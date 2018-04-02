@@ -1,0 +1,78 @@
+$blue: #387ef5;
+$orange: #ffc900;
+$red: #e43e56;
+$sblue: #11c1f3;
+$white: #fff;
+
+
+
+/**
+ * swiper 样式修改
+ */
+
+.swiper-container {
+  width: 100%;
+  height: 10rem;
+  padding-bottom: .5rem;
+  .swiper-pagination-bullet-active {
+    background: #fff;
+  }
+  .swiper-slide img {
+    width: 100%;
+    height: 100%;
+  }
+}
+.swiper-container-horizontal > .swiper-pagination {
+  bottom: .5rem;
+}
+
+/** 修改标题栏 **/
+.title{background: $blue;color:$white;}
+
+/** 功能区 **/
+#list{
+  background: #fff;
+  .row{
+    margin: 0;
+    .list-item{
+      width: 50%;
+      margin: 0;
+      height: 3.75rem;
+      box-sizing: border-box;
+      i{
+        font-size: 1.5rem;
+        line-height: 2.5rem;
+        margin: 0.625rem 0 0 1rem;
+        width: 2.5rem;
+        border-radius: 50%;
+        text-align: center;
+        color: $white;
+      }
+      span{
+        position: relative;
+        top: .5rem;
+        left: .5rem;
+      }
+    }
+  }
+  /** 图标设置 **/
+  .row:nth-child(1) {
+    border-bottom: solid 1px #eee;
+    .list-item:nth-child(1){
+      border-right: solid 1px #eee;
+      i{background: $orange;}
+    }
+    .list-item:nth-child(2) i{
+      background: $blue;
+    }
+  }
+  .row:nth-child(2) {
+    .list-item:nth-child(1){
+      border-right: solid 1px #eee;
+      i{background: $red;}
+    }
+    .list-item:nth-child(2) i{
+      background: $sblue;
+    }
+  }
+}

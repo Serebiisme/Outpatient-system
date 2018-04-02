@@ -1,0 +1,61 @@
+@charset "UTF-8";
+/**
+ * swiper 样式修改
+ */
+.swiper-container {
+  width: 100%;
+  height: 10rem;
+  padding-bottom: .5rem; }
+  .swiper-container .swiper-pagination-bullet-active {
+    background: #fff; }
+  .swiper-container .swiper-slide img {
+    width: 100%;
+    height: 100%; }
+
+.swiper-container-horizontal > .swiper-pagination {
+  bottom: .5rem; }
+
+/** 修改标题栏 **/
+.title {
+  background: #387ef5;
+  color: #fff; }
+
+/** 功能区 **/
+#list {
+  background: #fff;
+  /** 图标设置 **/ }
+  #list .row {
+    margin: 0; }
+    #list .row .list-item {
+      width: 50%;
+      margin: 0;
+      height: 3.75rem;
+      box-sizing: border-box; }
+      #list .row .list-item i {
+        font-size: 1.5rem;
+        line-height: 2.5rem;
+        margin: 0.625rem 0 0 1rem;
+        width: 2.5rem;
+        border-radius: 50%;
+        text-align: center;
+        color: #fff; }
+      #list .row .list-item span {
+        position: relative;
+        top: .5rem;
+        left: .5rem; }
+  #list .row:nth-child(1) {
+    border-bottom: solid 1px #eee; }
+    #list .row:nth-child(1) .list-item:nth-child(1) {
+      border-right: solid 1px #eee; }
+      #list .row:nth-child(1) .list-item:nth-child(1) i {
+        background: #ffc900; }
+    #list .row:nth-child(1) .list-item:nth-child(2) i {
+      background: #387ef5; }
+  #list .row:nth-child(2) .list-item:nth-child(1) {
+    border-right: solid 1px #eee; }
+    #list .row:nth-child(2) .list-item:nth-child(1) i {
+      background: #e43e56; }
+  #list .row:nth-child(2) .list-item:nth-child(2) i {
+    background: #11c1f3; }
+
+/*# sourceMappingURL=main.css.map */

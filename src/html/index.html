@@ -17,54 +17,78 @@
 
 </head>
 <body>
-<div class="page-group">
-    <div class="page">
-        <!-- 标题栏 -->
-        <header class="bar bar-nav">
-            <h1 class="title">门诊系统</h1>
-        </header>
-        <!-- 内容区 -->
-        <div class="content">
-            <!-- Slider -->
-            <div class="swiper-container">
-                <div class="swiper-wrapper">
-                    <div class="swiper-slide"><img src="../img/banner_1.png"></div>
-                    <div class="swiper-slide"><img src="../img/banner_2.png"></div>
-                    <div class="swiper-slide"><img src="../img/banner_3.png"></div>
+    <div class="page-group">
+        <div class="page" id="index" ng-controller="indexController">
+            <!-- 标题栏 -->
+            <header class="bar bar-nav">
+                <h1 class="title">门诊系统</h1>
+            </header>
+            <!-- 内容区 -->
+            <div class="content">
+                <!-- Slider -->
+                <div class="swiper-container">
+                    <div class="swiper-wrapper">
+                        <div class="swiper-slide"><img src="../img/banner_1.png"></div>
+                        <div class="swiper-slide"><img src="../img/banner_2.png"></div>
+                        <div class="swiper-slide"><img src="../img/banner_3.png"></div>
+                    </div>
+                    <div class="swiper-pagination"></div>
                 </div>
-                <div class="swiper-pagination"></div>
-            </div>
-            <!-- 功能区 -->
-            <div id="list">
-                <div class="row">
-                    <div class="col-50 list-item">
-                        <i class="icon iconfont icon-meiguoyiliao"></i>
-                        <span>医院简介</span>
+                <!-- 功能区 -->
+                <div id="list">
+                    <div class="row">
+                        <a class="col-50 list-item" href="/hospital">
+                            <i class="icon iconfont icon-meiguoyiliao"></i>
+                            <span>医院简介</span>
+                        </a>
+                        <a class="col-50 list-item" href="/appointment" >
+                            <i class="icon iconfont icon-yiliao"></i>
+                            <span>预约挂号</span>
+                        </a>
                     </div>
-                    <div class="col-50 list-item">
-                        <i class="icon iconfont icon-yiliao"></i>
-                        <span>预约挂号</span>
+                    <div class="row">
+                        <div class="col-50 list-item">
+                            <i class="icon iconfont icon-yisheng"></i>
+                            <span>搜索医生</span>
+                        </div>
+                        <div class="col-50 list-item">
+                            <i class="icon iconfont icon-tubiao22"></i>
+                            <span>健康自诊</span>
+                        </div>
                     </div>
                 </div>
-                <div class="row">
-                    <div class="col-50 list-item">
-                        <i class="icon iconfont icon-yisheng"></i>
-                        <span>搜索医生</span>
-                    </div>
-                    <div class="col-50 list-item">
-                        <i class="icon iconfont icon-tubiao22"></i>
-                        <span>健康自诊</span>
+
+                <!-- 推荐医生列表 -->
+                <div id="recommendDoc">
+                    <div class="content-block-title recommmendTitle">推荐医生</div>
+                    <div class="list-block media-list recommendItem" ng-repeat="x in arr">
+                        <ul>
+                            <li>
+                                <a href="#" class="item-link item-content">
+                                    <div class="item-media"><img src="../img/doctor_default.png" style='width: 4rem;'></div>
+                                    <div class="item-inner">
+                                        <div class="item-title-row">
+                                            <div class="item-title">医生姓名</div>
+                                            <div class="item-after">${{x}}</div>
+                                        </div>
+                                        <div class="item-subtitle">医生职称</div>
+                                        <div class="item-text">此处是医生简介...</div>
+                                    </div>
+                                </a>
+                            </li>
+                        </ul>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
 
 <script type='text/javascript' src='//g.alicdn.com/sj/lib/zepto/zepto.min.js' charset='utf-8'></script>
 <script type='text/javascript' src='//g.alicdn.com/msui/sm/0.6.2/js/sm.min.js' charset='utf-8'></script>
 <script type='text/javascript' src='//g.alicdn.com/msui/sm/0.6.2/js/sm-extend.min.js' charset='utf-8'></script>
+<script type="text/javascript" src="http://cdn.static.runoob.com/libs/angular.js/1.4.6/angular.min.js"></script>
 <script>$.init()</script>
+<script type="application/x-javascript" src="../js/main.js" charset="utf-8"></script>
 <script type='application/x-javascript' src='../js/func.js' charset="utf-8"></script>
 </body>
 </html>

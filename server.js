@@ -4,8 +4,9 @@
 var express = require('express');
 var bodyParser = require('body-parser');//引入
 var cookieParser = require('cookie-parser'); //cookie操作中间件
-var path = require('path');
-var fs = require('fs');
+var mysql  = require('mysql');
+//var path = require('path');
+//var fs = require('fs');
 
 var app = express();
 
@@ -30,8 +31,6 @@ app.use(express.static('src'));
 //    next();
 //});
 
-var mysql  = require('mysql');
-
 //填写数据库连接信息，可查询数据库详情页
 //var username = 'de50909b3dbc4aa188008c2d83521452';//用户AK
 //var password = 'b1d5c3320d4e4ca3af97bc822ad8f688';//用户SK
@@ -52,6 +51,28 @@ app.get('/',function (req, res) {
     res.sendfile(__dirname + '/src/' + 'html/index.html');
 });
 
+app.get('/hospital',function (req, res) {
+    res.sendfile(__dirname + '/src/' + 'html/hospital.html');
+});
+
+app.get('/appointment',function (req, res) {
+    res.sendfile(__dirname + '/src/' + 'html/appointment.html');
+});
+
+/**
+ * @type action start
+ */
+
+app.post('/test',function (req,res){
+    console.log(req.body);
+    res.send({
+        test2:123
+    });
+});
+
+/**
+ * @type action end
+ */
 var server = app.listen(9999, function () {
 
     var host = server.address().address;

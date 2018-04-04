@@ -5,6 +5,22 @@ $sblue: #11c1f3;
 $white: #fff;
 
 
+*{
+  -webkit-overflow-scrolling: touch;
+}
+
+.mr5{
+  margin-right: .5rem;
+}
+.ml5{
+  margin-left: .5rem;
+}
+.mt5{
+  margin-top: .5rem;
+}
+.mb5{
+  margin-bottom: .5rem;
+}
 
 /**
  * swiper 样式修改
@@ -28,6 +44,7 @@ $white: #fff;
 
 /** 修改标题栏 **/
 .title{background: $blue;color:$white;}
+.back{color: $white!important;}
 
 /** 功能区 **/
 #list{
@@ -39,6 +56,7 @@ $white: #fff;
       margin: 0;
       height: 3.75rem;
       box-sizing: border-box;
+      color: #000;
       i{
         font-size: 1.5rem;
         line-height: 2.5rem;
@@ -54,6 +72,10 @@ $white: #fff;
         left: .5rem;
       }
     }
+    .list-item:active{
+      background: #eee;
+    }
+  ;
   }
   /** 图标设置 **/
   .row:nth-child(1) {
@@ -74,5 +96,31 @@ $white: #fff;
     .list-item:nth-child(2) i{
       background: $sblue;
     }
+  }
+}
+
+/**
+ *  推荐医生
+ */
+#recommendDoc{
+  .recommmendTitle{
+    width: 100%;
+    line-height: 1rem;
+    margin: .5rem 0 0 0;
+    padding: .5rem .625rem;
+    background: #fff;
+  }
+  .recommendItem{
+    margin: 0;
+    border-bottom: solid 1px #eee;
+  }
+}
+
+/**
+ * 医院模块
+ */
+#hospital{
+  .hospIntro{
+
   }
 }

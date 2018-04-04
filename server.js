@@ -51,13 +51,13 @@ app.get('/',function (req, res) {
     res.sendfile(__dirname + '/src/' + 'html/index.html');
 });
 
-app.get('/hospital',function (req, res) {
-    res.sendfile(__dirname + '/src/' + 'html/hospital.html');
-});
-
-app.get('/appointment',function (req, res) {
-    res.sendfile(__dirname + '/src/' + 'html/appointment.html');
-});
+//app.get('/hospital',function (req, res) {
+//    res.sendfile(__dirname + '/src/' + 'html/hospital.html');
+//});
+//
+//app.get('/appointment',function (req, res) {
+//    res.sendfile(__dirname + '/src/' + 'html/appointment.html');
+//});
 
 /**
  * @type action start

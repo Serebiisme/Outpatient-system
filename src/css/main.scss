@@ -121,6 +121,14 @@ $white: #fff;
  */
 #hospital{
   .hospIntro{
-
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    word-break: break-all;
+    text-indent: 1.5rem;
+  }
+  .hospIntroAll{
+    -webkit-line-clamp: 5;
   }
 }

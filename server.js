@@ -48,7 +48,7 @@ app.use(express.static('src'));
 //connection.connect();//连接数据库
 
 app.get('/',function (req, res) {
-    res.sendfile(__dirname + '/src/' + 'html/index.html');
+    res.sendfile(__dirname + '/src/' + 'entry.html');
 });
 
 //app.get('/hospital',function (req, res) {

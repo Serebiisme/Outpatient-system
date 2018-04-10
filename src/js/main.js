@@ -38,15 +38,15 @@ function zinfo(title){
 }
 
 function zalert(text,title,callback){
-    $.alert(text, title, callback());
+    $.alert(text, title, callback);
 }
 
 function zcomfirm(text,title,success,cancel){
-    $.confirm(text, title,success(),cancel());
+    $.confirm(text, title,success,cancel);
 }
 
 function zprompt(text,title,success,cancel){
-    $.prompt(text, title,success(val),cancel(val));
+    $.prompt(text, title,success,cancel);
 }
 
 function zmodel(text,title,buttons){

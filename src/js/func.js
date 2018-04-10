@@ -20,6 +20,18 @@ var app = angular.module('myApp', ['ngRoute'])
             templateUrl:'html/search.html',
             controller:'searchController'
         })
+        .when('/myintro',{
+            templateUrl:'html/myintro.html',
+            controller:'myintroController'
+        })
+        .when('/information',{
+            templateUrl:'html/information.html',
+            controller:'informationController'
+        })
+        .when('/concern',{
+            templateUrl:'html/concern.html',
+            controller:'concernController'
+        })
         .otherwise({redirectTo:'/'});
 }]);
 /**
@@ -82,4 +94,28 @@ app.controller('searchController',function($scope){
     console.log('search');
 
     $.init();//放最后
+});
+/**
+ * 个人信息页面
+ */
+app.controller('myintroController',function($scope){
+    console.log('myintro');
+
+    $.init();//放最后
+});
+/**
+ * 健康咨询页
+ */
+app.controller('informationController',function($scope){
+   console.log('information');
+
+    $.init();//放最后
+});
+/**
+ * 关注医生页
+ */
+app.controller('concernController',function($scope){
+   console.log('concern');
+
+    $.init();
 });

@@ -5,6 +5,7 @@ var express = require('express');
 var bodyParser = require('body-parser');//引入
 var cookieParser = require('cookie-parser'); //cookie操作中间件
 var mysql  = require('mysql');
+var superagent = require('superagent');
 //var path = require('path');
 //var fs = require('fs');
 
@@ -64,10 +65,33 @@ app.get('/',function (req, res) {
  */
 
 app.post('/test',function (req,res){
-    console.log(req.body);
-    res.send({
-        test2:123
-    });
+    //var result = null;
+    superagent
+        .get('https://weixin.guizhou12320.org.cn/gzappv2/index.php/Index/getArticleList')
+        .send({
+            catid: '8',
+            pagenum: '1',
+            mode: 'knowledge'
+        })
+        .set({
+            'Content-Type': 'application/x-www-form-urlencoded',
+            'Cookie': 'PHPSESSID=lceddnscvj2qmk2jt7qbh4t537'
+        })
+        .accept('application/json')
+        .end(function(err, response) {
+            if (err) {
+                //do something
+                console.log('请求失败!');
+                console.log(err);
+            } else {
+                //do something
+                console.log('请求成功!');
+                //console.log(res);
+                console.log(JSON.parse(response.text));
+                res.send(JSON.parse(response.text));
+            }
+        });
+
 });
 
 /**

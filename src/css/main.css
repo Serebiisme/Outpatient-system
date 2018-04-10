@@ -1,6 +1,15 @@
 @charset "UTF-8";
 * {
-  -webkit-overflow-scrolling: touch; }
+  -webkit-overflow-scrolling: touch;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none; }
+
+html, body {
+  height: 100%; }
 
 .mr5 {
   margin-right: .5rem; }
@@ -13,6 +22,21 @@
 
 .mb5 {
   margin-bottom: .5rem; }
+
+.bar_tab_1 {
+  z-index: 2001;
+  background: #fff;
+  color: #387ef5;
+  font-weight: 600; }
+
+.content_1 {
+  bottom: 2.5rem; }
+
+.item-link_1 .item-inner .item-title {
+  margin: 0 auto; }
+
+.list-item:active, .list-link:active, .item-link_1:active {
+  background: #eee; }
 
 /**
  * swiper 样式修改
@@ -62,8 +86,11 @@
         position: relative;
         top: .5rem;
         left: .5rem; }
-    #list .row .list-item:active {
-      background: #eee; }
+      @media screen and (max-width: 320px) {
+        #list .row .list-item span {
+          position: relative;
+          top: .5rem;
+          left: .25rem; } }
   #list .row:nth-child(1) {
     border-bottom: solid 1px #eee; }
     #list .row:nth-child(1) .list-item:nth-child(1) {
@@ -104,5 +131,25 @@
   text-indent: 1.5rem; }
 #hospital .hospIntroAll {
   -webkit-line-clamp: 5; }
+
+/**
+ * 个人信息
+ */
+#myintro .avator {
+  width: 100%;
+  height: 35%;
+  color: #fff;
+  background-color: #387ef5;
+  text-align: center; }
+  #myintro .avator img {
+    width: 5rem;
+    height: 5rem;
+    position: relative;
+    top: 2rem; }
+  #myintro .avator div {
+    position: relative;
+    top: 3rem; }
+#myintro .list .list-block {
+  margin: 0 0 0.75rem 0; }
 
 /*# sourceMappingURL=main.css.map */

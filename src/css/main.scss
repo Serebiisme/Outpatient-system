@@ -7,6 +7,15 @@ $white: #fff;
 
 *{
   -webkit-overflow-scrolling: touch;
+  -webkit-touch-callout:none;
+  -webkit-user-select:none;
+  -khtml-user-select:none;
+  -moz-user-select:none;
+  -ms-user-select:none;
+  user-select:none;
+}
+html,body{
+  height: 100%;
 }
 
 .mr5{
@@ -20,6 +29,29 @@ $white: #fff;
 }
 .mb5{
   margin-bottom: .5rem;
+}
+
+.bar_tab_1{
+  z-index: 2001;
+  background: $white;
+  color: $blue;
+  font-weight: 600;
+}
+
+.content_1{
+  bottom:2.5rem;
+}
+
+.item-link_1{
+  .item-inner{
+    .item-title{
+      margin: 0 auto;
+    }
+  }
+}
+
+.list-item:active,.list-link:active,.item-link_1:active{
+  background: #eee;
 }
 
 /**
@@ -71,11 +103,14 @@ $white: #fff;
         top: .5rem;
         left: .5rem;
       }
+      @media screen  and (max-width: 320px) {
+        span{
+          position: relative;
+          top: .5rem;
+          left: .25rem;
+        }
+      }
     }
-    .list-item:active{
-      background: #eee;
-    }
-  ;
   }
   /** 图标设置 **/
   .row:nth-child(1) {
@@ -130,5 +165,32 @@ $white: #fff;
   }
   .hospIntroAll{
     -webkit-line-clamp: 5;
+  }
+}
+/**
+ * 个人信息
+ */
+#myintro{
+  .avator{
+    width: 100%;
+    height: 35%;
+    color: $white;
+    background-color: $blue;
+    text-align: center;
+    img{
+      width: 5rem;
+      height: 5rem;
+      position: relative;
+      top: 2rem;
+    }
+    div{
+      position: relative;
+      top: 3rem;
+    }
+  }
+  .list{
+    .list-block{
+      margin: 0 0 0.75rem 0;
+    }
   }
 }

@@ -8,6 +8,10 @@
   -ms-user-select: none;
   user-select: none; }
 
+input {
+  -webkit-user-select: auto;
+  user-select: text; }
+
 html, body {
   height: 100%; }
 
@@ -35,8 +39,31 @@ html, body {
 .item-link_1 .item-inner .item-title {
   margin: 0 auto; }
 
+.content-block_1, .list-block_1 {
+  margin: 0;
+  padding: 0;
+  position: relative;
+  top: 1rem; }
+  .content-block_1 .item-content:active, .list-block_1 .item-content:active {
+    background: #eee; }
+
+.item-media_1 img {
+  width: 5rem; }
+
+.item-title_1 {
+  white-space: pre-wrap !important; }
+
+.buttons_tab_1 {
+  position: absolute;
+  top: 2.2rem;
+  width: 100%;
+  z-index: 2002; }
+
 .list-item:active, .list-link:active, .item-link_1:active {
   background: #eee; }
+
+.pull-to-refresh-layer_1 {
+  top: 2.2rem !important; }
 
 /**
  * swiper 样式修改
@@ -53,6 +80,35 @@ html, body {
 
 .swiper-container-horizontal > .swiper-pagination {
   bottom: .5rem; }
+
+/* 登录页 */
+#login .logo {
+  text-align: center;
+  margin-top: 1rem; }
+  #login .logo i {
+    font-size: 6rem;
+    display: block;
+    color: #e43e56; }
+#login .list-block {
+  margin: 1.75rem .75rem; }
+  #login .list-block ul {
+    border-radius: .5rem; }
+#login .login_row {
+  margin: 0; }
+  #login .login_row a {
+    background: #387ef5; }
+  #login .login_row a:active {
+    background: #0894ec; }
+#login .partion {
+  text-align: center; }
+  #login .partion span {
+    margin: 0 4rem; }
+  #login .partion a {
+    color: #387ef5; }
+  #login .partion a:active {
+    color: #0894ec; }
+#login .list-block .item-title.label {
+  width: 30%; }
 
 /** 修改标题栏 **/
 .title {
@@ -104,7 +160,7 @@ html, body {
     #list .row:nth-child(2) .list-item:nth-child(1) i {
       background: #e43e56; }
   #list .row:nth-child(2) .list-item:nth-child(2) i {
-    background: #11c1f3; }
+    background: #0894ec; }
 
 /**
  *  推荐医生

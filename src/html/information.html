@@ -3,43 +3,78 @@
     <header class="bar bar-nav">
         <h1 class="title">健康资讯</h1>
     </header>
+
+    <!-- tab -->
+    <div class="buttons-tab buttons_tab_1">
+        <a class="tab-link button {{!tabIndex && 'active'}}" ng-click="switchTab()">生活</a>
+        <a class="tab-link button {{tabIndex && 'active'}}" ng-click="switchTab()">行业</a>
+    </div>
+
     <!-- 内容区 -->
-    <div class="content content_1">
-        <div class="list-block media-list inset">
-            <ul>
-                <li>
-                    <a href="#" class="item-link item-content">
-                        <div class="item-media"><img src="http://gqianniu.alicdn.com/bao/uploaded/i4//tfscom/i3/TB10LfcHFXXXXXKXpXXXXXXXXXX_!!0-item_pic.jpg_250x250q60.jpg" style='width: 2.2rem;'></div>
-                        <div class="item-inner">
-                            <div class="item-title-row">
-                                <div class="item-title">标题</div>
-                            </div>
-                            <div class="item-subtitle">子标题</div>
-                        </div>
-                    </a>
-                </li>
+    <div class="content content_1  pull-to-refresh-content infinite-scroll infinite-scroll-bottom" data-ptr-distance="50">
 
-                <li>
-                    <a href="#" class="item-link item-content">
-                        <div class="item-media"><img src="http://gqianniu.alicdn.com/bao/uploaded/i4//tfscom/i3/TB10LfcHFXXXXXKXpXXXXXXXXXX_!!0-item_pic.jpg_250x250q60.jpg" style='width: 2.2rem;'></div>
-                        <div class="item-inner">
-                            <div class="item-title-row">
-                                <div class="item-title">标题</div>
-                            </div>
-                            <div class="item-subtitle">子标题</div>
-                        </div>
-                    </a>
-                </li>
-
-            </ul>
+        <!-- 默认的下拉刷新层 -->
+        <div class="pull-to-refresh-layer pull-to-refresh-layer_1">
+            <div class="preloader"></div>
+            <div class="pull-to-refresh-arrow"></div>
         </div>
+
+        <!-- content -->
+        <div class="content-block content-block_1 ">
+
+            <div class="tabs">
+                <!-- 生活 -->
+                <div id="list1" class="tab {{!tabIndex && 'active'}}" ng-show="!tabIndex">
+                    <div class="list-block list-block_1 media-list">
+                        <ul>
+                            <div class="item-content" ng-repeat="item in lifeList" ng-click="goToInformationDetail()">
+                                <div class="item-media item-media_1"><img src="{{item.thumb}}"></div>
+                                <div class="item-inner">
+                                    <div class="item-title-row">
+                                        <div class="item-title item-title_1">{{item.title}}</div>
+                                    </div>
+                                    <!--<div class="item-subtitle">{{item.describe}}</div>-->
+                                </div>
+                            </div>
+                        </ul>
+                        <!-- 加载提示符 -->
+                        <div class="infinite-scroll-preloader">
+                            <div class="preloader"></div>
+                        </div>
+                    </div>
+                </div>
+                <!-- 行业 -->
+                <div id="list2" class="tab {{tabIndex && 'active'}}" ng-show="tabIndex">
+                    <div class="list-block list-block_1 media-list">
+                        <ul>
+                            <div class="item-content" ng-repeat="item in busnessList" ng-click="goToInformationDetail()">
+                                <div class="item-media item-media_1"><img src="{{item.thumb}}"></div>
+                                <div class="item-inner">
+                                    <div class="item-title-row">
+                                        <div class="item-title item-title_1">{{item.title}}</div>
+                                    </div>
+                                    <!--<div class="item-subtitle">{{item.describe}}</div>-->
+                                </div>
+                            </div>
+                        </ul>
+                        <!-- 加载提示符 -->
+                        <div class="infinite-scroll-preloader">
+                            <div class="preloader"></div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
     </div>
 
 </div>
 
 <!-- 工具栏 -->
 <nav class="bar bar-tab bar_tab_1">
-    <a class="tab-item " href="#/">
+    <a class="tab-item " href="#/index">
         <span class="icon icon-home"></span>
         <span class="tab-label">首页</span>
     </a>

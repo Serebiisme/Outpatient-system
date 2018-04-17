@@ -1,7 +1,7 @@
 $blue: #387ef5;
 $orange: #ffc900;
 $red: #e43e56;
-$sblue: #11c1f3;
+$sblue: #0894ec;
 $white: #fff;
 
 
@@ -14,6 +14,11 @@ $white: #fff;
   -ms-user-select:none;
   user-select:none;
 }
+input{
+  -webkit-user-select: auto;
+  user-select:text;
+}
+
 html,body{
   height: 100%;
 }
@@ -50,8 +55,38 @@ html,body{
   }
 }
 
+.content-block_1,.list-block_1{
+  .item-content:active{
+    background: #eee;
+  }
+  margin: 0;
+  padding:0;
+  position: relative;
+  top: 1rem;
+}
+
+.item-media_1{
+  img{
+    width: 5rem;
+  }
+}
+.item-title_1{
+  white-space: pre-wrap!important;
+}
+
+.buttons_tab_1{
+  position: absolute;
+  top: 2.2rem;
+  width: 100%;
+  z-index: 2002;
+}
+
 .list-item:active,.list-link:active,.item-link_1:active{
   background: #eee;
+}
+
+.pull-to-refresh-layer_1{
+  top: 2.2rem !important;
 }
 
 /**
@@ -73,6 +108,56 @@ html,body{
 .swiper-container-horizontal > .swiper-pagination {
   bottom: .5rem;
 }
+
+/* 登录页 */
+#login{
+  .logo{
+    text-align: center;
+    margin-top: 1rem;
+    i{
+      font-size: 6rem;
+      display: block;
+      color: $red;
+    }
+  }
+  .list-block{
+    margin: 1.75rem .75rem;
+    ul{
+      border-radius: .5rem;
+    }
+  }
+  .login_row{
+    margin: 0;
+    a{
+      background: $blue;
+    }
+    a:active{
+      background: $sblue;
+    }
+  }
+  .partion{
+    text-align: center;
+    span{
+      margin: 0 4rem;
+    }
+    a{
+      color: $blue;
+    }
+    a:active{
+      color: $sblue;
+    }
+  }
+  .list-block .item-title.label{
+    width: 30%;
+  }
+}
+//.popup-register,.popup-forget,.popup-doctor{
+//  .title{
+//    background: transparent;
+//    color: #3d4145;
+//  }
+//}
+
 
 /** 修改标题栏 **/
 .title{background: $blue;color:$white;}

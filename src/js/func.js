@@ -4,7 +4,11 @@
 var app = angular.module('myApp', ['ngRoute'])
     .config(['$routeProvider', function($routeProvider){
     $routeProvider
-        .when('/',{
+        .when('/login',{
+            templateUrl:'login.html',
+            controller:'loginController'
+        })
+        .when('/index',{
             templateUrl:'html/index.html',
             controller:'indexController'
         })
@@ -32,8 +36,180 @@ var app = angular.module('myApp', ['ngRoute'])
             templateUrl:'html/concern.html',
             controller:'concernController'
         })
-        .otherwise({redirectTo:'/'});
+        .when('/informationDetail',{
+            templateUrl:'html/informationDetail.html',
+            controller:'informationDetailController'
+        })
+        .otherwise({redirectTo:'/login'});
 }]);
+/**
+ * 登录
+ */
+app.controller('loginController',function($scope,$timeout){
+    console.log('login');
+
+    //身份选择
+    $(document).on('change','[name=identity]', function () {
+        var identity = $('[name=identity]').val();
+        switch (identity){
+            case '患者':
+                $('[name=name]').attr('placeholder','请输入医保号');
+                break;
+            case '医生':
+                $('[name=name]').attr('placeholder','请输入医生编号');
+                break;
+            case '管理员':
+                $('[name=name]').attr('placeholder','请输入管理员账号');
+                break;
+        }
+    });
+
+    //注册页面
+    $scope.openRegister = function(){
+        $.modal({
+            title:  '注册身份选择',
+            text: '提示:请您根据自身需求选择需要注册的账号类型,医生身份仅限具备医师资格证的人员注册.',
+            verticalButtons: true,
+            buttons: [
+                {
+                    text: '患者',
+                    onClick: function() {
+                        $.popup('.popup-register');
+                    }
+                },
+                {
+                    text: '医生',
+                    onClick: function() {
+                        $.popup('.popup-doctor');
+                    }
+                }
+            ]
+        })
+    };
+
+    //忘记密码页面
+    $scope.openForget = function(){
+        $.popup('.popup-forget');
+    };
+
+    //用户注册
+    $scope.registerPatient = function(){
+
+        var p_info = getFormToJson('#p_info');
+
+        if (p_info.p_name == "") {
+            zalert("名字不能为空!");
+            return false;
+        }
+
+        if(!isCorrectName(p_info.p_name)){
+            zalert("请输入10或10个以内汉字.");
+            return false;
+        }
+
+        if (p_info.p_passward == "") {
+            zalert("密码不能为空!");
+            return false;
+        }
+
+        if (p_info.p_birthday == "") {
+            zalert("请填写生日!");
+            return false;
+        }
+
+        if (p_info.p_telephone == "") {
+            zalert("手机号不能为空!");
+            return false;
+        }
+
+        if (!isMobile(p_info.p_telephone)) {
+            zalert("请填写正确的手机号！");
+            return false;
+        }
+
+        if (p_info.p_id == "") {
+            zalert("编号号不能为空!");
+            return false;
+        }
+
+        zpost('registerPatient',p_info,function(data){
+            //zalert(data.msg,'',function(){
+            //    $.closeModal();
+            //});
+            zinfo(data.msg);
+            $timeout(function(){
+                $.closeModal();
+            },2100);
+
+        });
+
+    };
+
+    //用户取消注册
+    $scope.cancelPatient = function(){
+        $('#p_info')[0].reset();
+    };
+
+    //医生注册
+    $scope.registerDoctor = function(){
+
+        var d_info = getFormToJson('#d_info');
+
+        if (d_info.d_name == "") {
+            zalert("名字不能为空!");
+            return false;
+        }
+
+        if(!isCorrectName(d_info.d_name)){
+            zalert("请输入10或10个以内汉字.");
+            return false;
+        }
+
+        if (d_info.d_passward == "") {
+            zalert("密码不能为空!");
+            return false;
+        }
+
+        if (d_info.d_telephone == "") {
+            zalert("手机号不能为空!");
+            return false;
+        }
+
+        if (!isMobile(d_info.d_telephone)) {
+            zalert("请填写正确的手机号！");
+            return false;
+        }
+
+        if (d_info.d_id == "") {
+            zalert("编号号不能为空!");
+            return false;
+        }
+
+        console.log(d_info);
+
+    };
+
+    //医生取消注册
+    $scope.cancelDoctor = function(){
+        $('#d_info')[0].reset();
+    };
+
+    //科室选择
+    $("[name=d_department]").picker({
+        toolbarTemplate: '<header class="bar bar-nav"><button class="button button-link pull-right close-picker">确定</button><h1 class="title" style="background: transparent;color: #3d4145;">请选择称呼</h1></header>',
+        cols: [
+            {
+                textAlign: 'center',
+                values: ['内科','外科','儿科','妇科','眼科','耳鼻喉科','口腔科','皮肤科','中医科','针灸推拿科','心理咨询室']
+            }
+        ]
+    });
+
+    //密码找回
+
+    $.init();
+});
+
 /**
  * 首页
  */
@@ -106,8 +282,171 @@ app.controller('myintroController',function($scope){
 /**
  * 健康咨询页
  */
-app.controller('informationController',function($scope){
-   console.log('information');
+app.controller('informationController',function($scope,$location){
+    console.log('information');
+
+    $scope.tabIndex = !!0;
+    $scope.lifeList = [];
+    $scope.busnessList = [];
+    $scope.ifload = 0;
+    $scope.lifeStartNum = 1;
+    $scope.busnessStartNum = 1;
+
+    //tab切换
+    $scope.switchTab = function(){
+        $scope.tabIndex = !$scope.tabIndex;
+        $.refreshScroller();
+    };
+
+    //跳转详情页
+    $scope.goToInformationDetail = function(){
+        var id = this.item.id,
+            path = '/informationDetail?id=' + id;
+        $location.url(path);
+    };
+
+    // 添加'refresh'监听器
+    $(document).on('refresh', '.pull-to-refresh-content',function(e) {
+        $scope.ifload = 0;
+        $scope.lifeStartNum = 0;
+        $scope.busnessStartNum = 0;
+
+        console.log('loadInformationList');
+
+        //初始化生活资讯
+        $.ajax({
+            type: 'POST',
+            url: $lifeArticleUrl + $scope.lifeStartNum,
+            dataType: 'jsonp',
+            timeout: 7500,
+            success: function(data){
+                $scope.lifeList = data.body;
+                $scope.ifload < 2 && $scope.ifload++;
+                console.log('A:' + $scope.ifload);
+                $scope.$apply();
+            },
+            error: function(xhr, type){
+                zalert('加载失败,请重新加载...!');
+                $.pullToRefreshDone('.pull-to-refresh-content');
+            }
+        });
+
+        //初始化行业资讯
+        $.ajax({
+            type: 'POST',
+            url: $busnessArticleUrl + $scope.busnessStartNum,
+            dataType: 'jsonp',
+            timeout: 7500,
+            success: function(data){
+                $scope.busnessList = data.body;
+                $scope.ifload < 2 && $scope.ifload++;
+                console.log('B:' + $scope.ifload);
+                $scope.$apply();
+            },
+            error: function(xhr, type){
+                zalert('加载失败,请重新加载...!');
+                $.pullToRefreshDone('.pull-to-refresh-content');
+            }
+        });
+
+    });
+
+    //无限滚动
+    var loading = false;
+    $(document).on('infinite', '.infinite-scroll-bottom',function() {
+
+        // 如果正在加载，则退出
+        if (loading) return;
+
+        //tabindex - false : life , true : busnes
+        if ($scope.tabIndex){
+            console.log('load more busness article');
+            $scope.busnessStartNum++;
+            $.ajax({
+                type: 'POST',
+                url: $busnessArticleUrl + $scope.busnessStartNum,
+                dataType: 'jsonp',
+                timeout: 7500,
+                success: function(data){
+                    loading = !loading;
+
+                    data.body.length == 0 && $.detachInfiniteScroll('.infinite-scroll-bottom');
+
+                    $scope.busnessList = $scope.busnessList.concat(data.body);
+                    $scope.$apply();
+                    $.refreshScroller();
+                },
+                error: function(xhr, type){
+                    zalert('加载失败,请重新加载...!');
+                    $.refreshScroller();
+                }
+            });
+            loading = !loading;
+
+        } else {
+            console.log('load more life article');
+            $scope.lifeStartNum = $scope.lifeStartNum + 1;
+            console.log( $scope.lifeStartNum);
+            $.ajax({
+                type: 'POST',
+                url: $lifeArticleUrl + $scope.lifeStartNum,
+                dataType: 'jsonp',
+                timeout: 7500,
+                success: function(data){
+                    loading = !loading;
+
+                    data.body.length == 0 && $.detachInfiniteScroll('.infinite-scroll-bottom');
+
+                    $scope.lifeList = $scope.lifeList.concat(data.body);
+                    $scope.$apply();
+                    $.refreshScroller();
+                },
+                error: function(xhr, type){
+                    zalert('加载失败,请重新加载...!');
+
+                }
+            });
+            loading = !loading;
+        }
+
+        console.log('刷新');
+        $.refreshScroller();
+    });
+
+
+    $scope.$watch("ifload",function(newValue, oldValue) {
+        // 加载完毕需要重置
+        newValue == 2 && $.pullToRefreshDone('.pull-to-refresh-content');
+    });
+
+    $.init();//放最后
+
+    //初始化触发;
+    $('.pull-to-refresh-content').trigger('refresh');
+});
+/**
+ * 资讯详情页
+ */
+app.controller('informationDetailController',function($scope,$location){
+    console.log('informationDetail');
+
+    $scope.id = $location.search().id;
+    $scope.article = {};
+
+    //初始化资讯详情
+    $.ajax({
+        type: 'POST',
+        url: $articleDetailUrl+ $scope.id +'&pubver=1',
+        dataType: 'jsonp',
+        timeout: 7500,
+        success: function(data){
+            $scope.article = data.body;
+            $scope.$apply();
+        },
+        error: function(xhr, type){
+            alert('Ajax error!')
+        }
+    });
 
     $.init();//放最后
 });

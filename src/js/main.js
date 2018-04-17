@@ -272,3 +272,12 @@ function getJson(obj){
 function getObj(str){
     return JSON.parse(str);
 }
+
+function getFormToJson (selector) {
+    var obj = {},
+        arr = $(selector).serializeArray();
+    arr.forEach(function(item){
+        obj[item.name] = item.value;
+    });
+    return obj;
+}

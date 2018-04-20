@@ -1,0 +1,32 @@
+<div class="page" id="informationDetail">
+    <!-- 标题栏 -->
+    <header class="bar bar-nav">
+        <a class="button button-link button-nav pull-left back">
+            <span class="icon icon-left"></span>
+            返回
+        </a>
+        <h1 class="title">资讯详情</h1>
+    </header>
+    <!-- 内容区 -->
+    <div class="content">
+        <div class="card">
+            <div class="card-header no-border">
+                <span>{{article.title}}</span>
+            </div>
+            <div valign="bottom" class="card-header color-white no-border no-padding">
+                <img class='card-cover' src="{{article.thumb}}" alt="">
+            </div>
+            <div class="card-content">
+                <div class="card-content-inner">
+                    <p class="color-gray">发表于 {{article.adddate}}</p>
+                    <p>{{article.fulltext}}</p>
+                </div>
+            </div>
+            <div class="card-footer">
+                <a class="link">赞</a>
+                <span class="link">阅读量:{{article.click}}</span>
+            </div>
+        </div>
+    </div>
+
+</div>

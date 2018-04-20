@@ -40,12 +40,16 @@ var app = angular.module('myApp', ['ngRoute'])
             templateUrl:'html/informationDetail.html',
             controller:'informationDetailController'
         })
+        .when('/myintrodetail',{
+            templateUrl:'html/myintrodetail.html',
+            controller:'myintrodetailController'
+        })
         .otherwise({redirectTo:'/login'});
 }]);
 /**
  * 登录
  */
-app.controller('loginController',function($scope,$timeout){
+app.controller('loginController',function($scope,$timeout,$location){
     console.log('login');
 
     //身份选择
@@ -53,16 +57,68 @@ app.controller('loginController',function($scope,$timeout){
         var identity = $('[name=identity]').val();
         switch (identity){
             case '患者':
-                $('[name=name]').attr('placeholder','请输入医保号');
+                $('[name=id]').attr('placeholder','请输入医保号');
                 break;
             case '医生':
-                $('[name=name]').attr('placeholder','请输入医生编号');
+                $('[name=id]').attr('placeholder','请输入医生编号');
                 break;
             case '管理员':
-                $('[name=name]').attr('placeholder','请输入管理员账号');
+                $('[name=id]').attr('placeholder','请输入管理员账号');
                 break;
         }
     });
+
+    //身份选择
+    $(document).on('change','[name=f_identity]', function () {
+        var identity = $('[name=f_identity]').val();
+        console.log('change');
+        switch (identity){
+            case '患者':
+                $('[name=f_id]').attr('placeholder','请输入医保号');
+                break;
+            case '医生':
+                $('[name=f_id]').attr('placeholder','请输入医生编号');
+                break;
+        }
+    });
+
+    //登录
+    $scope.clientLogin = function(){
+        var l_info = getFormToJson('#l_info');
+
+        if (l_info.id == "") {
+            zalert("账号不能为空!");
+            return false;
+        }
+
+        if (l_info.passward == "") {
+            zalert("密码不能为空!");
+            return false;
+        }
+
+        zpost('login',l_info, function (data) {
+            console.log('登录');
+            if (data.code == '200'){
+                window.client = data.client;
+
+                switch (l_info.identity){
+                    case '患者':
+                        $location.url('/index').replace();
+                        $scope.$apply();//必要
+                        break;
+                    case '医生':
+                        console.log('go to doctor.html');
+                        break;
+                    case '管理员':
+                        console.log('go to manager.html');
+                        break;
+                }
+            } else {
+                zinfo(data.msg);
+            }
+        });
+
+    };
 
     //注册页面
     $scope.openRegister = function(){
@@ -85,11 +141,6 @@ app.controller('loginController',function($scope,$timeout){
                 }
             ]
         })
-    };
-
-    //忘记密码页面
-    $scope.openForget = function(){
-        $.popup('.popup-forget');
     };
 
     //用户注册
@@ -128,7 +179,7 @@ app.controller('loginController',function($scope,$timeout){
         }
 
         if (p_info.p_id == "") {
-            zalert("编号号不能为空!");
+            zalert("编号不能为空!");
             return false;
         }
 
@@ -137,7 +188,7 @@ app.controller('loginController',function($scope,$timeout){
             //    $.closeModal();
             //});
             zinfo(data.msg);
-            $timeout(function(){
+            data.code == '200' && $timeout(function(){
                 $.closeModal();
             },2100);
 
@@ -185,8 +236,13 @@ app.controller('loginController',function($scope,$timeout){
             return false;
         }
 
-        console.log(d_info);
+        zpost('registerDoctor',d_info,function(data){
+            zinfo(data.msg);
+            data.code == '200' && $timeout(function(){
+                $.closeModal();
+            },2100);
 
+        });
     };
 
     //医生取消注册
@@ -205,7 +261,30 @@ app.controller('loginController',function($scope,$timeout){
         ]
     });
 
-    //密码找回
+    //打开密码找回页
+    $scope.openForget = function(){
+        $.popup('.popup-forget');
+    };
+
+    //取消忘记密码页
+    $scope.cancelForget = function(){
+        $('#f_info')[0].reset();
+    };
+
+    $scope.getBackPassward = function(){
+        var f_info = getFormToJson('#f_info');
+        console.log(f_info);
+
+        zpost('getBackPassward',f_info,function(data){
+            if(data.code == '200'){
+                zalert('您的密码已重置,新密码为' + data.passward,'短信提示', function () {
+                    $.closeModal();
+                })
+            } else {
+                zinfo(data.msg);
+            }
+        });
+    };
 
     $.init();
 });
@@ -274,11 +353,35 @@ app.controller('searchController',function($scope){
 /**
  * 个人信息页面
  */
-app.controller('myintroController',function($scope){
+app.controller('myintroController',function($scope,$location){
     console.log('myintro');
+    $scope.myintro = window.client;
+
+    //退出登录
+    $scope.logout = function(){
+        $location.url('login');
+        //history.go(1-history.length-1);
+    };
 
     $.init();//放最后
 });
+
+/**
+ * 我的信息
+ */
+app.controller('myintrodetailController',function($scope){
+    console.log('myintrodetail');
+    $scope.myintro = {
+        '姓名':window.client.name,
+        '性别':window.client.gender,
+        '生日':window.client.birthday,
+        '手机':window.client.telephone,
+        '医保编号':window.client.id
+    };
+
+    $.init();
+});
+
 /**
  * 健康咨询页
  */

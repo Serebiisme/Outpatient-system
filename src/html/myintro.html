@@ -2,13 +2,13 @@
     <!-- 头像区 -->
     <header class="avator">
         <img src="../img/avator_default.png">
-        <div>詹姆斯</div>
+        <div>{{myintro.name}}</div>
     </header>
     <!-- 内容区 -->
     <div class="list">
         <div class="list-block">
             <ul>
-                <li class="item-content item-link">
+                <li class="item-content item-link" href="#/myintrodetail">
                     <div class="item-media"><i class="icon icon-card"></i></div>
                     <div class="item-inner">
                         <div class="item-title">我的信息</div>
@@ -53,7 +53,7 @@
 
         <div class="list-block">
             <ul>
-                <li class="item-content item-link_1">
+                <li class="item-content item-link_1" ng-click="logout()">
                     <div class="item-inner">
                         <div class="item-title">退出登录</div>
                     </div>

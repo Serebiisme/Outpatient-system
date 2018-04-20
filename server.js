@@ -112,6 +112,7 @@ app.get('/',function (req, res) {
 //    });
 //});
 
+//注册患者
 app.post('/registerPatient',function(req,res){
     console.log(req.body) ;
     var DateSql = "INSERT INTO patient_login ( id, name, gender, passward, birthday, telephone ) VALUES ( "+ req.body.p_id +", '"+ req.body.p_name+"','"+ req.body.p_gender+"','"+ req.body.p_passward+"','"+ req.body.p_birthday+"','"+ req.body.p_telephone+"');";
@@ -129,6 +130,88 @@ app.post('/registerPatient',function(req,res){
             code:200,
             msg:'注册成功'
         });
+    });
+});
+
+//注册医生
+app.post('/registerDoctor',function(req,res){
+    console.log(req.body) ;
+    var DateSql = "INSERT INTO doctor_login ( id, name, gender, passward, department, telephone ) VALUES ( "+ req.body.d_id +", '"+ req.body.d_name+"','"+ req.body.d_gender+"','"+ req.body.d_passward+"','"+ req.body.d_department+"','"+ req.body.d_telephone+"');";
+    console.log(DateSql);
+    connection.query(DateSql, function (err, result) {
+        if (err) {
+            res.send({
+                code:500,
+                msg:'注册失败!'
+            });
+            return;
+        }
+        //console.log(result);
+        res.send({
+            code:200,
+            msg:'注册成功'
+        });
+    });
+});
+
+//忘记密码
+app.post('/getBackPassward',function(req,res){
+    var identity = {
+        '患者':'patient_login',
+        '医生':'doctor_login'
+    },
+        randomPassward = (Math.random() * 1000000).toFixed(0);
+
+    console.log(req.body) ;
+    var DateSql = "UPDATE " + identity[req.body.f_identity] + " SET passward='" + randomPassward + "' WHERE  id='"+ req.body.f_id +"' AND telephone='" + req.body.f_telephone + "';";
+    console.log(DateSql);
+    connection.query(DateSql, function (err, result) {
+        if (err) {
+            res.send({
+                code:500,
+                msg:'操作失败!'
+            });
+            return;
+        }
+        //console.log(result);
+        res.send({
+            code:200,
+            msg:'操作成功',
+            passward:randomPassward
+        });
+    });
+});
+
+//登录
+app.post('/login',function(req,res){
+    var identity = {
+            '患者':'patient_login',
+            '医生':'doctor_login'
+        };
+    console.log(req.body) ;
+    var DateSql = "SELECT * FROM " + identity[req.body.identity] + " WHERE id=" + req.body.id + ";";
+    console.log(DateSql);
+    connection.query(DateSql, function (err, result) {
+        if (err) {
+            res.send({
+                code:500,
+                msg:'操作失败!'
+            });
+            return;
+        }
+
+        if (result[0] && result[0].passward == req.body.passward){
+            res.send({
+                code:200,
+                msg:'登录成功',
+                client:result[0]
+            });
+        } else {
+            res.send({
+                code:501,
+                msg:'账号或密码错误!'
+            });
+        }
     });
 });
 

@@ -1,0 +1,24 @@
+<div class="page" id="myintrodetail">
+    <!-- 标题栏 -->
+    <header class="bar bar-nav">
+        <a class="button button-link button-nav pull-left back">
+            <span class="icon icon-left"></span>
+            返回
+        </a>
+        <h1 class="title">我的信息</h1>
+    </header>
+    <!-- 内容区 -->
+    <div class="content">
+        <div class="list-block">
+            <ul>
+                <li class="item-content" ng-repeat="(key, val) in myintro">
+                    <div class="item-inner">
+                        <div class="item-title">{{key}}</div>
+                        <div class="item-after">{{val}}</div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+</div>

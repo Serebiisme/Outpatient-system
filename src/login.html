@@ -1,0 +1,336 @@
+<div class="page" id="login">
+
+    <div class="content">
+
+        <!-- LOGO -->
+        <div class="logo">
+            <i class="icon iconfont icon-tubiao22"></i>
+            <span>门诊系统 v1.0.0</span>
+        </div>
+
+        <div class="list-block">
+            <form id="l_info">
+                <ul>
+                    <!-- Text inputs -->
+                    <li>
+                        <div class="item-content">
+                            <div class="item-media"><i class="icon icon-form-name"></i></div>
+                            <div class="item-inner">
+                                <div class="item-title label">账号</div>
+                                <div class="item-input">
+                                    <input type="text" name="id" placeholder="请输入医保号">
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="item-content">
+                            <div class="item-media"><i class="icon icon-form-password"></i></div>
+                            <div class="item-inner">
+                                <div class="item-title label">密码</div>
+                                <div class="item-input">
+                                    <input type="password" name="passward" placeholder="请输入密码" class="">
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="item-content">
+                            <div class="item-media"><i class="icon icon-form-gender"></i></div>
+                            <div class="item-inner">
+                                <div class="item-title label">身份</div>
+                                <div class="item-input">
+                                    <select name="identity">
+                                        <option value="患者">患者</option>
+                                        <option value="医生">医生</option>
+                                        <option value="管理员">管理员</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </form>
+        </div>
+
+        <div class="content-block">
+            <div class="row login_row">
+                <!--<div><a class="button button-big button-fill">登录</a></div>-->
+                <p><a class="button button-big button-fill button-success" ng-click="clientLogin()">登录</a></p>
+            </div>
+        </div>
+
+        <div class="partion">
+            <a class="open-register" ng-click="openRegister()">快速注册</a>
+            <span></span>
+            <a class="open-forget" ng-click="openForget()">忘记密码?</a>
+        </div>
+    </div>
+</div>
+<!-- Regiter Popup -->
+<div class="popup popup-register">
+    <header class="bar bar-nav">
+        <h1 class='title'>用户注册</h1>
+    </header>
+    <div class="content">
+        <div class="list-block">
+            <form id="p_info">
+                <ul>
+                    <!-- Text inputs -->
+                    <li>
+                        <div class="item-content">
+                            <div class="item-media"><i class="icon icon-form-name"></i></div>
+                            <div class="item-inner">
+                                <div class="item-title label">姓名</div>
+                                <div class="item-input">
+                                    <input type="text" name="p_name" placeholder="请输入姓名">
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="item-content">
+                            <div class="item-media"><i class="icon icon-form-password"></i></div>
+                            <div class="item-inner">
+                                <div class="item-title label">密码</div>
+                                <div class="item-input">
+                                    <input type="password" name="p_passward" placeholder="请输入密码" class="">
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="item-content">
+                            <div class="item-media"><i class="icon icon-form-gender"></i></div>
+                            <div class="item-inner">
+                                <div class="item-title label">性别</div>
+                                <div class="item-input">
+                                    <select name="p_gender">
+                                        <option value="男">男</option>
+                                        <option value="女">女</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <!-- Date -->
+                    <li>
+                        <div class="item-content">
+                            <div class="item-media"><i class="icon icon-form-calendar"></i></div>
+                            <div class="item-inner">
+                                <div class="item-title label">生日</div>
+                                <div class="item-input">
+                                    <input type="date" name="p_birthday" placeholder="选择生日" value="">
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="item-content">
+                            <div class="item-media"><i class="icon icon-form-telephone"></i></div>
+                            <div class="item-inner">
+                                <div class="item-title label">手机</div>
+                                <div class="item-input">
+                                    <input type="text" name="p_telephone" placeholder="请输入手机号" maxlength="11">
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <!-- Switch (Checkbox) -->
+                    <!--<li>-->
+                    <!--<div class="item-content">-->
+                    <!--<div class="item-media"><i class="icon icon-form-toggle"></i></div>-->
+                    <!--<div class="item-inner">-->
+                    <!--<div class="item-title label">记住密码</div>-->
+                    <!--<div class="item-input">-->
+                    <!--<label class="label-switch">-->
+                    <!--<input type="checkbox">-->
+                    <!--<div class="checkbox"></div>-->
+                    <!--</label>-->
+                    <!--</div>-->
+                    <!--</div>-->
+                    <!--</div>-->
+                    <!--</li>-->
+                    <!--<li>-->
+                    <!--<div class="item-content">-->
+                    <!--<div class="item-media"><i class="icon"></i></div>-->
+                    <!--<div class="item-inner">-->
+                    <!--<div class="item-title label">身份</div>-->
+                    <!--<div class="item-input">-->
+                    <!--<select>-->
+                    <!--<option>患者</option>-->
+                    <!--<option>医生</option>-->
+                    <!--</select>-->
+                    <!--</div>-->
+                    <!--</div>-->
+                    <!--</div>-->
+                    <!--</li>-->
+                    <li>
+                        <div class="item-content">
+                            <div class="item-media"><i class="icon"></i></div>
+                            <div class="item-inner">
+                                <div class="item-title label">编号</div>
+                                <div class="item-input">
+                                    <input type="text" name="p_id" placeholder="请输入医保编号">
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </form>
+        </div>
+        <div class="content-block">
+            <div class="row">
+                <div class="col-50 close-popup"><a class="button button-big button-fill button-danger" ng-click="cancelPatient()">取消</a></div>
+                <div class="col-50"><a class="button button-big button-fill" ng-click="registerPatient()">注册</a></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- 医生注册 -->
+<div class="popup popup-doctor">
+    <header class="bar bar-nav">
+        <h1 class='title'>医生注册</h1>
+    </header>
+    <div class="content">
+        <div class="list-block">
+            <form id="d_info">
+                <ul>
+                    <!-- Text inputs -->
+                    <li>
+                        <div class="item-content">
+                            <div class="item-media"><i class="icon icon-form-name"></i></div>
+                            <div class="item-inner">
+                                <div class="item-title label">姓名</div>
+                                <div class="item-input">
+                                    <input type="text" name="d_name" placeholder="请输入姓名">
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="item-content">
+                            <div class="item-media"><i class="icon icon-form-password"></i></div>
+                            <div class="item-inner">
+                                <div class="item-title label">密码</div>
+                                <div class="item-input">
+                                    <input type="password" name="d_passward" placeholder="请输入密码" class="">
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="item-content">
+                            <div class="item-media"><i class="icon icon-form-gender"></i></div>
+                            <div class="item-inner">
+                                <div class="item-title label">性别</div>
+                                <div class="item-input">
+                                    <select name="d_gender">
+                                        <option value="男">男</option>
+                                        <option value="女">女</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="item-content">
+                            <div class="item-media"><i class="icon icon-form-telephone"></i></div>
+                            <div class="item-inner">
+                                <div class="item-title label">手机</div>
+                                <div class="item-input">
+                                    <input type="text" name="d_telephone" placeholder="请输入手机号" maxlength="11">
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="item-content">
+                            <div class="item-media"><i class="icon"></i></div>
+                            <div class="item-inner">
+                                <div class="item-title label">编号</div>
+                                <div class="item-input">
+                                    <input type="text" name="d_id" placeholder="请输入医生编号">
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="item-content">
+                            <div class="item-media"><i class="icon"></i></div>
+                            <div class="item-inner">
+                                <div class="item-title label">科室</div>
+                                <div class="item-input">
+                                    <input type="text" name="d_department" placeholder="选择科室">
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+
+                </ul>
+            </form>
+        </div>
+        <div class="content-block">
+            <div class="row">
+                <div class="col-50 close-popup"><a class="button button-big button-fill button-danger" ng-click="cancelDoctor()">取消</a></div>
+                <div class="col-50"><a class="button button-big button-fill" ng-click="registerDoctor()">注册</a></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- forget help -->
+<div class="popup popup-forget">
+    <header class="bar bar-nav">
+        <h1 class='title'>密码找回</h1>
+    </header>
+    <div class="content">
+        <div class="list-block">
+            <form id="f_info">
+                <ul>
+                    <li>
+                        <div class="item-content">
+                            <div class="item-media"><i class="icon icon-form-gender"></i></div>
+                            <div class="item-inner">
+                                <div class="item-title label">身份</div>
+                                <div class="item-input">
+                                    <select name="f_identity">
+                                        <option value="患者">患者</option>
+                                        <option value="医生">医生</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="item-content">
+                            <div class="item-media"><i class="icon icon-form-name"></i></div>
+                            <div class="item-inner">
+                                <div class="item-title label">账号</div>
+                                <div class="item-input">
+                                    <input type="text" name="f_id" placeholder="请输入医保号">
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="item-content">
+                            <div class="item-media"><i class="icon icon-form-telephone"></i></div>
+                            <div class="item-inner">
+                                <div class="item-title label">手机</div>
+                                <div class="item-input">
+                                    <input type="text" name="f_telephone" placeholder="请输入手机号" maxlength="11">
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </form>
+        </div>
+        <div class="content-block">
+            <div class="row">
+                <div class="col-50 close-popup"><a class="button button-big button-fill button-danger" ng-click="cancelForget()">取消</a></div>
+                <div class="col-50"><a class="button button-big button-fill button-success" ng-click="getBackPassward()" >找回</a></div>
+            </div>
+        </div>
+    </div>
+</div>

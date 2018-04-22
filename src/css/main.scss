@@ -3,6 +3,7 @@ $orange: #ffc900;
 $red: #e43e56;
 $sblue: #0894ec;
 $white: #fff;
+$green:#66cccc;
 
 
 *{
@@ -277,5 +278,106 @@ html,body{
     .list-block{
       margin: 0 0 0.75rem 0;
     }
+  }
+}
+
+/**
+ * 预约挂号
+ */
+#appointment{
+  .content_2{
+    top: 1.2rem;
+    .list-block{
+      margin:1.5rem 0;
+      .item-text{
+        height: 1.2rem;
+      }
+      .item-center{
+        margin:0 auto;
+      }
+      .item-inner:active{
+        background: #eee;
+      }
+    }
+    .list-block_1{
+      margin:0;
+    }
+  }
+}
+
+/* * * * * * * * * * * * * * * * * * * * * * *  医生端 * * * * * * * * * * * * * * * * * * * * * * * */
+#doctor,#manager,#setting,#addappointment,#calendar,#healtheducation {
+  .title {
+    background: $green;
+    color: $white;
+  }
+}
+#doctor{
+  /** 功能区 **/
+  #list{
+    background: #fff;
+    .row{
+      margin: 0;
+      display: flex;
+      .list-item{
+        //width: 50%;
+        //margin: 0;
+        height: 5.75rem;
+        box-sizing: border-box;
+        color: #000;
+        i{
+          font-size: 1.5rem;
+          line-height: 2.5rem;
+          margin: 1rem 29% 0;
+          width: 2.5rem;
+          border-radius: 50%;
+          text-align: center;
+          color: $white;
+        }
+        span{
+          position: relative;
+          top: .5rem;
+          left: 1.25rem;
+        }
+        @media screen  and (max-width: 320px) {
+          span{
+            position: relative;
+            top: .5rem;
+            left: .25rem;
+          }
+        }
+      }
+    }
+    /** 图标设置 **/
+    .list-item:nth-child(1){
+      border-right: solid 1px #eee;
+      i{  background: $orange;}
+    }
+    .list-item:nth-child(2) {
+      border-right: solid 1px #eee;
+      i{  background: $blue;  }
+    }
+    .list-item:nth-child(3) {
+      i{
+        background: $red;
+      }
+    }
+  }
+}
+.bar_tab_2{
+  z-index: 2001;
+  background: $white;
+  color: $green;
+  font-weight: 600;
+  .tab-item.active{
+    color: $green;
+  }
+}
+#setting{
+  .list-block_2{
+    margin:9.75rem 0 0 0;
+  }
+  .list-block_3{
+    margin: 1.25rem 0;
   }
 }

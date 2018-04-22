@@ -208,4 +208,78 @@ html, body {
 #myintro .list .list-block {
   margin: 0 0 0.75rem 0; }
 
+/**
+ * 预约挂号
+ */
+#appointment .content_2 {
+  top: 1.2rem; }
+  #appointment .content_2 .list-block {
+    margin: 1.5rem 0; }
+    #appointment .content_2 .list-block .item-text {
+      height: 1.2rem; }
+    #appointment .content_2 .list-block .item-center {
+      margin: 0 auto; }
+    #appointment .content_2 .list-block .item-inner:active {
+      background: #eee; }
+  #appointment .content_2 .list-block_1 {
+    margin: 0; }
+
+/* * * * * * * * * * * * * * * * * * * * * * *  医生端 * * * * * * * * * * * * * * * * * * * * * * * */
+#doctor .title, #manager .title, #setting .title, #addappointment .title, #calendar .title, #healtheducation .title {
+  background: #66cccc;
+  color: #fff; }
+
+#doctor {
+  /** 功能区 **/ }
+  #doctor #list {
+    background: #fff;
+    /** 图标设置 **/ }
+    #doctor #list .row {
+      margin: 0;
+      display: flex; }
+      #doctor #list .row .list-item {
+        height: 5.75rem;
+        box-sizing: border-box;
+        color: #000; }
+        #doctor #list .row .list-item i {
+          font-size: 1.5rem;
+          line-height: 2.5rem;
+          margin: 1rem 29% 0;
+          width: 2.5rem;
+          border-radius: 50%;
+          text-align: center;
+          color: #fff; }
+        #doctor #list .row .list-item span {
+          position: relative;
+          top: .5rem;
+          left: 1.25rem; }
+        @media screen and (max-width: 320px) {
+          #doctor #list .row .list-item span {
+            position: relative;
+            top: .5rem;
+            left: .25rem; } }
+    #doctor #list .list-item:nth-child(1) {
+      border-right: solid 1px #eee; }
+      #doctor #list .list-item:nth-child(1) i {
+        background: #ffc900; }
+    #doctor #list .list-item:nth-child(2) {
+      border-right: solid 1px #eee; }
+      #doctor #list .list-item:nth-child(2) i {
+        background: #387ef5; }
+    #doctor #list .list-item:nth-child(3) i {
+      background: #e43e56; }
+
+.bar_tab_2 {
+  z-index: 2001;
+  background: #fff;
+  color: #66cccc;
+  font-weight: 600; }
+  .bar_tab_2 .tab-item.active {
+    color: #66cccc; }
+
+#setting .list-block_2 {
+  margin: 9.75rem 0 0 0; }
+#setting .list-block_3 {
+  margin: 1.25rem 0; }
+
 /*# sourceMappingURL=main.css.map */

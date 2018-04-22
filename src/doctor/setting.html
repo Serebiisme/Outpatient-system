@@ -1,0 +1,90 @@
+<div class="page" id="setting">
+    <!-- 标题栏 -->
+    <header class="bar bar-nav">
+        <h1 class="title">医生设置</h1>
+    </header>
+    <!-- 内容区 -->
+    <div class="content content_1">
+        <!-- 我的信息 -->
+        <div class="list-block media-list list-block_1">
+            <ul>
+                <li>
+                    <a href="#" class="item-link item-content">
+                        <div class="item-media"><img src="../img/doctor_default.png" style='width: 4rem;'></div>
+                        <div class="item-inner">
+                            <div class="item-title-row">
+                                <div class="item-title">医生姓名</div>
+                            </div>
+                            <div class="item-subtitle">职称</div>
+                            <div class="item-text">医生简介...</div>
+                        </div>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <!-- 功能区 -->
+    <div class="list-block list-block_2">
+        <ul>
+            <li class="item-content item-link">
+                <div class="item-media"><i class="icon icon-emoji"></i></div>
+                <div class="item-inner">
+                    <div class="item-title">我的简介</div>
+                    <div class="item-after"></div>
+                </div>
+            </li>
+            <li class="item-content item-link">
+                <div class="item-media"><i class="icon icon-friends"></i></div>
+                <div class="item-inner">
+                    <div class="item-title">我的管理</div>
+                    <div class="item-after"></div>
+                </div>
+            </li>
+        </ul>
+    </div>
+
+    <div class="list-block list-block_3">
+        <ul>
+            <li class="item-content item-link">
+                <div class="item-media"><i class="icon icon-edit"></i></div>
+                <div class="item-inner">
+                    <div class="item-title">帮助与反馈</div>
+                    <div class="item-after"></div>
+                </div>
+            </li>
+            <li class="item-content item-link">
+                <div class="item-media"><i class="icon icon-app"></i></div>
+                <div class="item-inner">
+                    <div class="item-title">版本信息</div>
+                    <div class="item-after"></div>
+                </div>
+            </li>
+        </ul>
+    </div>
+
+    <div class="list-block">
+        <ul>
+            <li class="item-content item-link_1" ng-click="logout()">
+                <div class="item-inner">
+                    <div class="item-title">退出登录</div>
+                </div>
+            </li>
+        </ul>
+    </div>
+</div>
+
+<!-- 工具栏 -->
+<nav class="bar bar-tab bar_tab_2">
+    <a class="tab-item" href="#/doctor">
+        <span class="icon icon-home"></span>
+        <span class="tab-label">首页</span>
+    </a>
+    <a class="tab-item " href="#/manager">
+        <span class="icon icon-friends"></span>
+        <span class="tab-label">管理</span>
+    </a>
+    <a class="tab-item active" href="#/setting">
+        <span class="icon icon-settings"></span>
+        <span class="tab-label">设置</span>
+    </a>
+</nav>

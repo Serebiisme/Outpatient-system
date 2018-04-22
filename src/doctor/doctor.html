@@ -1,0 +1,74 @@
+
+<div class="page" id="doctor">
+    <!-- 标题栏 -->
+    <header class="bar bar-nav">
+        <h1 class="title">医生助手</h1>
+    </header>
+    <!-- 内容区 -->
+    <div class="content content_1">
+        <!-- Slider -->
+        <div class="swiper-container">
+            <div class="swiper-wrapper">
+                <div class="swiper-slide"><img src="../img/banner_1.png"></div>
+                <div class="swiper-slide"><img src="../img/banner_2.png"></div>
+                <div class="swiper-slide"><img src="../img/banner_3.png"></div>
+            </div>
+            <div class="swiper-pagination"></div>
+        </div>
+        <!-- 功能区 -->
+        <div id="list">
+            <div class="row">
+                <a class="list-item" href="#/addappointment">
+                    <i class="icon icon-message"></i>
+                    <span>新增预约</span>
+                </a>
+                <a class="list-item" href="#/calendar">
+                    <i class="icon icon-clock"></i>
+                    <span>预约日历</span>
+                </a>
+                <a class="list-item" href="#/healtheducation">
+                    <i class="icon icon-picture"></i>
+                    <span>健康教育</span>
+                </a>
+            </div>
+        </div>
+
+        <!-- 推荐医生列表 -->
+        <div id="recommendDoc">
+            <div class="content-block-title recommmendTitle">推荐资讯</div>
+            <div class="list-block media-list recommendItem" ng-repeat="x in arr">
+                <ul>
+                    <li>
+                        <a href="#" class="item-link item-content">
+                            <div class="item-media"><img src="../img/doctor_default.png" style='width: 4rem;'></div>
+                            <div class="item-inner">
+                                <div class="item-title-row">
+                                    <div class="item-title">医生姓名</div>
+                                    <div class="item-after">${{x}}</div>
+                                </div>
+                                <div class="item-subtitle">医生职称</div>
+                                <div class="item-text">此处是医生简介...</div>
+                            </div>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- 工具栏 -->
+<nav class="bar bar-tab bar_tab_2">
+    <a class="tab-item active" href="#/doctor">
+        <span class="icon icon-home"></span>
+        <span class="tab-label">首页</span>
+    </a>
+    <a class="tab-item" href="#/manager">
+        <span class="icon icon-friends"></span>
+        <span class="tab-label">管理</span>
+    </a>
+    <a class="tab-item" href="#/setting">
+        <span class="icon icon-settings"></span>
+        <span class="tab-label">设置</span>
+    </a>
+</nav>

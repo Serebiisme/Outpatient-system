@@ -111,7 +111,7 @@ html,body{
 }
 
 /* 登录页 */
-#login{
+#login,#version{
   .logo{
     text-align: center;
     margin-top: 1rem;
@@ -306,11 +306,12 @@ html,body{
 }
 
 /* * * * * * * * * * * * * * * * * * * * * * *  医生端 * * * * * * * * * * * * * * * * * * * * * * * */
-#doctor,#manager,#setting,#addappointment,#calendar,#healtheducation {
-  .title {
-    background: $green;
-    color: $white;
-  }
+//#doctor,#manager,#setting,#addappointment,#calendar,#healtheducation,#help,#version {
+//  .title,
+//}
+.title_1 {
+  background: $green;
+  color: $white;
 }
 #doctor{
   /** 功能区 **/
@@ -318,6 +319,8 @@ html,body{
     background: #fff;
     .row{
       margin: 0;
+      display:-webkit-box;
+      display:-webkit-flex;
       display: flex;
       .list-item{
         //width: 50%;
@@ -380,4 +383,21 @@ html,body{
   .list-block_3{
     margin: 1.25rem 0;
   }
+}
+
+#calendar{
+  #calendardetail{
+    .icon-only{
+      visibility: hidden;
+    }
+  }
+}
+
+#addappointment{
+  #submitappointment{
+    margin: 2rem .5rem;
+  }
+}
+.icon-only{
+  visibility: hidden;
 }

@@ -82,32 +82,32 @@ html, body {
   bottom: .5rem; }
 
 /* 登录页 */
-#login .logo {
+#login .logo, #version .logo {
   text-align: center;
   margin-top: 1rem; }
-  #login .logo i {
+  #login .logo i, #version .logo i {
     font-size: 6rem;
     display: block;
     color: #e43e56; }
-#login .list-block {
+#login .list-block, #version .list-block {
   margin: 1.75rem .75rem; }
-  #login .list-block ul {
+  #login .list-block ul, #version .list-block ul {
     border-radius: .5rem; }
-#login .login_row {
+#login .login_row, #version .login_row {
   margin: 0; }
-  #login .login_row a {
+  #login .login_row a, #version .login_row a {
     background: #387ef5; }
-  #login .login_row a:active {
+  #login .login_row a:active, #version .login_row a:active {
     background: #0894ec; }
-#login .partion {
+#login .partion, #version .partion {
   text-align: center; }
-  #login .partion span {
+  #login .partion span, #version .partion span {
     margin: 0 4rem; }
-  #login .partion a {
+  #login .partion a, #version .partion a {
     color: #387ef5; }
-  #login .partion a:active {
+  #login .partion a:active, #version .partion a:active {
     color: #0894ec; }
-#login .list-block .item-title.label {
+#login .list-block .item-title.label, #version .list-block .item-title.label {
   width: 30%; }
 
 /** 修改标题栏 **/
@@ -225,7 +225,7 @@ html, body {
     margin: 0; }
 
 /* * * * * * * * * * * * * * * * * * * * * * *  医生端 * * * * * * * * * * * * * * * * * * * * * * * */
-#doctor .title, #manager .title, #setting .title, #addappointment .title, #calendar .title, #healtheducation .title {
+.title_1 {
   background: #66cccc;
   color: #fff; }
 
@@ -236,6 +236,8 @@ html, body {
     /** 图标设置 **/ }
     #doctor #list .row {
       margin: 0;
+      display: -webkit-box;
+      display: -webkit-flex;
       display: flex; }
       #doctor #list .row .list-item {
         height: 5.75rem;
@@ -281,5 +283,14 @@ html, body {
   margin: 9.75rem 0 0 0; }
 #setting .list-block_3 {
   margin: 1.25rem 0; }
+
+#calendar #calendardetail .icon-only {
+  visibility: hidden; }
+
+#addappointment #submitappointment {
+  margin: 2rem .5rem; }
+
+.icon-only {
+  visibility: hidden; }
 
 /*# sourceMappingURL=main.css.map */

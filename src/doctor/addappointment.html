@@ -5,11 +5,73 @@
             <span class="icon icon-left"></span>
             返回
         </a>
-        <h1 class="title">新增预约</h1>
+        <h1 class="title title_1">新增预约</h1>
     </header>
     <!-- 内容区 -->
     <div class="content">
-        <span>新增预约页</span>
+        <div class="list-block list-block_1">
+            <form id="appointmentform">
+                <ul>
+                    <!-- Text inputs -->
+                    <li>
+                        <div class="item-content">
+                            <div class="item-inner">
+                                <div class="item-title label">日期</div>
+                                <div class="item-input">
+                                    <input type="text" id="date-picker" name="date" value="{{minDate}}" />
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="item-content">
+                            <div class="item-inner">
+                                <div class="item-title label">时间</div>
+                                <div class="item-input">
+                                    <select name="time">
+                                        <option>8:00 ~ 9:00</option>
+                                        <option>9:00 ~ 10:00</option>
+                                        <option>10:00 ~ 11:00</option>
+                                        <option>14:00 ~ 15:00</option>
+                                        <option>15:00 ~ 16:00</option>
+                                        <option>16:00 ~ 17:00</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="item-content">
+                            <div class="item-inner">
+                                <div class="item-title label">地址</div>
+                                <div class="item-input">
+                                    <input type="text" name="address" placeholder="请输入就诊地址">
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="item-content">
+                            <div class="item-inner">
+                                <div class="item-title label">数量</div>
+                                <div class="item-input">
+                                    <select name="number">
+                                        <option>1</option>
+                                        <option>2</option>
+                                        <option>3</option>
+                                        <option>4</option>
+                                        <option>5</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+
+            </form>
+        </div>
+
+        <p><a class="button button-big button-fill button-success" id="submitappointment" ng-click="submitappointment()">提交</a></p>
     </div>
 
 </div>

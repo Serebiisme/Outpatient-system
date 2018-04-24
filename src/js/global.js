@@ -65,7 +65,8 @@ app.controller('loginController',function($scope,$timeout,$location){
                         $scope.$apply();//必要
                         break;
                     case '医生':
-                        console.log('go to doctor.html');
+                        $location.url('/doctor').replace();
+                        $scope.$apply();//必要
                         break;
                     case '管理员':
                         console.log('go to manager.html');
@@ -244,6 +245,16 @@ app.controller('loginController',function($scope,$timeout,$location){
         });
     };
 
+    $.init();
+});
+
+/**
+ * 帮助与反馈 版本
+ */
+app.controller('helpAndVersionController',function($scope,$location){
+    console.log('help and feedback , version');
+    $scope.appType = $location.search().type;
+    console.log($scope.appType);
     $.init();
 });
 

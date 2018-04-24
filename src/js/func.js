@@ -70,6 +70,7 @@ app.controller('myintroController',function($scope,$location){
 
     //退出登录
     $scope.logout = function(){
+        window.client = {};
         $location.url('login');
         //history.go(1-history.length-1);
     };

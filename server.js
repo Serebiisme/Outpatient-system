@@ -215,6 +215,32 @@ app.post('/login',function(req,res){
     });
 });
 
+//新增预约挂号
+app.post('/addappointment',function(req,res){
+    console.log(req.body) ;
+    var valstr = "",num = req.body.number;
+    for (var i = 0 ; i < num ; i++){
+        valstr += "(" + new Date().getTime() + ",9877,'2018-4-24','9:00~10:00','内科403','内科','未完成')";
+    }
+
+    var DateSql = "INSERT INTO appointment_list ( id, doctorid, date, time, address,department,status ) VALUES (1234,9877,'2018-4-24','9:00~10:00','内科403','内科','未完成');";
+    console.log(DateSql);
+    connection.query(DateSql, function (err, result) {
+        if (err) {
+            res.send({
+                code:500,
+                msg:'操作失败!'
+            });
+            return;
+        }
+        //console.log(result);
+        res.send({
+            code:200,
+            msg:'操作成功'
+        });
+    });
+});
+
 /**
  * @type action end
  */

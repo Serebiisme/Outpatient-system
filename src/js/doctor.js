@@ -29,11 +29,12 @@ app.controller('managerController',function($scope){
 /**
  * 设置页面
  */
-app.controller('settingController',function($scope){
+app.controller('settingController',function($scope,$location){
     console.log('setting');
 
     //退出登录
     $scope.logout = function(){
+        window.client = {};
         $location.url('login');
         //history.go(1-history.length-1);
     };
@@ -45,6 +46,37 @@ app.controller('settingController',function($scope){
  */
 app.controller('addappointmentController',function($scope){
     console.log('addappointment');
+    var d = new Date(),dm = new Date();
+        dm.setMonth(d.getMonth() + 1);
+    $scope.minDate = d.format("yyyy-MM-dd");
+    $scope.maxDate = dm.format("yyyy-MM-dd");
+
+    $("#date-picker").calendar({
+        value: [$scope.minDate],
+        minDate: $scope.minDate,
+        maxDate: $scope.maxDate
+    });
+
+    $scope.submitappointment = function () {
+        var a_info = getFormToJson('#appointmentform');
+        console.log(a_info);
+
+        if(a_info.address == ""){
+            zalert('地址不能为空!');
+            return false;
+        }
+
+        zpost('addappointment',{
+            doctorid:window.id,
+            date:a_info['date'],
+            time:a_info['time'],
+            address:a_info['address'],
+            number:a_info['number'],
+            department:window.department
+        },function(data){
+            zinfo(data.msg);
+        })
+    };
 
     $.init();
 });

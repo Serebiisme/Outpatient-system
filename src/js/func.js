@@ -3,7 +3,7 @@
  */
 app.controller('indexController', function($scope,$timeout,$compile) {
     console.log('index');
-    $scope.arr = ['1','2','3'];
+    $scope.arr = null;
 
 
     //初始化banner
@@ -11,6 +11,19 @@ app.controller('indexController', function($scope,$timeout,$compile) {
         autoplay : 3000,
         pagination : '.swiper-pagination',
         loop: true
+    });
+
+    //初始化推荐医生
+    zpost('recommendDoctor',{}, function (data) {
+        if(data.code == 500 ){
+            zinfo(data.msg);
+        } else {
+            data.data.forEach(function (e) {
+                e.intro == null && (e.intro = '暂无简介') ;
+            });
+            $scope.arr = data.data;
+            $scope.$apply();
+        }
     });
 
     $.init();//放最后
@@ -45,12 +58,112 @@ app.controller('hospitalController',function($scope,$compile){
 /**
  * 预约挂号页
  */
-app.controller('appointmentController',function($scope){
+app.controller('appointmentController',function($scope,$location){
     console.log('appointment');
 
     $scope.department = ['内科','外科','儿科','妇科','眼科','耳鼻喉科','口腔科','皮肤科','中医科','针灸推拿科','心理咨询室'];
 
+    $scope.showdoctorlist = function () {
+        //console.log(this);
+        $location.url('/doctorlist?department=' + this.x);
+    };
+
     $.init();//放最后
+});
+
+/**
+ * 预约医生列表页
+ */
+app.controller('doctorlistController', function ($scope,$location) {
+    console.log('doctorlist');
+    var dateArr = [];
+    for (var i = 0 ; i < 7 ;  i++){
+        (function(i){
+            var d = new Date();
+            d.setDate(d.getDate() + i);
+            d = d.format('yyyy-MM-dd').slice(5);
+            dateArr.push({
+                day:"周"+"日一二三四五六".charAt(new Date(d).getDay()),
+                date:d
+            });
+        })(i)
+    }
+
+    $scope.dateArr = dateArr;
+    $scope.department =  $location.search().department;
+    $scope.doctorlist = null;
+    $scope.currentDate = null;
+    //console.log('科室选择:' + $scope.department );
+
+    //初始化
+    $scope.checkLast = function($last){
+        var today = new Date().format('yyyy-MM-dd');
+        if($last){
+            $('#doctorlist .btn-group .button').eq(0).addClass('active');
+            $scope.currentDate = today;
+            zpost('getDoctorlist',{date:today,department:$scope.department}, function (data) {
+                if(data.code == 500){
+                    zinfo(data.msg);
+                } else {
+                    $scope.doctorlist = data.data;
+                    $scope.$apply();
+                }
+            })
+        }
+    };
+
+    //选择日期
+    $scope.selectDate = function () {
+        $('#doctorlist .btn-group .button').removeClass('active').eq(this.$index).addClass('active');
+
+        var d = new Date();
+            d = d.format('yyyy');
+        var date = d + "-" + this.date.date,
+            department = $scope.department;
+        $scope.currentDate = date ;
+        zpost('getDoctorlist',{date:date,department:department}, function (data) {
+            if(data.code == 500){
+                zinfo(data.msg);
+            } else {
+                $scope.doctorlist = data.data;
+                $scope.$apply();
+            }
+        })
+    };
+
+    //点击进入医生详情
+    $scope.showDoctorDetail = function () {
+        console.log('showdetail');
+        var doctorid = this.doctor.doctorid,
+            date = $scope.currentDate;
+
+        $location.url('doctordetail?doctorid='+doctorid+"&date="+date);
+    };
+
+    $.init();
+});
+
+/**
+ * 医生具体预约列表
+ */
+app.controller('doctordetailController', function ($scope,$location) {
+    console.log('doctordetail');
+    var doctorid = $location.search().doctorid,
+        date = $location.search().date;
+
+    $scope.doctroInfo = null;
+    $scope.d_appointlist = [];
+    $scope.selectedDate = date;
+
+    zpost('getDoctorinfo',{doctorid:doctorid,date:date}, function (data) {
+        $scope.doctroInfo = data.data[0];
+        zpost('getCurrentAppointment',{doctorid:doctorid,date:date}, function (data) {
+            $scope.d_appointlist = data.data;
+            $scope.$apply();
+        });
+    });
+
+    $.init();
 });
 
 /**

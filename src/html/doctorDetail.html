@@ -1,0 +1,54 @@
+<div class="page" id="doctordetail">
+    <!-- 标题栏 -->
+    <header class="bar bar-nav">
+        <a class="button button-link button-nav pull-left back">
+            <span class="icon icon-left"></span>
+            返回
+        </a>
+        <h1 class="title">预约列表</h1>
+    </header>
+    <!-- 内容区 -->
+    <div class="content">
+        <div class="card">
+            <div class="card-header">{{doctroInfo.name}}</div>
+            <div class="card-content">
+                <div class="list-block media-list">
+                    <ul>
+                        <li class="item-content">
+                            <div class="item-media">
+                                <img src="../img/doctor_default.png" width="44">
+                            </div>
+                            <div class="item-inner">
+                                <div class="item-title-row">
+                                    <div class="item-title">{{doctroInfo.department}}</div>
+                                </div>
+                                <div class="item-subtitle">{{doctroInfo.intro}}</div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="card-footer">
+                <span>{{selectedDate}}</span>
+                <span>号源:{{doctroInfo.num}}</span>
+            </div>
+        </div>
+
+        <div class="list-block media-list inset">
+            <ul>
+                <li ng-repeat="item in d_appointlist">
+                    <a class="item-link item-content">
+                        <div class="item-inner">
+                            <div class="item-title-row">
+                                <div class="item-title">预约编号:{{item.id}}</div>
+                            </div>
+                            <div class="item-subtitle">时间:{{item.time}}                    地点:{{item.address}}</div>
+                        </div>
+                    </a>
+                </li>
+            </ul>
+        </div>
+
+    </div>
+
+</div>

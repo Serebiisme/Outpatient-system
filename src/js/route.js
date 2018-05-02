@@ -56,6 +56,14 @@ app.config(['$routeProvider', function($routeProvider){
             templateUrl:'html/myintrodetail.html',
             controller:'myintrodetailController'
         })
+        .when('/doctorlist',{
+            templateUrl:'html/doctorList.html',
+            controller:'doctorlistController'
+        })
+        .when('/doctordetail',{
+            templateUrl:'html/doctorDetail.html',
+            controller:'doctordetailController'
+        })
 
         //医生端路由
         .when('/doctor',{
@@ -81,6 +89,14 @@ app.config(['$routeProvider', function($routeProvider){
         .when('/healtheducation',{
             templateUrl:'doctor/healtheducation.html',
             controller:'healtheducationController'
+        })
+        .when('/doctorintrodetail',{
+            templateUrl:'doctor/doctorintrodetail.html',
+            controller:'doctorintroController'
+        })
+        .when('/editintro',{
+            templateUrl:'doctor/editintro.html',
+            controller:'editintroController'
         })
         .otherwise({redirectTo:'/login'});
 }]);

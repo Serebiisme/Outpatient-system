@@ -1,0 +1,36 @@
+<div class="page" id="doctorintrodetail">
+    <!-- 标题栏 -->
+    <header class="bar bar-nav">
+        <a class="button button-link button-nav pull-left back">
+            <span class="icon icon-left"></span>
+            返回
+        </a>
+        <h1 class="title title_1">医生信息</h1>
+    </header>
+    <!-- 内容区 -->
+    <div class="content">
+        <div class="list-block">
+            <ul>
+                <li class="item-content" ng-repeat="(key, val) in myintro">
+                    <div class="item-inner">
+                        <div class="item-title">{{key}}</div>
+                        <div class="item-after">{{val}}</div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+        <div class="list-block media-list">
+            <ul>
+                <li class="item-content">
+                    <div class="item-inner">
+                        <div class="item-title-row">
+                            <div class="item-title">简介</div>
+                        </div>
+                        <div class="item-text">{{intro}}</div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+</div>

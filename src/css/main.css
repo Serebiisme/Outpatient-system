@@ -8,7 +8,7 @@
   -ms-user-select: none;
   user-select: none; }
 
-input {
+input, textarea {
   -webkit-user-select: auto;
   user-select: text; }
 
@@ -214,7 +214,7 @@ html, body {
 #appointment .content_2 {
   top: 1.2rem; }
   #appointment .content_2 .list-block {
-    margin: 1.5rem 0; }
+    margin: 1.5rem 0 0 0; }
     #appointment .content_2 .list-block .item-text {
       height: 1.2rem; }
     #appointment .content_2 .list-block .item-center {
@@ -223,6 +223,26 @@ html, body {
       background: #eee; }
   #appointment .content_2 .list-block_1 {
     margin: 0; }
+
+#doctorlist .btn-group {
+  overflow: auto; }
+  #doctorlist .btn-group a {
+    height: 3rem;
+    line-height: 1.5rem; }
+#doctorlist #listcontent {
+  margin: 1rem 0.75rem; }
+  #doctorlist #listcontent ul {
+    margin-top: .5rem; }
+
+#doctordetail .card {
+  box-shadow: none;
+  border-radius: .3rem; }
+#doctordetail .inset {
+  margin: .5rem; }
+  #doctordetail .inset ul {
+    margin: .5rem 0; }
+    #doctordetail .inset ul li .item-subtitle {
+      white-space: pre-wrap; }
 
 /* * * * * * * * * * * * * * * * * * * * * * *  医生端 * * * * * * * * * * * * * * * * * * * * * * * */
 .title_1 {
@@ -259,7 +279,7 @@ html, body {
           #doctor #list .row .list-item span {
             position: relative;
             top: .5rem;
-            left: .25rem; } }
+            left: 1rem; } }
     #doctor #list .list-item:nth-child(1) {
       border-right: solid 1px #eee; }
       #doctor #list .list-item:nth-child(1) i {
@@ -286,11 +306,53 @@ html, body {
 
 #calendar #calendardetail .icon-only {
   visibility: hidden; }
+#calendar #calendardetail .active {
+  background: #e43e56;
+  color: #fff; }
+#calendar #calendardetail .active.selected {
+  border: 1px solid #e43e56;
+  color: #e43e56;
+  background: transparent; }
+#calendar #datelist ul {
+  margin-top: .5rem; }
 
 #addappointment #submitappointment {
   margin: 2rem .5rem; }
 
 .icon-only {
   visibility: hidden; }
+
+#manager .button-green {
+  border: 1px solid #66cccc;
+  color: #66cccc;
+  padding: 0.25rem 1rem;
+  border-radius: .25rem; }
+#manager .button-green:active {
+  border: 1px solid #66cccc;
+  background: #66cccc;
+  color: #fff; }
+#manager .button-red {
+  border: 1px solid #e43e56;
+  color: #e43e56;
+  padding: 0.25rem 1rem;
+  border-radius: .25rem; }
+#manager .button-red:active {
+  border: 1px solid #e43e56;
+  background: #e43e56;
+  color: #fff; }
+#manager .layCenter {
+  text-align: center;
+  position: relative;
+  top: 30%; }
+  #manager .layCenter img {
+    width: 5rem; }
+  #manager .layCenter h1 {
+    color: #bbb;
+    font-size: 1rem; }
+
+#editintro [name=editintro] {
+  padding-left: 0; }
+#editintro #submiteditintro {
+  margin: 2rem .5rem; }
 
 /*# sourceMappingURL=main.css.map */

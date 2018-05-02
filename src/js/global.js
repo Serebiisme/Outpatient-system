@@ -49,7 +49,7 @@ app.controller('loginController',function($scope,$timeout,$location){
             return false;
         }
 
-        if (l_info.passward == "") {
+        if (l_info.password == "") {
             zalert("密码不能为空!");
             return false;
         }
@@ -117,7 +117,7 @@ app.controller('loginController',function($scope,$timeout,$location){
             return false;
         }
 
-        if (p_info.p_passward == "") {
+        if (p_info.p_password == "") {
             zalert("密码不能为空!");
             return false;
         }
@@ -175,7 +175,7 @@ app.controller('loginController',function($scope,$timeout,$location){
             return false;
         }
 
-        if (d_info.d_passward == "") {
+        if (d_info.d_password == "") {
             zalert("密码不能为空!");
             return false;
         }
@@ -230,13 +230,13 @@ app.controller('loginController',function($scope,$timeout,$location){
         $('#f_info')[0].reset();
     };
 
-    $scope.getBackPassward = function(){
+    $scope.getBackpassword = function(){
         var f_info = getFormToJson('#f_info');
         console.log(f_info);
 
-        zpost('getBackPassward',f_info,function(data){
+        zpost('getBackpassword',f_info,function(data){
             if(data.code == '200'){
-                zalert('您的密码已重置,新密码为' + data.passward,'短信提示', function () {
+                zalert('您的密码已重置,新密码为' + data.password,'短信提示', function () {
                     $.closeModal();
                 })
             } else {

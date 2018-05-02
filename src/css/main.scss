@@ -15,7 +15,7 @@ $green:#66cccc;
   -ms-user-select:none;
   user-select:none;
 }
-input{
+input,textarea{
   -webkit-user-select: auto;
   user-select:text;
 }
@@ -288,7 +288,7 @@ html,body{
   .content_2{
     top: 1.2rem;
     .list-block{
-      margin:1.5rem 0;
+      margin: 1.5rem 0 0 0;
       .item-text{
         height: 1.2rem;
       }
@@ -304,6 +304,38 @@ html,body{
     }
   }
 }
+#doctorlist{
+  .btn-group{
+    overflow: auto;
+    a{
+      height: 3rem;
+      line-height: 1.5rem;
+    }
+  }
+  #listcontent{
+    margin: 1rem 0.75rem;
+    ul{  margin-top: .5rem;  }
+  }
+}
+
+#doctordetail{
+  .card{
+    box-shadow: none;
+    border-radius: .3rem;
+  }
+  .inset{
+    margin: .5rem;
+    ul{
+      margin: .5rem 0;
+      li{
+        .item-subtitle{
+          white-space: pre-wrap;
+        }
+      }
+    }
+  }
+}
+
 
 /* * * * * * * * * * * * * * * * * * * * * * *  医生端 * * * * * * * * * * * * * * * * * * * * * * * */
 //#doctor,#manager,#setting,#addappointment,#calendar,#healtheducation,#help,#version {
@@ -346,7 +378,7 @@ html,body{
           span{
             position: relative;
             top: .5rem;
-            left: .25rem;
+            left: 1rem;
           }
         }
       }
@@ -387,9 +419,19 @@ html,body{
 
 #calendar{
   #calendardetail{
-    .icon-only{
-      visibility: hidden;
+    .icon-only{  visibility: hidden;  }
+    .active{
+      background:#e43e56;
+      color:#fff
     }
+    .active.selected{
+      border:1px solid #e43e56;
+      color: #e43e56;
+      background: transparent;
+    }
+  }
+  #datelist{
+    ul{  margin-top: .5rem;  }
   }
 }
 
@@ -400,4 +442,48 @@ html,body{
 }
 .icon-only{
   visibility: hidden;
+}
+#manager {
+  .button-green {
+    border: 1px solid #66cccc;
+    color: #66cccc;
+    padding: 0.25rem 1rem;
+    border-radius: .25rem;
+  }
+  .button-green:active {
+    border: 1px solid #66cccc;
+    background:#66cccc ;
+    color: #fff;
+  }
+  .button-red {
+    border: 1px solid #e43e56;
+    color: #e43e56;
+    padding: 0.25rem 1rem;
+    border-radius: .25rem;
+  }
+  .button-red:active {
+    border: 1px solid #e43e56;
+    background:#e43e56 ;
+    color: #fff;
+  }
+  .layCenter{
+    text-align: center;
+    position: relative;
+    top: 30%;
+    img{
+      width: 5rem;
+    }
+    h1{
+      color: #bbb;
+      font-size: 1rem;
+    }
+  }
+}
+#editintro{
+  [name=editintro]{
+    padding-left: 0;
+  }
+  #submiteditintro{
+    margin: 2rem .5rem;
+  }
 }

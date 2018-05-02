@@ -1,0 +1,36 @@
+<div class="page" id="doctorlist">
+    <!-- 标题栏 -->
+    <header class="bar bar-nav">
+        <a class="button button-link button-nav pull-left back">
+            <span class="icon icon-left"></span>
+            返回
+        </a>
+        <h1 class="title">选择医生</h1>
+    </header>
+    <!-- 内容区 -->
+    <div class="content">
+        <div class="buttons-tab btn-group">
+            <a class="tab-link button" ng-repeat="date in dateArr" ng-init="checkLast($last)" ng-click="selectDate()">
+                <div>{{date.day}}</div>
+                <div>{{date.date}}</div>
+            </a>
+        </div>
+
+        <div class="list-block media-list inset" id="listcontent">
+            <ul ng-repeat="doctor in doctorlist" ng-click="showDoctorDetail()">
+                <li>
+                    <a class="item-link item-content">
+                        <div class="item-media"><img src="../img/doctor_default.png" style='width: 2.2rem;'></div>
+                        <div class="item-inner">
+                            <div class="item-title-row">
+                                <div class="item-title">{{doctor.name}}</div>
+                            </div>
+                            <div class="item-subtitle">号源数量:{{doctor.num}}</div>
+                        </div>
+                    </a>
+                </li>
+            </ul>
+        </div>
+
+    </div>
+</div>

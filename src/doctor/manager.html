@@ -5,7 +5,37 @@
     </header>
     <!-- 内容区 -->
     <div class="content content_1">
-        <span>预约管理</span>
+
+        <!-- 预约列表 -->
+        <div class="card" ng-repeat="x in appointmentList">
+            <div class="card-header">预约编号:{{x.id}}</div>
+            <div class="card-content">
+                <div class="list-block media-list">
+                    <ul>
+                        <li class="item-content">
+                            <div class="item-inner">
+                                <div class="item-title-row">
+                                    <div class="item-title">{{x.date}}</div>
+                                    <div class="item-after">{{x.time}}</div>
+                                </div>
+                                <div class="item-subtitle">预约地点:{{x.address}}</div>
+                                <div class="item-subtitle">预约患者:{{x.name}}</div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="card-footer">
+                <span class="button-green" ng-click="finishAppointment()">完成</span>
+                <span class="button-red" ng-click="cancelAppointment()">取消</span>
+            </div>
+        </div>
+
+        <div class="content-padded layCenter" ng-if="!appointmentList.length">
+            <img src="../img/nodata.png">
+            <h1>暂无数据</h1>
+        </div>
+
     </div>
 
 </div>

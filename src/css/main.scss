@@ -336,6 +336,38 @@ html,body{
   }
 }
 
+#searchdoc{
+  .bar-header-secondary {
+    top: 2.1rem;
+  }
+  .searchbar {
+    background: #387ef5;
+    .searchbar-cancel{
+      color: #ffffff;
+    }
+  }
+  .content_2{
+    top: 4rem;
+    .content-block-title{
+      font-size: .8rem;
+    }
+  }
+}
+
+#searchresult{
+  .layCenter{
+    text-align: center;
+    position: relative;
+    top: 30%;
+    img{
+      width: 5rem;
+    }
+    h1{
+      color: #bbb;
+      font-size: 1rem;
+    }
+  }
+}
 
 /* * * * * * * * * * * * * * * * * * * * * * *  医生端 * * * * * * * * * * * * * * * * * * * * * * * */
 //#doctor,#manager,#setting,#addappointment,#calendar,#healtheducation,#help,#version {

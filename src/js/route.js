@@ -64,6 +64,10 @@ app.config(['$routeProvider', function($routeProvider){
             templateUrl:'html/doctorDetail.html',
             controller:'doctordetailController'
         })
+        .when('/searchresult',{
+            templateUrl:'html/searchResult.html',
+            controller:'searchresultController'
+        })
 
         //医生端路由
         .when('/doctor',{

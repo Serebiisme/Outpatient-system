@@ -151,17 +151,35 @@ app.controller('doctordetailController', function ($scope,$location) {
     var doctorid = $location.search().doctorid,
         date = $location.search().date;
 
-    $scope.doctroInfo = null;
-    $scope.d_appointlist = [];
-    $scope.selectedDate = date;
-
-    zpost('getDoctorinfo',{doctorid:doctorid,date:date}, function (data) {
+    zpost('getDoctorinfo',{doctorid:doctorid}, function (data) {
         $scope.doctroInfo = data.data[0];
+        updateCurrent(doctorid,date);
+
+    });
+
+    function updateCurrent(doctorid,date){
         zpost('getCurrentAppointment',{doctorid:doctorid,date:date}, function (data) {
             $scope.d_appointlist = data.data;
             $scope.$apply();
         });
-    });
+    }
+
+    $scope.doctroInfo = null;
+    $scope.d_appointlist = [];
+    $scope.selectedDate = date;
+
+    $scope.confirmAppointment = function(){
+        zcomfirm('确认预约该门诊订单?','提示', function () {
+            zpost('confirmAppointment',{id:this.item.id,patientid:window.client.id},function(data){
+                if (data.code == 500) {
+                    zinfo(data.msg);
+                } else {
+                    updateCurrent(doctorid,date);
+                    zinfo('预约成功!');
+                }
+            });
+        }.bind(this));
+    };
 
     $.init();
 });
@@ -169,11 +187,84 @@ app.controller('doctordetailController', function ($scope,$location) {
 /**
  * 医生搜索页面
  */
-app.controller('searchController',function($scope){
+app.controller('searchController',function($scope,$locals,$location){
     console.log('search');
+
+    $scope.historyArr = $locals.getObject('historySearch').history && $locals.getObject('historySearch').history.reverse().slice(0,5);
+    //console.log($scope.historyArr);
+
+    //搜索医生
+    $scope.foundDoctor = function () {
+        var keyValues = $('#search').val(),
+            historySearch = $locals.getObject('historySearch');
+        document.activeElement.blur();  //移动端收齐键盘
+
+        //输入不等于空
+        if (keyValues != "" && isCorrectName(keyValues)){
+            //点击搜索后续操作
+            JSON.stringify(historySearch) == '{}' ? (function () {
+                historySearch.history = [];
+                historySearch.history.push(keyValues);
+            })():(function () {
+                historySearch.history.push(keyValues);
+            })();
+
+            $locals.setObject('historySearch',historySearch);
+
+            $location.url('searchresult?keyval=' + keyValues);
+        } else {
+            zinfo('输入有误,请重新输入!');
+        }
+    };
+
+    //历史记录搜索
+    $scope.goToSearch = function () {
+        $location.url('searchresult?keyval=' + this.history);
+    };
+
+    //清理历史记录
+    $scope.clearHistory = function () {
+        $scope.historyArr = [];
+        $locals.setObject('historySearch',{});
+    };
 
     $.init();//放最后
 });
+
+/**
+ * 搜索详情页
+ */
+app.controller('searchresultController', function ($scope,$location) {
+    console.log('searchresult');
+
+    $scope.allresult = null;
+    $scope.nodata = false;
+    $scope.whichtitle = $location.search().status;
+
+    var searchname = $location.search().keyval;
+
+    showLoading('搜索中');
+    zpost('searchDoctor',{keyval:searchname}, function (data) {
+        hideLoading();
+        if (data.code == 500){
+            zinfo(data.msg);
+        } else {
+            $scope.allresult = data.data;
+            $scope.nodata = JSON.stringify($scope.allresult) == '{}';
+            $scope.$apply();
+        }
+    });
+
+    $scope.goToAppointment = function () {
+        var date = this.date,
+            doctorid = this.$parent.key;
+
+        $location.url('doctordetail?doctorid='+doctorid+"&date="+date);
+    };
+
+    $.init();
+});
+
 /**
  * 个人信息页面
  */
@@ -183,8 +274,11 @@ app.controller('myintroController',function($scope,$location){
 
     //退出登录
     $scope.logout = function(){
-        window.client = {};
-        $location.url('login');
+        zalert('确定要退出登录吗?','提示', function () {
+            window.client = {};
+            $location.url('login');
+            $scope.$apply();
+        });
         //history.go(1-history.length-1);
     };
 
@@ -234,6 +328,7 @@ app.controller('informationController',function($scope,$location){
     };
 
     // 添加'refresh'监听器
+    $(document).off('refresh', '.pull-to-refresh-content');
     $(document).on('refresh', '.pull-to-refresh-content',function(e) {
         $scope.ifload = 0;
         $scope.lifeStartNum = 0;
@@ -281,6 +376,7 @@ app.controller('informationController',function($scope,$location){
 
     //无限滚动
     var loading = false;
+    $(document).off('infinite', '.infinite-scroll-bottom');
     $(document).on('infinite', '.infinite-scroll-bottom',function() {
 
         // 如果正在加载，则退出

@@ -30,13 +30,13 @@
             </div>
             <div class="card-footer">
                 <span>{{selectedDate}}</span>
-                <span>号源:{{doctroInfo.num}}</span>
+                <span>剩余号源:{{d_appointlist.length}}</span>
             </div>
         </div>
 
         <div class="list-block media-list inset">
             <ul>
-                <li ng-repeat="item in d_appointlist">
+                <li ng-repeat="item in d_appointlist" ng-click="confirmAppointment()">
                     <a class="item-link item-content">
                         <div class="item-inner">
                             <div class="item-title-row">

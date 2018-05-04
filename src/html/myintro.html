@@ -1,7 +1,7 @@
 <div class="page" id="myintro">
     <!-- 头像区 -->
     <header class="avator">
-        <img src="../img/avator_default.png">
+        <img src="{{myintro.gender == '男' ? '../img/male_default.png' : '../img/female_default.png'}}">
         <div>{{myintro.name}}</div>
     </header>
     <!-- 内容区 -->

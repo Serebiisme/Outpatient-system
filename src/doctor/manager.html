@@ -4,7 +4,13 @@
         <h1 class="title title_1">预约管理</h1>
     </header>
     <!-- 内容区 -->
-    <div class="content content_1">
+    <div class="content content_1 pull-to-refresh-content" data-ptr-distance="55">
+
+        <!-- 默认的下拉刷新层 -->
+        <div class="pull-to-refresh-layer">
+            <div class="preloader"></div>
+            <div class="pull-to-refresh-arrow"></div>
+        </div>
 
         <!-- 预约列表 -->
         <div class="card" ng-repeat="x in appointmentList">

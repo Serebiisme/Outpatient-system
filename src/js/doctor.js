@@ -25,20 +25,24 @@ app.controller('managerController',function($scope){
     console.log('manager');
     $scope.appointmentList = null;
 
-    zpost('/getAppointment',{doctorid:window.client.id}, function (data) {
-        console.log(data);
-        var arr = data.data;
-        arr.forEach(function (e) {
-            e.name || (e.name = '暂未预约');
+    $(document).off('refresh', '.pull-to-refresh-content');
+    $(document).on('refresh', '.pull-to-refresh-content',function(e) {
+        zpost('/getAppointment',{doctorid:window.client.id}, function (data) {
+            var arr = data.data;
+            arr.forEach(function (e) {
+                e.name || (e.name = '暂未预约');
+            });
+            $scope.appointmentList = arr;
+            $scope.$apply();
+            // 加载完毕需要重置
+            $.pullToRefreshDone('.pull-to-refresh-content');
         });
-        $scope.appointmentList = arr;
-        $scope.$apply();
     });
 
     $scope.finishAppointment = function () {
         console.log(this.$index);
         var index = this.$index;
-        zalert('确实该患者已完成就诊?',"", function () {
+        zcomfirm('确实该患者已完成就诊?',"", function () {
             zpost('complateAppointment',{id:this.x.id}, function (data) {
                 zinfo(data.msg);
                 if(data.code == 200 ){
@@ -59,7 +63,7 @@ app.controller('managerController',function($scope){
             return false;
         }
 
-        zalert('确实取消该预约?',"", function () {
+        zcomfirm('确实取消该预约?',"", function () {
             zpost('cancelAppointment',{id:this.x.id}, function (data) {
                 zinfo(data.msg);
                 if(data.code == 200 ){
@@ -71,6 +75,9 @@ app.controller('managerController',function($scope){
     };
 
     $.init();
+
+    //初始化触发;
+    $('.pull-to-refresh-content').trigger('refresh');
 });
 /**
  * 设置页面
@@ -82,8 +89,11 @@ app.controller('settingController',function($scope,$location){
 
     //退出登录
     $scope.logout = function(){
-        window.client = {};
-        $location.url('login');
+        zalert('确定要退出登录吗?','提示', function () {
+            window.client = {};
+            $location.url('login');
+            $scope.$apply();
+        });
         //history.go(1-history.length-1);
     };
 

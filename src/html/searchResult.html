@@ -1,0 +1,53 @@
+<div class="page" id="searchresult">
+    <!-- 标题栏 -->
+    <header class="bar bar-nav">
+        <a class="button button-link button-nav pull-left back">
+            <span class="icon icon-left"></span>
+            返回
+        </a>
+        <h1 class="title">{{whichtitle ? '医生详情' : '搜索结果'}}</h1>
+    </header>
+    <!-- 内容区 -->
+    <div class="content">
+        <div class="card" ng-repeat="(key,value) in allresult">
+            <div class="card-header">{{value.name}}</div>
+            <div class="card-content">
+                <div class="list-block media-list">
+                    <ul>
+                        <li class="item-content">
+                            <div class="item-media">
+                                <img src="../img/doctor_default.png" width="44">
+                            </div>
+                            <div class="item-inner">
+                                <div class="item-title-row">
+                                    <div class="item-title">{{value.department}}</div>
+                                </div>
+                                <div class="item-subtitle">{{value.intro}}</div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="card-content">
+                <div class="list-block">
+                    <ul>
+                        <li ng-repeat="date in value.dates" ng-click="goToAppointment()">
+                            <a class="item-link item-content">
+                                <div class="item-inner">
+                                    <div class="item-title">{{date}}</div>
+                                </div>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="content-padded layCenter" ng-if="nodata">
+            <img src="../img/nodata_1.png">
+            <h1>该医生不存在或无号源</h1>
+        </div>
+
+    </div>
+
+</div>

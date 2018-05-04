@@ -244,6 +244,27 @@ html, body {
     #doctordetail .inset ul li .item-subtitle {
       white-space: pre-wrap; }
 
+#searchdoc .bar-header-secondary {
+  top: 2.1rem; }
+#searchdoc .searchbar {
+  background: #387ef5; }
+  #searchdoc .searchbar .searchbar-cancel {
+    color: #ffffff; }
+#searchdoc .content_2 {
+  top: 4rem; }
+  #searchdoc .content_2 .content-block-title {
+    font-size: .8rem; }
+
+#searchresult .layCenter {
+  text-align: center;
+  position: relative;
+  top: 30%; }
+  #searchresult .layCenter img {
+    width: 5rem; }
+  #searchresult .layCenter h1 {
+    color: #bbb;
+    font-size: 1rem; }
+
 /* * * * * * * * * * * * * * * * * * * * * * *  医生端 * * * * * * * * * * * * * * * * * * * * * * * */
 .title_1 {
   background: #66cccc;

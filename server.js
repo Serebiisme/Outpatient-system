@@ -219,7 +219,10 @@ app.post('/login',function(req,res){
 //推荐医生
 app.post('/recommendDoctor', function (req,res) {
     console.log(req.body) ;
-    var DateSql = "select id,name,gender,telephone,department,intro from `doctor_login` order by rand() limit 3;";
+    var DateSql = " select dl.id,dl.name,dl.gender,dl.telephone,dl.department, dl.intro  " +
+        "from `doctor_login` dl left join `appointment_list` al on al.`doctorid` = dl.`id` " +
+        " where al.`date` >= DATE_FORMAT(CURRENT_DATE(),'%Y-%m-%d') and al.`date` <= DATE_FORMAT(DATE_ADD(CURRENT_DATE(),INTERVAL 7 DAY),'%Y-%m-%d') " +
+        "  order by rand() limit 3;";
 
     connection.query(DateSql, function (err, result) {
         if (err) {
@@ -267,7 +270,7 @@ app.post('/getDoctorlist', function (req,res) {
 app.post('/getCurrentAppointment', function (req, res) {
     console.log(req.body) ;
 
-    var DateSql = " select al.`id`,al.`time`,al.`address` from `appointment_list` al where al.`doctorid` = "  + req.body.doctorid + " and al.`date` = '"  + req.body.date + "' ";
+    var DateSql = " select al.`id`,al.`time`,al.`address` from `appointment_list` al where al.`doctorid` = "  + req.body.doctorid + " and al.`date` = '"  + req.body.date + "' and status = '未完成'";
 
     connection.query(DateSql, function (err, result) {
         if (err) {
@@ -289,12 +292,62 @@ app.post('/getCurrentAppointment', function (req, res) {
 app.post('/getDoctorinfo', function (req,res) {
     console.log(req.body) ;
 
-    var DateSql = "select  al.`doctorid`, dl.`name`, count(al.`id`) as num , dl.`department`,dl.`intro`" +
-        "from `appointment_list` al left join `doctor_login` dl on al.`doctorid` = dl.`id`" +
-        "where al.`date` = '" + req.body.date + "' and al.`status` = '未完成' and al.`doctorid` = " + req.body.doctorid  +
-        " group by dl.`name`, al.`doctorid`;";
+    //var DateSql = "select  al.`doctorid`, dl.`name`, count(al.`id`) as num , dl.`department`,dl.`intro`" +
+    //    "from `appointment_list` al left join `doctor_login` dl on al.`doctorid` = dl.`id`" +
+    //    "where al.`date` = '" + req.body.date + "' and al.`doctorid` = " + req.body.doctorid  +
+    //    " group by dl.`name`, al.`doctorid`;";
 
-    console.log(DateSql);
+    var DateSql = "select id,name,intro,department from `doctor_login` where id = " + req.body.doctorid;
+
+    //console.log(DateSql);
+    connection.query(DateSql, function (err, result) {
+        if (err) {
+            res.send({
+                code:500,
+                msg:'网络错误!'
+            });
+            return;
+        }
+        //console.log(result);
+
+        res.send({
+            code:200,
+            msg:'操作成功',
+            data:result
+        });
+    });
+});
+
+app.post('/confirmAppointment', function (req,res) {
+    console.log(req.body) ;
+
+    var DateSql = " UPDATE `appointment_list` SET status = '已预约' , patientid = " + req.body.patientid + " where id = " + req.body.id;
+
+    connection.query(DateSql, function (err, result) {
+        if (err) {
+            res.send({
+                code:500,
+                msg:'网络错误!'
+            });
+            return;
+        }
+        //console.log(result);
+
+        res.send({
+            code:200,
+            msg:'操作成功'
+        });
+    });
+});
+
+app.post('/searchDoctor',function(req,res){
+    console.log(req.body);
+
+    var DateSql = "Select distinct(al.`date`) , dl.`name` ,dl.`id`,dl.`intro`,dl.`department` " +
+        " from `appointment_list` al left join `doctor_login` dl on al.`doctorid` = dl.`id`  " +
+        " where dl.`name` = '" + req.body.keyval + "' and al.`date` >= DATE_FORMAT(CURRENT_DATE(),'%Y-%m-%d') and al.`date` <= DATE_FORMAT(DATE_ADD(CURRENT_DATE(),INTERVAL 7 DAY),'%Y-%m-%d') " +
+        " and al.`status` = '未完成'  order by al.`date` asc";
+
     connection.query(DateSql, function (err, result) {
         if (err) {
             res.send({
@@ -304,10 +357,28 @@ app.post('/getDoctorinfo', function (req,res) {
             return;
         }
         console.log(result);
+
+        var data = {};
+
+        result.forEach(function (item) {
+            if (data[item.id]){
+                data[item.id].name = item.name;
+                data[item.id].intro = item.intro;
+                data[item.id].department = item.department;
+                data[item.id].dates.push(item.date);
+            } else {
+                data[item.id] = {};
+                data[item.id].name = item.name;
+                data[item.id].intro = item.intro;
+                data[item.id].department = item.department;
+                data[item.id].dates ? data[item.id].dates.push(item.date) : (data[item.id].dates = [],data[item.id].dates.push(item.date));
+            }
+        });
+
         res.send({
             code:200,
             msg:'操作成功',
-            data:result
+            data:data
         });
     });
 });
@@ -373,7 +444,7 @@ app.post('/getAppointment', function (req,res) {
     console.log(req.body) ;
     var DateSql = " select ol.`id`, ol.`doctorid`, ol.`patientid`, pl.`name`,ol.`time`, ol.`date` ,ol.`address`, ol.`status` " +
         "from appointment_list ol left join patient_login pl on ol.`patientid` = pl.`id`  " +
-        "where ol.`doctorid` = " + req.body.doctorid + " and ol.`date` >= DATE_FORMAT(CURRENT_DATE(),'%Y-%m-%d') and ol.`status` = '未完成' order by ol.`date` asc ";
+        "where ol.`doctorid` = " + req.body.doctorid + " and ol.`date` >= DATE_FORMAT(CURRENT_DATE(),'%Y-%m-%d') and ol.`status` = '未完成'  or ol.`status` = '已预约'  order by ol.`date` asc ";
     connection.query(DateSql, function (err, result) {
         if (err) {
             res.send({

@@ -8,14 +8,28 @@
         <h1 class="title">搜索医生</h1>
     </header>
     <!-- 内容区 -->
-    <div class="bar bar-header-secondary">
-        <div class="searchbar">
-            <a class="searchbar-cancel">取消</a>
-            <div class="search-input">
-                <label class="icon icon-search" for="search"></label>
-                <input type="search" id='search' placeholder='输入关键字...'/>
+    <form id="searchdoctor" ng-submit="foundDoctor()">
+        <div class="bar bar-header-secondary">
+            <div class="searchbar">
+                <a class="searchbar-cancel">取消</a>
+                <div class="search-input">
+                    <label class="icon icon-search" for="search"></label>
+                    <input type="search" id='search' name="s_doctor" placeholder='输入医生姓名...'/>
+                </div>
             </div>
         </div>
-    </div>
+    </form>
 
+    <div class="content content_2">
+        <div class="content-block-title">历史记录  <span class="icon icon-remove pull-right" ng-click="clearHistory()"></span></div>
+        <div class="list-block">
+            <ul>
+                <li class="item-content" ng-repeat="history in historyArr" ng-click="goToSearch()">
+                    <div class="item-inner">
+                        <div class="item-title">{{history}}</div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
 </div>

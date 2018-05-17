@@ -32,7 +32,7 @@
                 </div>
             </div>
             <div class="card-footer">
-                <span class="button-green" ng-click="finishAppointment()">完成</span>
+                <span class="button-green {{x.name == '暂未预约' ? 'button-grey' : ''}}" ng-click="finishAppointment()">完成</span>
                 <span class="button-red" ng-click="cancelAppointment()">取消</span>
             </div>
         </div>

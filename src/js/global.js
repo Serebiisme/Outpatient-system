@@ -69,7 +69,8 @@ app.controller('loginController',function($scope,$timeout,$location){
                         $scope.$apply();//必要
                         break;
                     case '管理员':
-                        console.log('go to manager.html');
+                        $location.url('/manager').replace();
+                        $scope.$apply();//必要
                         break;
                 }
             } else {
@@ -258,6 +259,60 @@ app.controller('helpAndVersionController',function($scope,$location){
     $.init();
 });
 
+/**
+ * 修改密码
+ */
+app.controller('modifypsdController', function ($scope,$location) {
+    console.log('modify password');
+    $scope.appType = $location.search().type;
+
+    $scope.modifypassword = function(){
+      var arr = getFormToJson('#password_info');
+        console.log(arr);
+
+        if (arr.oldpsd == "" ){
+            zalert('请输入旧密码');
+            return false;
+        }
+
+        if (arr.newpsd == "" ){
+            zalert('新密码不能为空!');
+            return false;
+        }
+
+        if (arr.confirmpsd == "" ){
+            zalert('确认密码不能为空!');
+            return false;
+        }
+
+        if (arr.oldpsd !== window.client.password){
+            zalert('旧密码输入错误,请重新输入!');
+            return false;
+        }
+
+        if (arr.newpsd !== arr.confirmpsd){
+            zalert('新密码输入不一致,请检查!');
+            return false;
+        }
+
+        if (arr.oldpsd == arr.newpsd){
+            zalert('新密码不能与旧密码一致!');
+            return false;
+        }
+
+        zpost('modifypassword',{id:window.client.id,type:$scope.appType,newpsd:arr.newpsd}, function (data) {
+            if (data.code == 500){
+                zinfo(data.msg);
+            } else {
+                zinfo(data.msg);
+                window.client.password = arr.newpsd;
+            }
+        });
+    };
+
+    $.init();
+});
+
 //资讯根链接
 var $lifeArticleUrl = 'https://yypt.ngarihealth.com/api.php/App/getArticlelist?catid=6&onlyorgan=1&organid=1&page=',
     $busnessArticleUrl = 'https://yypt.ngarihealth.com/api.php/App/getArticlelist?catid=5&onlyorgan=1&organid=1&page=',
@@ -295,3 +350,13 @@ app.factory('$locals', ['$window', function ($window) {
 
     }
 }]);
+
+//管理端tab
+$(document).on('click','.m_content .tab-link', function () {
+    var index = $(this).index();
+    //tab-link 切换
+    $('.m_content .tab-link').removeClass('active');
+    $(this).addClass('active');
+    //tab 切换
+    $('.m_content .tab').hide().eq(index).show();
+});

@@ -18,6 +18,10 @@ app.config(['$routeProvider', function($routeProvider){
             templateUrl:'version.html',
             controller:'helpAndVersionController'
         })
+        .when('/modifypsd',{
+            templateUrl:'modifypsd.html',
+            controller:'modifypsdController'
+        })
 
         //居民端路由
         .when('/index',{
@@ -68,6 +72,10 @@ app.config(['$routeProvider', function($routeProvider){
             templateUrl:'html/searchResult.html',
             controller:'searchresultController'
         })
+        .when('/mycase',{
+            templateUrl:'html/myCase.html',
+            controller:'mycaseController'
+        })
 
         //医生端路由
         .when('/doctor',{
@@ -102,5 +110,36 @@ app.config(['$routeProvider', function($routeProvider){
             templateUrl:'doctor/editintro.html',
             controller:'editintroController'
         })
+
+        //管理端路由
+        .when('/manager',{
+            templateUrl:'manager/manager.html',
+            controller:'managerController'
+        })
+        .when('/docmanage',{
+            templateUrl:'manager/doctorManage.html',
+            controller:'docmanagerController'
+        })
+        .when('/patmanage',{
+            templateUrl:'manager/patientManage.html',
+            controller:'patmanagerController'
+        })
+        .when('/appointmanage',{
+            templateUrl:'manager/appointmentManage.html',
+            controller:'appointController'
+        })
+        .when('/officemanage',{
+            templateUrl:'manager/officeManage.html',
+            controller:'officeController'
+        })
+        .when('/infomanage',{
+            templateUrl:'manager/infoManage.html',
+            controller:'infoController'
+        })
+        .when('/bannermanage',{
+            templateUrl:'manager/bannerManage.html',
+            controller:'bannerController'
+        })
+
         .otherwise({redirectTo:'/login'});
 }]);

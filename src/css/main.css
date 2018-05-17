@@ -343,37 +343,125 @@ html, body {
 .icon-only {
   visibility: hidden; }
 
-#manager .button-green {
+#concern .button-green, #manager .button-green, #mycase .button-green, #doctormanage .button-green {
   border: 1px solid #66cccc;
   color: #66cccc;
   padding: 0.25rem 1rem;
   border-radius: .25rem; }
-#manager .button-green:active {
+#concern .button-green:active, #manager .button-green:active, #mycase .button-green:active, #doctormanage .button-green:active {
   border: 1px solid #66cccc;
   background: #66cccc;
   color: #fff; }
-#manager .button-red {
+#concern .button-red, #manager .button-red, #mycase .button-red, #doctormanage .button-red {
   border: 1px solid #e43e56;
   color: #e43e56;
   padding: 0.25rem 1rem;
   border-radius: .25rem; }
-#manager .button-red:active {
+#concern .button-red:active, #manager .button-red:active, #mycase .button-red:active, #doctormanage .button-red:active {
   border: 1px solid #e43e56;
   background: #e43e56;
   color: #fff; }
-#manager .layCenter {
+#concern .button-grey, #manager .button-grey, #mycase .button-grey, #doctormanage .button-grey {
+  border: 1px solid #bbb;
+  color: #bbb; }
+#concern .layCenter, #manager .layCenter, #mycase .layCenter, #doctormanage .layCenter {
   text-align: center;
   position: relative;
   top: 30%; }
-  #manager .layCenter img {
+  #concern .layCenter img, #manager .layCenter img, #mycase .layCenter img, #doctormanage .layCenter img {
     width: 5rem; }
-  #manager .layCenter h1 {
+  #concern .layCenter h1, #manager .layCenter h1, #mycase .layCenter h1, #doctormanage .layCenter h1 {
     color: #bbb;
     font-size: 1rem; }
+#concern .caseresult, #manager .caseresult, #mycase .caseresult, #doctormanage .caseresult {
+  padding: 0; }
 
-#editintro [name=editintro] {
+#editintro [name=editintro], #modifypsd [name=editintro] {
   padding-left: 0; }
-#editintro #submiteditintro {
+#editintro #submiteditintro, #editintro #confirmModify, #modifypsd #submiteditintro, #modifypsd #confirmModify {
   margin: 2rem .5rem; }
+
+@media only screen and (min-width: 980px) {
+  #login {
+    width: 30%;
+    margin: 0 auto; }
+
+  #manager .content, #doctormanage .content {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: flex; }
+    #manager .content .panel, #doctormanage .content .panel {
+      display: block;
+      position: relative; }
+      #manager .content .panel .list-block .list-block ul li:hover, #doctormanage .content .panel .list-block .list-block ul li:hover {
+        background: #efeff4; }
+        #manager .content .panel .list-block .list-block ul li:hover .item-title, #doctormanage .content .panel .list-block .list-block ul li:hover .item-title {
+          color: #111; }
+      #manager .content .panel .list-block .list-block ul li.active, #doctormanage .content .panel .list-block .list-block ul li.active {
+        background: #efeff4; }
+        #manager .content .panel .list-block .list-block ul li.active .item-title, #doctormanage .content .panel .list-block .list-block ul li.active .item-title {
+          color: #111; }
+      #manager .content .panel .list-block .list-block ul li .item-inner::after, #doctormanage .content .panel .list-block .list-block ul li .item-inner::after {
+        height: 0px; }
+      #manager .content .panel .list-block .list-block .exit, #doctormanage .content .panel .list-block .list-block .exit {
+        position: absolute;
+        bottom: 1rem;
+        width: 80%;
+        margin: 1rem;
+        color: #ccc; }
+      #manager .content .panel .list-block .list-block .exit:active, #manager .content .panel .list-block .list-block .exit:hover, #doctormanage .content .panel .list-block .list-block .exit:active, #doctormanage .content .panel .list-block .list-block .exit:hover {
+        background: #efeff4;
+        color: #5f646e;
+        border: none; }
+    #manager .content .m_content, #doctormanage .content .m_content {
+      -webkit-box-flex: 1;
+      -webkit-flex: 1;
+      flex: 1; }
+      #manager .content .m_content .buttons-tab .button, #doctormanage .content .m_content .buttons-tab .button {
+        width: 6rem;
+        height: 3rem;
+        line-height: 3rem;
+        border: none; }
+      #manager .content .m_content .buttons-tab .button.active span, #doctormanage .content .m_content .buttons-tab .button.active span {
+        border-bottom: 2px solid #0894ec;
+        line-height: inherit;
+        height: inherit;
+        display: inline-block; }
+      #manager .content .m_content .content-block, #doctormanage .content .m_content .content-block {
+        margin: 0.75rem 0; }
+      #manager .content .m_content .searchbar, #doctormanage .content .m_content .searchbar {
+        width: 30rem;
+        margin: 0 auto; }
+      #manager .content .m_content .list-block, #doctormanage .content .m_content .list-block {
+        margin: 0.75rem 0; }
+        #manager .content .m_content .list-block .item-title.label, #doctormanage .content .m_content .list-block .item-title.label {
+          width: 5rem; }
+        #manager .content .m_content .list-block textarea, #doctormanage .content .m_content .list-block textarea {
+          padding-top: 0.6rem; }
+        #manager .content .m_content .list-block .item-title, #doctormanage .content .m_content .list-block .item-title {
+          width: 6rem;
+          display: -webkit-box;
+          display: -webkit-flex;
+          display: flex; }
+          #manager .content .m_content .list-block .item-title .button-green, #manager .content .m_content .list-block .item-title .button-red, #doctormanage .content .m_content .list-block .item-title .button-green, #doctormanage .content .m_content .list-block .item-title .button-red {
+            padding: 0 .5rem;
+            margin: 0 .2rem; }
+        #manager .content .m_content .list-block .item-inner, #doctormanage .content .m_content .list-block .item-inner {
+          min-height: 2.5rem; }
+      #manager .content .m_content .tab-content ul, #doctormanage .content .m_content .tab-content ul {
+        max-height: 27.5rem;
+        overflow: auto; }
+      #manager .content .m_content .tab-content ul.searchresult, #doctormanage .content .m_content .tab-content ul.searchresult {
+        max-height: 25rem; }
+
+  .editdoctor {
+    width: 25rem;
+    transform: translate(-15%, -5%) !important; }
+    .editdoctor .list-block {
+      margin: 0; }
+
+  #doctormanage #d_info {
+    width: 22rem;
+    margin: 0 auto; } }
 
 /*# sourceMappingURL=main.css.map */

@@ -475,10 +475,82 @@ app.controller('informationDetailController',function($scope,$location){
     $.init();//放最后
 });
 /**
- * 关注医生页
+ * 我的预约页
  */
 app.controller('concernController',function($scope){
    console.log('concern');
 
+    $scope.appointmentList = null;
+
+    $(document).off('refresh', '.pull-to-refresh-content');
+    $(document).on('refresh', '.pull-to-refresh-content',function(e) {
+        zpost('getMyAppointment',{patientid:window.client.id}, function (data) {
+            if(data.code == 500){
+                zinfo(data.msg);
+            } else {
+                $scope.appointmentList = data.data;
+                $scope.$apply();
+            }
+            // 加载完毕需要重置
+            $.pullToRefreshDone('.pull-to-refresh-content');
+        });
+    });
+
+    $scope.cancelAppointment = function () {
+        var index = this.$index;
+
+        console.log(index);
+
+        zcomfirm('确实取消该预约?',"温馨提示", function () {
+            zpost('cancelMyAppointment',{id:this.x.id}, function (data) {
+                zinfo(data.msg);
+                if(data.code == 200 ){
+                    $scope.appointmentList.splice(index,1);
+                    $scope.$apply();
+                }
+            });
+        }.bind(this));
+    };
+
     $.init();
+
+    //初始化触发;
+    $('.pull-to-refresh-content').trigger('refresh');
+});
+
+//我的病历
+app.controller('mycaseController', function ($scope) {
+    console.log('mycase');
+
+    $scope.historyAppointment = null;
+
+    $(document).off('refresh', '.pull-to-refresh-content');
+    $(document).on('refresh', '.pull-to-refresh-content',function(e) {
+        zpost('getHistroyAppointment',{patientid:window.client.id}, function (data) {
+            if(data.code == 500){
+                zinfo(data.msg);
+            } else {
+                $scope.historyAppointment = data.data;
+                $scope.$apply();
+            }
+            // 加载完毕需要重置
+            $.pullToRefreshDone('.pull-to-refresh-content');
+        });
+    });
+
+    //zpost('getHistroyAppointment',{patientid:window.client.id}, function (data) {
+    //    if(data.code == 500){
+    //        zinfo(data.msg);
+    //    } else {
+    //        $scope.historyAppointment = data.data;
+    //        $scope.$apply();
+    //    }
+    //    // 加载完毕需要重置
+    //    $.pullToRefreshDone('.pull-to-refresh-content');
+    //});
+
+    $.init();
+
+    //初始化触发;
+    $('.pull-to-refresh-content').trigger('refresh');
 });

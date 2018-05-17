@@ -65,54 +65,6 @@ app.get('/',function (req, res) {
  * @type action start
  */
 
-//app.post('/test',function (req,res){
-//    //var result = null;
-//    superagent
-//        .get('https://weixin.guizhou12320.org.cn/gzappv2/index.php/Index/getArticleList')
-//        .send({
-//            catid: '8',
-//            pagenum: '1',
-//            mode: 'knowledge'
-//        })
-//        .set({
-//            'Content-Type': 'application/x-www-form-urlencoded',
-//            'Cookie': 'PHPSESSID=lceddnscvj2qmk2jt7qbh4t537'
-//        })
-//        .accept('application/json')
-//        .end(function(err, response) {
-//            if (err) {
-//                //do something
-//                console.log('请求失败!');
-//                console.log(err);
-//            } else {
-//                //do something
-//                console.log('请求成功!');
-//                //console.log(res);
-//                console.log(JSON.parse(response.text));
-//                //res.send(JSON.parse(response.text));
-//            }
-//        });
-//
-//});
-
-//app.post('/test', function (req, res) {
-//    //res.send('Hello World');
-//    console.log("请求的单词数量"+req.body.thereAreNumber);
-//    console.log("请求的词库为"+req.body.cardState+"0->四级，1->六级");
-//    if (req.body.cardState == 0){whichCard = "CET4Word"};
-//    if (req.body.cardState == 1){whichCard = "CET6Word"};
-//    console.log(whichCard);
-//    var DateSql = "SELECT * FROM " + whichCard + " WHERE ifknow=1 order by rand() limit " + req.body.thereAreNumber ;
-//    connection.query(DateSql, function (err, result) {
-//        if (err) {
-//            console.log('[SELECT ERROR] - ', err.message);
-//            return;
-//        }
-//        //console.log(result);
-//        res.send(result);
-//    });
-//});
-
 //注册患者
 app.post('/registerPatient',function(req,res){
     console.log(req.body) ;
@@ -183,11 +135,41 @@ app.post('/getBackpassword',function(req,res){
     });
 });
 
+//修改密码
+app.post('/modifypassword', function (req,res) {
+    console.log(req.body) ;
+
+    var type = req.body.type == "1" ? "1" : "0",
+        identity = {
+        '0':'patient_login',
+        '1':'doctor_login'
+    };
+
+    var DateSql = "UPDATE " + identity[type] + " SET password='" + req.body.newpsd + "' WHERE  id="+ req.body.id;
+
+    console.log(DateSql);
+    connection.query(DateSql, function (err, result) {
+        if (err) {
+            res.send({
+                code:500,
+                msg:'修改失败!'
+            });
+            return;
+        }
+        //console.log(result);
+        res.send({
+            code:200,
+            msg:'修改成功!'
+        });
+    });
+});
+
 //登录
 app.post('/login',function(req,res){
     var identity = {
             '患者':'patient_login',
-            '医生':'doctor_login'
+            '医生':'doctor_login',
+            '管理员':'manager_login'
         };
     console.log(req.body) ;
     var DateSql = "SELECT * FROM " + identity[req.body.identity] + " WHERE id=" + req.body.id + ";";
@@ -267,6 +249,7 @@ app.post('/getDoctorlist', function (req,res) {
     });
 });
 
+//得到当前可预约信息
 app.post('/getCurrentAppointment', function (req, res) {
     console.log(req.body) ;
 
@@ -289,6 +272,7 @@ app.post('/getCurrentAppointment', function (req, res) {
     });
 });
 
+//获取医生信息
 app.post('/getDoctorinfo', function (req,res) {
     console.log(req.body) ;
 
@@ -318,6 +302,7 @@ app.post('/getDoctorinfo', function (req,res) {
     });
 });
 
+//确认预约
 app.post('/confirmAppointment', function (req,res) {
     console.log(req.body) ;
 
@@ -340,6 +325,7 @@ app.post('/confirmAppointment', function (req,res) {
     });
 });
 
+//搜索医生
 app.post('/searchDoctor',function(req,res){
     console.log(req.body);
 
@@ -382,6 +368,80 @@ app.post('/searchDoctor',function(req,res){
         });
     });
 });
+
+//获取我的预约
+app.post('/getMyAppointment', function (req,res) {
+    console.log(req.body);
+
+    var DateSql = "select al.`id`,al.`address`,al.`date`,al.`time`,dl.`name`  " +
+        "from `appointment_list` al left join `doctor_login` dl on al.`doctorid` = dl.`id` " +
+        " where al.`patientid` = " + req.body.patientid + " and al.`date` >= DATE_FORMAT(CURRENT_DATE(),'%Y-%m-%d') and al.`date` <= DATE_FORMAT(DATE_ADD(CURRENT_DATE(),INTERVAL 7 DAY),'%Y-%m-%d') " +
+        " and al.`status` = '已预约' order by al.`date` asc;";
+
+    connection.query(DateSql, function (err, result) {
+        if (err) {
+            res.send({
+                code:500,
+                msg:'网络错误!'
+            });
+            return;
+        }
+        //console.log(result);
+
+        res.send({
+            code:200,
+            msg:'操作成功',
+            data:result
+        });
+    });
+});
+
+//取消我的预约
+app.post('/cancelMyAppointment', function (req,res) {
+    console.log(req.body) ;
+    var DateSql = "UPDATE appointment_list SET status = '未完成' WHERE id = " + req.body.id;
+    connection.query(DateSql, function (err, result) {
+        if (err) {
+            res.send({
+                code:500,
+                msg:'操作失败!'
+            });
+            return;
+        }
+        //console.log(result);
+        res.send({
+            code:200,
+            msg:'操作成功'
+        });
+    });
+});
+
+//获取病历
+app.post('/getHistroyAppointment', function (req,res) {
+   console.log(req.body);
+
+    var DateSql = "select al.`id`,al.`address`,al.`date`,al.`time`,dl.`name`,al.`result` " +
+        " from `appointment_list` al left join `doctor_login` dl on al.`doctorid` = dl.`id` " +
+        " where al.`patientid` = " + req.body.patientid + " and al.`date` <= DATE_FORMAT(CURRENT_DATE(),'%Y-%m-%d') and al.`status` = '已完成' " +
+        " order by al.`date` desc";
+
+    connection.query(DateSql, function (err, result) {
+        if (err) {
+            res.send({
+                code:500,
+                msg:'操作失败!'
+            });
+            return;
+        }
+        //console.log(result);
+        res.send({
+            code:200,
+            msg:'操作成功',
+            data:result
+        });
+    });
+});
+
 
 /** ******************************************************************* 医生端  **************************************************************************** **/
 
@@ -444,7 +504,7 @@ app.post('/getAppointment', function (req,res) {
     console.log(req.body) ;
     var DateSql = " select ol.`id`, ol.`doctorid`, ol.`patientid`, pl.`name`,ol.`time`, ol.`date` ,ol.`address`, ol.`status` " +
         "from appointment_list ol left join patient_login pl on ol.`patientid` = pl.`id`  " +
-        "where ol.`doctorid` = " + req.body.doctorid + " and ol.`date` >= DATE_FORMAT(CURRENT_DATE(),'%Y-%m-%d') and ol.`status` = '未完成'  or ol.`status` = '已预约'  order by ol.`date` asc ";
+        "where ol.`doctorid` = " + req.body.doctorid + " and ol.`date` >= DATE_FORMAT(CURRENT_DATE(),'%Y-%m-%d') and ( ol.`status` = '未完成'  or ol.`status` = '已预约' ) order by ol.`date` asc ";
     connection.query(DateSql, function (err, result) {
         if (err) {
             res.send({
@@ -465,7 +525,8 @@ app.post('/getAppointment', function (req,res) {
 //完成预约
 app.post('/complateAppointment', function (req,res) {
     console.log(req.body) ;
-    var DateSql = "UPDATE appointment_list SET status = '已完成' WHERE id = " + req.body.id;
+    var DateSql = "UPDATE appointment_list SET status = '已完成' ,result = ' " + req.body.result +"' WHERE id = " + req.body.id;
+    console.log(DateSql);
     connection.query(DateSql, function (err, result) {
         if (err) {
             res.send({
@@ -543,9 +604,73 @@ app.post('/getDateList', function (req,res) {
     });
 });
 
+/** ******************************************************************* 管理端  **************************************************************************** **/
+
+//获取所有医生
+app.post('/getAllDoctor', function (req,res) {
+    var DateSql = 'select * from `doctor_login`';
+    connection.query(DateSql, function (err, result) {
+        if (err) {
+            res.send({
+                code:500,
+                msg:'查询失败!'
+            });
+            return;
+        }
+        res.send({
+            code:200,
+            msg:'查询成功',
+            result:result
+        });
+    });
+});
+
+//更新医生
+app.post('/updateDoctor',function(req,res){
+    console.log(req.body) ;
+    var DateSql = "update `doctor_login` set id = " + req.body.u_id + " ,name = '" + req.body.u_name + "',password = " + req.body.u_password + " , gender = '" + req.body.u_gender + "' , telephone = '" + req.body.u_telephone + "' ,department = '" + req.body.u_department + "' where id = " + req.body.u_id;
+    console.log(DateSql);
+    connection.query(DateSql, function (err, result) {
+        if (err) {
+            res.send({
+                code:500,
+                msg:'更新失败!'
+            });
+            return;
+        }
+        //console.log(result);
+        res.send({
+            code:200,
+            msg:'更新成功'
+        });
+    });
+});
+
+//删除医生
+app.post('/deleteDoctor',function(req,res){
+    console.log(req.body) ;
+    var DateSql = "delete `doctor_login`,`appointment_list` from `doctor_login` left join `appointment_list` on `doctor_login`.`id` = `appointment_list`.`doctorid` where `doctor_login`.`id` = " + req.body.id;
+    console.log(DateSql);
+    connection.query(DateSql, function (err, result) {
+        if (err) {
+            res.send({
+                code:500,
+                msg:'删除失败!'
+            });
+            return;
+        }
+        //console.log(result);
+        res.send({
+            code:200,
+            msg:'删除成功'
+        });
+    });
+});
+
 /**
  * @type action end
  */
+
 var server = app.listen(9999, function () {
 
     var host = server.address().address;
@@ -581,9 +706,8 @@ var server = app.listen(9999, function () {
 //}
 //function ss (doctoridArr,departmentArr){
 //    //var times = +new Date();
-//    var dateArr = ['2018-5-2','2018-5-3','2018-5-4','2018-5-5','2018-5-6','2018-5-7',
-//        '2018-5-8','2018-5-9','2018-5-10','2018-5-11','2018-5-12','2018-5-13','2018-5-14','2018-5-15','2018-5-16','2018-5-17','2018-5-18',
-//        '2018-5-19','2018-5-20','2018-5-21','2018-5-22','2018-5-23','2018-5-24','2018-5-25','2018-5-26','2018-5-27'];
+//    var dateArr = ['2018-5-8','2018-5-9','2018-5-10','2018-5-11','2018-5-12','2018-5-13','2018-5-14','2018-5-15','2018-5-16','2018-5-17','2018-5-18',
+//        '2018-5-19','2018-5-20','2018-5-21','2018-5-22','2018-5-23','2018-5-24','2018-5-25','2018-5-26','2018-5-27','2018-5-28','2018-5-29','2018-5-30','2018-5-31'];
 //    var room = ['101','102','103'];
 //    for(var i = 0 ; i < 500 ; i++ ) {
 //        var ra = Math.floor(Math.random() * (doctoridArr.length));

@@ -475,7 +475,7 @@ html,body{
 .icon-only{
   visibility: hidden;
 }
-#manager {
+#concern,#manager,#mycase,#doctormanage {
   .button-green {
     border: 1px solid #66cccc;
     color: #66cccc;
@@ -498,6 +498,10 @@ html,body{
     background:#e43e56 ;
     color: #fff;
   }
+  .button-grey{
+    border: 1px solid #bbb;
+    color: #bbb;
+  }
   .layCenter{
     text-align: center;
     position: relative;
@@ -510,12 +514,141 @@ html,body{
       font-size: 1rem;
     }
   }
+  .caseresult{
+    padding: 0;
+  }
 }
-#editintro{
+#editintro,#modifypsd{
   [name=editintro]{
     padding-left: 0;
   }
-  #submiteditintro{
+  #submiteditintro,#confirmModify{
     margin: 2rem .5rem;
+  }
+}
+
+@media only screen and (min-width: 980px) {
+  #login {
+    width: 30%;
+    margin: 0 auto;
+  }
+  #manager,#doctormanage{
+    .content{
+      display:-webkit-box;
+      display:-webkit-flex;
+      display: flex;
+      .panel{
+        display: block;
+        position: relative;
+        .list-block{
+          .list-block{
+            ul{
+              li:hover{
+                background: #efeff4;
+                .item-title{
+                  color: #111;
+                }
+              }
+              li.active{
+                background: #efeff4;
+                .item-title{
+                  color: #111;
+                }
+              }
+              li{
+                .item-inner::after{
+                  height: 0px;
+                }
+              }
+            }
+            .exit{
+              position: absolute;
+              bottom: 1rem;
+              width: 80%;
+              margin: 1rem;
+              color: #ccc;
+            }
+            .exit:active,.exit:hover{
+              background: #efeff4;
+              color: #5f646e;
+              border: none;
+            }
+          }
+        }
+      }
+      .m_content{
+        -webkit-box-flex:1;
+        -webkit-flex:1;
+        flex:1;
+        .buttons-tab{
+          .button{
+            width: 6rem;
+            height: 3rem;
+            line-height: 3rem;
+            border: none;
+          }
+          .button.active{
+            span{
+              border-bottom: 2px solid #0894ec;
+              line-height: inherit;
+              height: inherit;
+              display: inline-block;
+            }
+          }
+        }
+        .content-block{
+          margin: 0.75rem 0;
+        }
+        .searchbar{
+          width: 30rem;
+          margin: 0 auto;
+        }
+        .list-block{
+          margin: 0.75rem 0;
+          .item-title.label{
+            width: 5rem;
+          }
+          textarea{
+            padding-top: 0.6rem;
+          }
+          .item-title{
+            width: 6rem;
+            display:-webkit-box;
+            display:-webkit-flex;
+            display: flex;
+            .button-green,.button-red{
+              padding:0 .5rem;
+              margin: 0 .2rem;
+
+            }
+          }
+          .item-inner{
+            min-height: 2.5rem;
+          }
+        }
+        .tab-content{
+          ul{
+            max-height: 27.5rem;
+            overflow: auto;
+          }
+          ul.searchresult{
+            max-height: 25rem;
+          }
+        }
+      }
+    }
+  }
+  .editdoctor{
+    width: 25rem;
+    transform: translate(-15%,-5%)!important;
+    .list-block{
+      margin:0;
+    }
+  }
+  #doctormanage{
+    #d_info{
+      width: 22rem;
+      margin: 0 auto;
+    }
   }
 }

@@ -1,0 +1,53 @@
+<div class="page" id="modifypsd">
+    <!-- 标题栏 -->
+    <header class="bar bar-nav">
+        <a class="button button-link button-nav pull-left back">
+            <span class="icon icon-left"></span>
+            返回
+        </a>
+        <h1 class="title {{appType == 1 ? 'title_1' : ''}}">修改密码</h1>
+    </header>
+    <!-- 内容区 -->
+    <div class="content">
+        <form id="password_info">
+            <div class="list-block">
+                <ul>
+                    <li>
+                        <div class="item-content">
+                            <div class="item-media"><i class="icon icon-form-password"></i></div>
+                            <div class="item-inner">
+                                <div class="item-title label">旧密码</div>
+                                <div class="item-input">
+                                    <input type="password" placeholder="请输入旧密码" name="oldpsd" class="">
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="item-content">
+                            <div class="item-media"><i class="icon icon-form-password"></i></div>
+                            <div class="item-inner">
+                                <div class="item-title label">新密码</div>
+                                <div class="item-input">
+                                    <input type="password" placeholder="请输入新密码" name="newpsd" class="">
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="item-content">
+                            <div class="item-media"><i class="icon icon-form-password"></i></div>
+                            <div class="item-inner">
+                                <div class="item-title label">确认密码</div>
+                                <div class="item-input">
+                                    <input type="password" placeholder="确认新密码" name="confirmpsd" class="">
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </form>
+        <div class="button button-big button-fill {{appType == 1 ? ' button-success' : ''}}" id="confirmModify" ng-click="modifypassword()">确认修改</div>
+    </div>
+</div>

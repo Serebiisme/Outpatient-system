@@ -40,30 +40,68 @@ app.controller('managerController',function($scope){
     });
 
     $scope.finishAppointment = function () {
-        console.log(this.$index);
-        var index = this.$index;
-        zcomfirm('确实该患者已完成就诊?',"", function () {
-            zpost('complateAppointment',{id:this.x.id}, function (data) {
-                zinfo(data.msg);
-                if(data.code == 200 ){
-                    $scope.appointmentList.splice(index,1);
-                    $scope.$apply();
-                }
-            });
-
-        }.bind(this));
-    };
-
-    $scope.cancelAppointment = function () {
-        console.log(this.$index);
+        //console.log(this.$index);
         var index = this.$index;
 
-        if (this.x.patientid){
-            zinfo('改预约单已被预约,不能取消!');
+        if (!this.x.patientid){
+            zinfo('该单尚未预约!');
             return false;
         }
 
-        zcomfirm('确实取消该预约?',"", function () {
+        //zcomfirm('确实该患者已完成就诊?',"", function () {
+        //    zpost('complateAppointment',{id:this.x.id}, function (data) {
+        //        zinfo(data.msg);
+        //        if(data.code == 200 ){
+        //            $scope.appointmentList.splice(index,1);
+        //            $scope.$apply();
+        //        }
+        //    });
+        //
+        //}.bind(this));
+        $.modal({
+            title:'添加病历',
+            text:'<textarea style="border: 1px solid #bbb;width: 90%;height: 6.5rem;border-radius: 5px;" autofocus></textarea>',
+            extraClass:'addCase',
+            buttons: [
+                {
+                    text: '<span style="color: #e43e56;">取消</span>',
+                    close:true
+                },
+                {
+                    text: '<span>确定</span>',
+                    bold: true,
+                    onClick: function() {
+                        var val = $('.addCase textarea').val();
+
+                        if(val == ""){
+                            zalert('请输入病历情况!');
+                            return false;
+                        }
+
+                        zpost('complateAppointment',{id:this.x.id,result:val}, function (data) {
+                            zinfo(data.msg);
+                            if(data.code == 200 ){
+                                $scope.appointmentList.splice(index,1);
+                                $scope.$apply();
+                            }
+                        });
+
+                    }.bind(this)
+                }
+            ]
+        });
+    };
+
+    $scope.cancelAppointment = function () {
+        //console.log(this.$index);
+        var index = this.$index;
+
+        if (this.x.patientid){
+            zinfo('该预约单已被预约,不能取消!');
+            return false;
+        }
+
+        zcomfirm('确实取消该预约?',"温馨提示", function () {
             zpost('cancelAppointment',{id:this.x.id}, function (data) {
                 zinfo(data.msg);
                 if(data.code == 200 ){

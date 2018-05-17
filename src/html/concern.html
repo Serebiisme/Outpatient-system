@@ -1,13 +1,43 @@
 <div class="page" id="concern">
     <!-- 标题栏 -->
     <header class="bar bar-nav">
-        <h1 class="title">关注医生</h1>
+        <h1 class="title">我的预约</h1>
     </header>
     <!-- 内容区 -->
-    <div class="content content_1">
-        <span>关注医生页面</span>
-    </div>
+    <div class="content content_1 pull-to-refresh-content" data-ptr-distance="55">
 
+        <!-- 默认的下拉刷新层 -->
+        <div class="pull-to-refresh-layer">
+            <div class="preloader"></div>
+            <div class="pull-to-refresh-arrow"></div>
+        </div>
+
+        <div class="card" ng-repeat="x in appointmentList">
+            <div class="card-header">预约编号:{{x.id}}
+                <span class="button button-warning pull-right" ng-click="cancelAppointment()">取消</span>
+            </div>
+            <div class="card-content">
+                <div class="list-block media-list">
+                    <ul>
+                        <li class="item-content">
+                            <div class="item-inner">
+                                <div class="item-subtitle">预约日期:{{x.date}}</div>
+                                <div class="item-subtitle">预约时间:{{x.time}}</div>
+                                <div class="item-subtitle">预约地点:{{x.address}}</div>
+                                <div class="item-subtitle">主治医生:{{x.name}}</div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="content-padded layCenter" ng-if="!appointmentList.length">
+            <img src="../img/nodata_1.png">
+            <h1>暂无预约</h1>
+        </div>
+
+    </div>
 </div>
 
 <!-- 工具栏 -->
@@ -18,7 +48,7 @@
     </a>
     <a class="tab-item active" href="#/concern">
         <span class="icon icon-star"></span>
-        <span class="tab-label">关注</span>
+        <span class="tab-label">预约</span>
     </a>
     <a class="tab-item " href="#/information">
         <span class="icon icon-picture"></span>

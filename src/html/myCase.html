@@ -1,0 +1,61 @@
+<div class="page" id="mycase">
+    <!-- 标题栏 -->
+    <header class="bar bar-nav">
+        <a class="button button-link button-nav pull-left back">
+            <span class="icon icon-left"></span>
+            返回
+        </a>
+        <h1 class="title">我的病历</h1>
+    </header>
+    <!-- 内容区 -->
+    <div class="content pull-to-refresh-content" data-ptr-distance="55">
+
+        <!-- 默认的下拉刷新层 -->
+        <div class="pull-to-refresh-layer">
+            <div class="preloader"></div>
+            <div class="pull-to-refresh-arrow"></div>
+        </div>
+
+        <!-- 预约列表 -->
+        <div class="card" ng-repeat="item in historyAppointment">
+            <div class="card-header">预约编号:{{item.id}}</div>
+            <div class="card-content">
+                <div class="list-block media-list">
+                    <ul>
+                        <li class="item-content">
+                            <div class="item-inner">
+                                <div class="item-title-row">
+                                    <div class="item-title">预约日期:{{item.date}}</div>
+                                </div>
+                                <div class="item-subtitle">预约时间:{{item.time}}</div>
+                                <div class="item-subtitle">预约地点:{{item.address}}</div>
+                                <div class="item-subtitle">主治医师:{{item.name}}</div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="card-footer caseresult">
+                <div class="list-block media-list">
+                    <ul>
+                        <li class="item-content">
+                            <div class="item-inner">
+                                <div class="item-title-row">
+                                    <div class="item-title">就诊结果:</div>
+                                </div>
+                                <div class="item-subtitle">{{item.result}}</div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="content-padded layCenter" ng-if="!historyAppointment.length">
+            <img src="../img/nodata_1.png">
+            <h1>暂无病历</h1>
+        </div>
+
+    </div>
+
+</div>

@@ -1,4 +1,4 @@
-manager.html<div class="page" id="manager">
+manager.html<div class="page" id="patientmanager">
     <div class="content">
         <!--侧栏-->
         <div class="panel panel-left panel-reveal theme-dark">
@@ -83,13 +83,83 @@ manager.html<div class="page" id="manager">
             <div class="content-block">
                 <div class="tabs">
                     <div class="tab active">
-                        <div class="content-block">
-                            <p>This is tab 1 content</p>
+                        <div class="content-block animated fadeIn">
+                            <!-- 注册患者列表 -->
+                            <div class="content-block">
+                                <div class="list-block tab-content">
+                                    <ul>
+                                        <li class="item-content">
+                                            <div class="item-inner">
+                                                <div class="item-title">医保编号</div>
+                                                <div class="item-title">患者姓名</div>
+                                                <div class="item-title">患者性别</div>
+                                                <div class="item-title">患者手机</div>
+                                                <div class="item-title">登录密码</div>
+                                                <div class="item-title">账户操作</div>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                    <ul>
+                                        <li class="item-content" ng-repeat="patient in allpatient">
+                                            <div class="item-inner">
+                                                <div class="item-title">{{patient.id}}</div>
+                                                <div class="item-title">{{patient.name}}</div>
+                                                <div class="item-title">{{patient.gender}}</div>
+                                                <div class="item-title">{{patient.telephone}}</div>
+                                                <div class="item-title">{{patient.password}}</div>
+                                                <div class="item-title">
+                                                    <span class="button button-green" ng-click="editPatientInfo()">编辑</span>
+                                                </div>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
                         </div>
                     </div>
                     <div class="tab">
                         <div class="content-block">
-                            <p>This is tab 2 content</p>
+                            <!-- 搜索栏 -->
+                            <div class="content-block">
+                                <div class="searchbar row">
+                                    <div class="search-input col-80">
+                                        <label class="icon icon-search" for="search"></label>
+                                        <input type="search" id='search' placeholder='输入患者姓名/医保编号...'/>
+                                    </div>
+                                    <a class="button button-fill button-primary col-20" ng-click="getSearchResult()">搜索</a>
+                                </div>
+                            </div>
+                            <!-- 搜索结果 -->
+                            <div class="content-block">
+                                <div class="list-block tab-content">
+                                    <ul ng-show="searchpatient.length > 0">
+                                        <li class="item-content">
+                                            <div class="item-inner">
+                                                <div class="item-title">医保编号</div>
+                                                <div class="item-title">患者姓名</div>
+                                                <div class="item-title">患者性别</div>
+                                                <div class="item-title">患者手机</div>
+                                                <div class="item-title">登录密码</div>
+                                                <div class="item-title">账户操作</div>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                    <ul class="searchresult">
+                                        <li class="item-content animated fadeIn" ng-repeat="patient in searchpatient">
+                                            <div class="item-inner">
+                                                <div class="item-title">{{patient.id}}</div>
+                                                <div class="item-title">{{patient.name}}</div>
+                                                <div class="item-title">{{patient.gender}}</div>
+                                                <div class="item-title">{{patient.telephone}}</div>
+                                                <div class="item-title">{{patient.password}}</div>
+                                                <div class="item-title">
+                                                    <span class="button button-green" ng-click="editPatientInfo()">编辑</span>
+                                                </div>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -97,4 +167,70 @@ manager.html<div class="page" id="manager">
         </div>
     </div>
 </div>
+<script type="text/html" id="editModel">
+    <div class="list-block">
+        <form id="p_info">
+            <ul>
+                <li>
+                    <div class="item-content">
+                        <div class="item-media"><i class="icon icon-form-name"></i></div>
+                        <div class="item-inner">
+                            <div class="item-title label">姓名</div>
+                            <div class="item-input">
+                                <input type="text" name="p_name" placeholder="请输入姓名">
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="item-content">
+                        <div class="item-media"><i class="icon icon-form-password"></i></div>
+                        <div class="item-inner">
+                            <div class="item-title label">密码</div>
+                            <div class="item-input">
+                                <input type="text" name="p_password" placeholder="请输入密码" class="">
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="item-content">
+                        <div class="item-media"><i class="icon icon-form-gender"></i></div>
+                        <div class="item-inner">
+                            <div class="item-title label">性别</div>
+                            <div class="item-input">
+                                <select name="p_gender">
+                                    <option value="男">男</option>
+                                    <option value="女">女</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="item-content">
+                        <div class="item-media"><i class="icon icon-form-telephone"></i></div>
+                        <div class="item-inner">
+                            <div class="item-title label">手机</div>
+                            <div class="item-input">
+                                <input type="text" name="p_telephone" placeholder="请输入手机号" maxlength="11">
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="item-content">
+                        <div class="item-media"><i class="icon"></i></div>
+                        <div class="item-inner">
+                            <div class="item-title label">编号</div>
+                            <div class="item-input">
+                                <input type="text" name="p_id" placeholder="请输入医保编号">
+                            </div>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </form>
+    </div>
+</script>
 

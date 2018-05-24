@@ -210,15 +210,24 @@ app.controller('loginController',function($scope,$timeout,$location){
         $('#d_info')[0].reset();
     };
 
-    //科室选择
-    $("[name=d_department]").picker({
-        toolbarTemplate: '<header class="bar bar-nav"><button class="button button-link pull-right close-picker">确定</button><h1 class="title" style="background: transparent;color: #3d4145;">请选择称呼</h1></header>',
-        cols: [
-            {
-                textAlign: 'center',
-                values: ['内科','外科','儿科','妇科','眼科','耳鼻喉科','口腔科','皮肤科','中医科','针灸推拿科','心理咨询室']
-            }
-        ]
+    //初始化科室
+    zpost('getAllDepartment',{}, function (data) {
+        console.log(data);
+
+        var values = data.result.map(function (item) {
+            return item.department;
+        });
+
+        //科室选择
+        $("[name=d_department]").picker({
+            toolbarTemplate: '<header class="bar bar-nav"><button class="button button-link pull-right close-picker">确定</button><h1 class="title" style="background: transparent;color: #3d4145;">请选择称呼</h1></header>',
+            cols: [
+                {
+                    textAlign: 'center',
+                    values: values
+                }
+            ]
+        });
     });
 
     //打开密码找回页

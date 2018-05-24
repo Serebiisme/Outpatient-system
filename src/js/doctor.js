@@ -21,8 +21,8 @@ app.controller('doctorController',function($scope){
 /**
  * 预约管理
  */
-app.controller('managerController',function($scope){
-    console.log('manager');
+app.controller('manageController',function($scope){
+    console.log('manage');
     $scope.appointmentList = null;
 
     $(document).off('refresh', '.pull-to-refresh-content');

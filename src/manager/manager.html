@@ -73,31 +73,53 @@
 
         <div class="m_content">
             <div class="buttons-tab">
-                <a class="tab-link active button">
+                <a class="tab-link active button" ng-click="initCountAppoint()">
                     <span>预约统计</span>
                 </a>
-                <a class="tab-link button">
+                <a class="tab-link button" ng-click="initCountDepart()">
                     <span>人员统计</span>
-                </a>
-                <a class="tab-link button">
-                    <span>科室统计</span>
                 </a>
             </div>
             <div class="content-block">
                 <div class="tabs">
                     <div class="tab active">
                         <div class="content-block">
-                            <p>This is tab 1 content</p>
+                            <div class="echars-content">
+                                <div id="countAppoint"></div>
+                                <div id="todayTime"></div>
+                                <div id="weekTime"></div>
+                            </div>
                         </div>
                     </div>
                     <div class="tab">
+                        <!--<div class="content-block">-->
+                            <!--<div class="content-block office-content">-->
+                                <!--&lt;!&ndash; 科室列表 &ndash;&gt;-->
+                                <!--<div class="content-block">-->
+                                    <!--<div class="list-block tab-content">-->
+                                        <!--<ul>-->
+                                            <!--<li class="item-content">-->
+                                                <!--<div class="item-inner">-->
+                                                    <!--<div class="item-title">科室名称</div>-->
+                                                    <!--<div class="item-title">人员数量</div>-->
+                                                <!--</div>-->
+                                            <!--</li>-->
+                                        <!--</ul>-->
+                                        <!--<ul>-->
+                                            <!--<li class="item-content animated fadeIn" ng-repeat="department in departmentArr">-->
+                                                <!--<div class="item-inner">-->
+                                                    <!--<div class="item-title">{{department.department}}</div>-->
+                                                    <!--<div class="item-title">{{department.num}}</div>-->
+                                                <!--</div>-->
+                                            <!--</li>-->
+                                        <!--</ul>-->
+                                    <!--</div>-->
+                                 <!--</div>-->
+                            <!--</div>-->
+                        <!--</div>-->
+
                         <div class="content-block">
-                            <p>This is tab 2 content</p>
-                        </div>
-                    </div>
-                    <div class="tab">
-                        <div class="content-block">
-                            <p>This is tab 3 content</p>
+                            <div id="countDepart"></div>
                         </div>
                     </div>
                 </div>

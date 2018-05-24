@@ -1,4 +1,4 @@
-<div class="page" id="manager">
+<div class="page" id="infomanage">
     <div class="content">
         <!--侧栏-->
         <div class="panel panel-left panel-reveal theme-dark">
@@ -88,110 +88,116 @@
             </div>
             <div class="content-block">
                 <div class="tabs">
-                    <!-- 基本信息 -->
-                    <div class="tab active">
-                        <div class="content-block">
-                            <div class="list-block">
-                                <ul>
-                                    <!-- Text inputs -->
-                                    <li>
-                                        <div class="item-content">
-                                            <div class="item-media"><i class="icon icon-form-name"></i></div>
-                                            <div class="item-inner">
-                                                <div class="item-title label">医院名称</div>
-                                                <div class="item-input">
-                                                    <input type="text" placeholder="请输入医院名称">
+                    <form id="s_hospital">
+                        <!-- 基本信息 -->
+                        <div class="tab active">
+                            <div class="content-block">
+                                <div class="list-block">
+                                    <ul>
+                                        <!-- Text inputs -->
+                                        <li>
+                                            <div class="item-content">
+                                                <div class="item-media"><i class="icon icon-form-name"></i></div>
+                                                <div class="item-inner">
+                                                    <div class="item-title label">医院名称</div>
+                                                    <div class="item-input">
+                                                        <input type="text" placeholder="请输入医院名称" name="s_name" value="{{hospital.hospName}}">
+                                                    </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="item-content">
-                                            <div class="item-media"><i class="icon icon-form-name"></i></div>
-                                            <div class="item-inner">
-                                                <div class="item-title label">医院电话</div>
-                                                <div class="item-input">
-                                                    <input type="text" placeholder="请输入医院电话">
+                                        </li>
+                                        <li>
+                                            <div class="item-content">
+                                                <div class="item-media"><i class="icon icon-form-name"></i></div>
+                                                <div class="item-inner">
+                                                    <div class="item-title label">医院电话</div>
+                                                    <div class="item-input">
+                                                        <input type="text" placeholder="请输入医院电话" name="s_phone" value="{{hospital.hospPhone}}">
+                                                    </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="item-content">
-                                            <div class="item-media"><i class="icon icon-form-name"></i></div>
-                                            <div class="item-inner">
-                                                <div class="item-title label">医院地址</div>
-                                                <div class="item-input">
-                                                    <input type="text" placeholder="请输入医院地址">
+                                        </li>
+                                        <li>
+                                            <div class="item-content">
+                                                <div class="item-media"><i class="icon icon-form-name"></i></div>
+                                                <div class="item-inner">
+                                                    <div class="item-title label">医院地址</div>
+                                                    <div class="item-input">
+                                                        <input type="text" placeholder="请输入医院地址" name="s_address" value="{{hospital.hospAddress}}">
+                                                    </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                    </li>
+                                        </li>
 
-                                </ul>
+                                    </ul>
+                                    <p><a class="button button-fill button-big" ng-click="saveHospitalInfo()">保存</a></p>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <!-- 医院简介 -->
-                    <div class="tab">
-                        <div class="content-block">
-                            <div class="list-block">
-                                <ul>
-                                    <li class="align-top">
-                                        <div class="item-content">
-                                            <div class="item-media"><i class="icon icon-form-comment"></i></div>
-                                            <div class="item-inner">
-                                                <div class="item-title label">医院简介</div>
-                                                <div class="item-input">
-                                                    <textarea></textarea>
+                        <!-- 医院简介 -->
+                        <div class="tab">
+                            <div class="content-block">
+                                <div class="list-block">
+                                    <ul>
+                                        <li class="align-top">
+                                            <div class="item-content">
+                                                <div class="item-media"><i class="icon icon-form-comment"></i></div>
+                                                <div class="item-inner">
+                                                    <div class="item-title label">医院简介</div>
+                                                    <div class="item-input">
+                                                        <textarea placeholder="请编辑医院简介..." name="s_introduction">{{hospital.hospIntroduction}}</textarea>
+                                                    </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                    </li>
-                                </ul>
+                                        </li>
+                                    </ul>
+                                </div>
                             </div>
+                            <p><a class="button button-fill button-big" ng-click="saveHospitalInfo()">保存</a></p>
                         </div>
-                    </div>
-                    <!-- 医院荣誉 -->
-                    <div class="tab">
-                        <div class="content-block">
-                            <div class="list-block">
-                                <ul>
-                                    <li class="align-top">
-                                        <div class="item-content">
-                                            <div class="item-media"><i class="icon icon-form-comment"></i></div>
-                                            <div class="item-inner">
-                                                <div class="item-title label">医院荣誉</div>
-                                                <div class="item-input">
-                                                    <textarea></textarea>
+                        <!-- 医院荣誉 -->
+                        <div class="tab">
+                            <div class="content-block">
+                                <div class="list-block">
+                                    <ul>
+                                        <li class="align-top">
+                                            <div class="item-content">
+                                                <div class="item-media"><i class="icon icon-form-comment"></i></div>
+                                                <div class="item-inner">
+                                                    <div class="item-title label">医院荣誉</div>
+                                                    <div class="item-input">
+                                                        <textarea placeholder="请编辑医院荣誉..." name="s_honor">{{hospital.hospHonor}}</textarea>
+                                                    </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                    </li>
-                                </ul>
+                                        </li>
+                                    </ul>
+                                </div>
                             </div>
+                            <p><a class="button button-fill button-big" ng-click="saveHospitalInfo()">保存</a></p>
                         </div>
-                    </div>
-                    <!-- 医院特色 -->
-                    <div class="tab">
-                        <div class="content-block">
-                            <div class="list-block">
-                                <ul>
-                                    <li class="align-top">
-                                        <div class="item-content">
-                                            <div class="item-media"><i class="icon icon-form-comment"></i></div>
-                                            <div class="item-inner">
-                                                <div class="item-title label">医院特色</div>
-                                                <div class="item-input">
-                                                    <textarea></textarea>
+                        <!-- 医院特色 -->
+                        <div class="tab">
+                            <div class="content-block">
+                                <div class="list-block">
+                                    <ul>
+                                        <li class="align-top">
+                                            <div class="item-content">
+                                                <div class="item-media"><i class="icon icon-form-comment"></i></div>
+                                                <div class="item-inner">
+                                                    <div class="item-title label">医院特色</div>
+                                                    <div class="item-input">
+                                                        <textarea placeholder="请编辑医院特色..." name="s_feature">{{hospital.hospFeature}}</textarea>
+                                                    </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                    </li>
-                                </ul>
+                                        </li>
+                                    </ul>
+                                </div>
                             </div>
+                            <p><a class="button button-fill button-big" ng-click="saveHospitalInfo()">保存</a></p>
                         </div>
-                    </div>
+                    </form>
                 </div>
             </div>
         </div>

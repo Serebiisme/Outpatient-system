@@ -475,7 +475,7 @@ html,body{
 .icon-only{
   visibility: hidden;
 }
-#concern,#manager,#mycase,#doctormanage {
+#concern,#manager,#mycase,#doctormanage,#officemanager,#patientmanager {
   .button-green {
     border: 1px solid #66cccc;
     color: #66cccc;
@@ -501,6 +501,10 @@ html,body{
   .button-grey{
     border: 1px solid #bbb;
     color: #bbb;
+  }
+  .button-grey:active{
+    background: #bbb;
+    color: #fff;
   }
   .layCenter{
     text-align: center;
@@ -532,7 +536,7 @@ html,body{
     width: 30%;
     margin: 0 auto;
   }
-  #manager,#doctormanage{
+  #manager,#doctormanage,#officemanager,#patientmanager,#infomanage{
     .content{
       display:-webkit-box;
       display:-webkit-flex;
@@ -616,7 +620,7 @@ html,body{
             display:-webkit-box;
             display:-webkit-flex;
             display: flex;
-            .button-green,.button-red{
+            .button-green,.button-red,.button-grey{
               padding:0 .5rem;
               margin: 0 .2rem;
 
@@ -649,6 +653,75 @@ html,body{
     #d_info{
       width: 22rem;
       margin: 0 auto;
+    }
+  }
+  #officemanager{
+    .content {
+      .m_content {
+        .office-content{
+          width: 100%;
+          position: relative;
+          .content-block{
+            width: 50%;
+          }
+          .add-department{
+            position: absolute;
+            right: 5%;
+            background: #fff;
+            margin: 0;
+            top: 35%;
+            width: 40%;
+            text-align: center;
+            .content-block{
+              width: 100%;
+              margin: .5rem auto;
+              display:-webkit-box;
+              display:-webkit-flex;
+              display: flex;
+              -webkit-box-pack: justify;
+              -webkit-justify-content: space-between;
+              justify-content: space-between;
+              .col-50{
+                width: 45%;
+              }
+            }
+          }
+        }
+        .tab-content {
+          ul{
+            max-height: 25rem;
+            overflow: auto;
+          }
+        }
+      }
+    }
+  }
+  #infomanage{
+    #s_hospital{
+      width: 60%;
+    }
+    textarea{
+      height: 20rem;
+    }
+    p {
+      margin: 1rem;
+    }
+  }
+  #manager{
+    .echars-content{
+      height: 31rem;
+      #countAppoint{
+        width: 100%;
+        height: 7rem;
+      }
+      #todayTime,#weekTime{
+        width: 100%;
+        height: 12rem;
+      }
+    }
+    #countDepart{
+      height: 31rem;
+      width: 100%;
     }
   }
 }

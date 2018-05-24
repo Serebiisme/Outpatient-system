@@ -82,9 +82,9 @@ app.config(['$routeProvider', function($routeProvider){
             templateUrl:'doctor/doctor.html',
             controller:'doctorController'
         })
-        .when('/manager',{
+        .when('/manage',{
             templateUrl:'doctor/manager.html',
-            controller:'managerController'
+            controller:'manageController'
         })
         .when('/setting',{
             templateUrl:'doctor/setting.html',

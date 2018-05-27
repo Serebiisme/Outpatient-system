@@ -210,26 +210,6 @@ app.controller('loginController',function($scope,$timeout,$location){
         $('#d_info')[0].reset();
     };
 
-    //初始化科室
-    zpost('getAllDepartment',{}, function (data) {
-        console.log(data);
-
-        var values = data.result.map(function (item) {
-            return item.department;
-        });
-
-        //科室选择
-        $("[name=d_department]").picker({
-            toolbarTemplate: '<header class="bar bar-nav"><button class="button button-link pull-right close-picker">确定</button><h1 class="title" style="background: transparent;color: #3d4145;">请选择称呼</h1></header>',
-            cols: [
-                {
-                    textAlign: 'center',
-                    values: values
-                }
-            ]
-        });
-    });
-
     //打开密码找回页
     $scope.openForget = function(){
         $.popup('.popup-forget');
@@ -256,6 +236,25 @@ app.controller('loginController',function($scope,$timeout,$location){
     };
 
     $.init();
+    //初始化科室
+    zpost('getAllDepartment',{}, function (data) {
+        console.log(data);
+
+        var values = data.result.map(function (item) {
+            return item.department;
+        });
+
+        //科室选择
+        $("[name=d_department]").picker({
+            toolbarTemplate: '<header class="bar bar-nav"><button class="button button-link pull-right close-picker">确定</button><h1 class="title" style="background: transparent;color: #3d4145;">请选择称呼</h1></header>',
+            cols: [
+                {
+                    textAlign: 'center',
+                    values: values
+                }
+            ]
+        });
+    });
 });
 
 /**

@@ -76,6 +76,14 @@ app.config(['$routeProvider', function($routeProvider){
             templateUrl:'html/myCase.html',
             controller:'mycaseController'
         })
+        .when('/examine',{
+            templateUrl:'html/examine.html',
+            controller:'examineController'
+        })
+        .when('/examinedetail',{
+            templateUrl:'html/examinedetail.html',
+            controller:'examinedetailController'
+        })
 
         //医生端路由
         .when('/doctor',{

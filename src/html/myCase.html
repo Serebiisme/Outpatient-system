@@ -5,7 +5,7 @@
             <span class="icon icon-left"></span>
             返回
         </a>
-        <h1 class="title">我的病历</h1>
+        <h1 class="title {{patid ? 'title_1' : ''}}">{{patid ? '病人病历' : '我的病历'}}</h1>
     </header>
     <!-- 内容区 -->
     <div class="content pull-to-refresh-content" data-ptr-distance="55">
@@ -52,7 +52,7 @@
         </div>
 
         <div class="content-padded layCenter" ng-if="!historyAppointment.length">
-            <img src="../img/nodata_1.png">
+            <img src="{{patid ? '../img/nodata.png':'../img/nodata_1.png'}}">
             <h1>暂无病历</h1>
         </div>
 

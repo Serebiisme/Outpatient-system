@@ -1,0 +1,46 @@
+<div class="page" id="examine">
+    <!-- 标题栏 -->
+    <header class="bar bar-nav">
+        <a class="button button-link button-nav pull-left back">
+            <span class="icon icon-left"></span>
+            返回
+        </a>
+        <h1 class="title">健康自诊</h1>
+        <a class="button button-link button-nav pull-right" style="color: #fff;" ng-click="getDisease()">
+            提交
+            <span class="icon "></span>
+        </a>
+    </header>
+    <!-- 内容区 -->
+    <div class="content">
+        <div class="list-block partlist">
+            <form id="g_symptom">
+                <ul>
+                    <li class="list-group-title">请选择身体症状</li>
+                    <li ng-repeat="sym in symptom">
+                        <label class="label-checkbox item-content">
+                            <input type="checkbox" name="symptoms" value="{{sym.id}}">
+                            <div class="item-media"><i class="icon icon-form-checkbox"></i></div>
+                            <div class="item-inner">
+                                <div class="item-subtitle">{{sym.symptom}}</div>
+                            </div>
+                        </label>
+                    </li>
+                </ul>
+            </form>
+        </div>
+    </div>
+</div>
+<!-- 自诊断结果 -->
+<div class="popup popup-result">
+    <header class="bar bar-nav">
+        <h1 class='title'>自诊结果</h1>
+        <a class="button button-link button-nav pull-right" style="color: #fff;" ng-click="closeExamine()">
+            关闭
+            <span class="icon "></span>
+        </a>
+    </header>
+    <div class="content">
+        <div id="examineresult"></div>
+    </div>
+</div>

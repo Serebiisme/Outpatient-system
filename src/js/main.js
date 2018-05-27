@@ -7,7 +7,7 @@ function zpost(name,param,callback){
         url: name,
         data: param,
         dataType: 'json',
-        timeout: 300,
+        timeout: 2000,
         success: function(data){
             callback(data);
         },

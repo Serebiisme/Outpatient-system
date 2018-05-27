@@ -94,7 +94,7 @@
                                         <div class="item-inner">
                                             <div class="item-title">医生编号</div>
                                             <div class="item-title">医生姓名</div>
-                                            <div class="item-title">医生性别</div>
+                                            <div class="item-title">医生职称</div>
                                             <div class="item-title">医生手机</div>
                                             <div class="item-title">医生科室</div>
                                             <div class="item-title">登录密码</div>
@@ -107,7 +107,7 @@
                                         <div class="item-inner">
                                             <div class="item-title">{{doctor.id}}</div>
                                             <div class="item-title">{{doctor.name}}</div>
-                                            <div class="item-title">{{doctor.gender}}</div>
+                                            <div class="item-title">{{doctor.title}}</div>
                                             <div class="item-title">{{doctor.telephone}}</div>
                                             <div class="item-title">{{doctor.department}}</div>
                                             <div class="item-title">{{doctor.password}}</div>
@@ -140,7 +140,7 @@
                                         <div class="item-inner">
                                             <div class="item-title">医生编号</div>
                                             <div class="item-title">医生姓名</div>
-                                            <div class="item-title">医生性别</div>
+                                            <div class="item-title">医生职称</div>
                                             <div class="item-title">医生手机</div>
                                             <div class="item-title">医生科室</div>
                                             <div class="item-title">登录密码</div>
@@ -153,7 +153,7 @@
                                         <div class="item-inner">
                                             <div class="item-title">{{doctor.id}}</div>
                                             <div class="item-title">{{doctor.name}}</div>
-                                            <div class="item-title">{{doctor.gender}}</div>
+                                            <div class="item-title">{{doctor.title}}</div>
                                             <div class="item-title">{{doctor.telephone}}</div>
                                             <div class="item-title">{{doctor.department}}</div>
                                             <div class="item-title">{{doctor.password}}</div>
@@ -196,7 +196,7 @@
                                     </li>
                                     <li>
                                         <div class="item-content">
-                                            <div class="item-media"><i class="icon icon-form-gender"></i></div>
+                                            <div class="item-media"><i class="icon"></i></div>
                                             <div class="item-inner">
                                                 <div class="item-title label">性别</div>
                                                 <div class="item-input">
@@ -240,6 +240,22 @@
                                                         <select name="d_department">
                                                         </select>
                                                     </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="item-content">
+                                            <div class="item-media"><i class="icon"></i></div>
+                                            <div class="item-inner">
+                                                <div class="item-title label">职称</div>
+                                                <div class="item-input">
+                                                    <select name="d_title">
+                                                        <option value="医师">医师</option>
+                                                        <option value="主治医师">主治医师</option>
+                                                        <option value="副主任医师">副主任医师</option>
+                                                        <option value="主任医师">主任医师</option>
+                                                    </select>
                                                 </div>
                                             </div>
                                         </div>
@@ -288,11 +304,13 @@
                     <div class="item-content">
                         <div class="item-media"><i class="icon icon-form-gender"></i></div>
                         <div class="item-inner">
-                            <div class="item-title label">性别</div>
+                            <div class="item-title label">职称</div>
                             <div class="item-input">
-                                <select name="u_gender">
-                                    <option value="男">男</option>
-                                    <option value="女">女</option>
+                                <select name="u_title">
+                                    <option value="医师">医师</option>
+                                    <option value="主治医师">主治医师</option>
+                                    <option value="副主任医师">副主任医师</option>
+                                    <option value="主任医师">主任医师</option>
                                 </select>
                             </div>
                         </div>

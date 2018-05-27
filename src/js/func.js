@@ -13,6 +13,8 @@ app.controller('indexController', function($scope,$timeout,$compile) {
         loop: true
     });
 
+    $.init();//放最后
+
     //初始化推荐医生
     zpost('recommendDoctor',{}, function (data) {
         if(data.code == 500 ){
@@ -25,8 +27,6 @@ app.controller('indexController', function($scope,$timeout,$compile) {
             $scope.$apply();
         }
     });
-
-    $.init();//放最后
 });
 /**
  * 医院页
@@ -75,6 +75,7 @@ app.controller('appointmentController',function($scope,$location){
     console.log('appointment');
 
     $scope.department = null;
+    $scope.hospinfo = null;
 
     $scope.showdoctorlist = function () {
         //console.log(this);
@@ -89,6 +90,17 @@ app.controller('appointmentController',function($scope,$location){
         });
         $scope.$apply();
     });
+
+    //zpost('getHospitalInfo',{}, function (data) {
+    //
+    //    $scope.hospinfo = {
+    //        name : data.data[0].hospName,
+    //        address : data.data[0].hospAddress,
+    //        phone : data.data[0].hospPhone
+    //    };
+    //
+    //    $scope.$apply();
+    //});
 
     $.init();//放最后
 });
@@ -541,14 +553,16 @@ app.controller('concernController',function($scope){
 });
 
 //我的病历
-app.controller('mycaseController', function ($scope) {
+app.controller('mycaseController', function ($scope,$location) {
     console.log('mycase');
 
     $scope.historyAppointment = null;
+    $scope.patid = $location.search() && $location.search().id;
+    console.log($scope.patid);
 
     $(document).off('refresh', '.pull-to-refresh-content');
     $(document).on('refresh', '.pull-to-refresh-content',function(e) {
-        zpost('getHistroyAppointment',{patientid:window.client.id}, function (data) {
+        zpost('getHistroyAppointment',{patientid:$scope.patid || window.client.id}, function (data) {
             if(data.code == 500){
                 zinfo(data.msg);
             } else {
@@ -575,4 +589,235 @@ app.controller('mycaseController', function ($scope) {
 
     //初始化触发;
     $('.pull-to-refresh-content').trigger('refresh');
+});
+
+//自我诊断
+app.controller('examineController', function ($scope) {
+    console.log('examine');
+
+    $scope.partlist = null;
+
+    zpost('getExamine',{}, function (data) {
+        $scope.partlist = data.data;
+        $scope.$apply();
+    });
+
+    $.init();
+});
+
+app.controller('examinedetailController', function ($scope,$location) {
+    console.log('examinedatail');
+
+    var param =  $location.search().id;
+
+    $scope.symptom = null;
+    $scope.alldisease = null;
+
+    $scope.getDisease = function () {
+        var resultObj = {};
+        var arr = Array.from($('[name=symptoms]'));
+        var selecteditem = [];
+        arr.forEach(function(e){
+            if (e.checked == true) {
+                selecteditem.push(e.value);
+            }
+        });
+
+        console.log(selecteditem);
+
+
+        selecteditem.forEach(function (selectItem) {
+            $scope.alldisease.forEach(function (disease) {
+                //存在
+                if (disease.symptom.indexOf(selectItem) != -1){
+                    resultObj[disease.disease] ? (function () {
+                        resultObj[disease.disease].count++;
+                        resultObj[disease.disease].probability = (resultObj[disease.disease].count / disease.symptom.length).toFixed(2);
+                    })(): (function () {
+                        resultObj[disease.disease] = {};
+                        resultObj[disease.disease].count = 1;
+                        resultObj[disease.disease].name = disease.disease;
+                        resultObj[disease.disease].id = disease.id;
+                        resultObj[disease.disease].probability = (resultObj[disease.disease].count / disease.symptom.length).toFixed(2);
+                    })();
+                }
+            })
+        });
+
+        console.log(selecteditem);
+
+        selecteditem.length != 0 ? (function (obj){
+            var myChart = echarts.init(document.getElementById('examineresult'));
+            var option = {
+                baseOption: {
+                    tooltip: {},
+                    title: [{
+                        text: '自我诊断结果',
+                        x: '50%',
+                        textAlign: 'center'
+                    }],
+                    grid: [{
+                        top: 50,
+                        width: '90%',
+                        bottom: '45%',
+                        left: 10,
+                        containLabel: true
+                    }, {
+                        top: '55%',
+                        width: '50%',
+                        bottom: 0,
+                        left: 10,
+                        containLabel: true
+                    }],
+                    xAxis: [{
+                        type: 'value',
+                        max: 100,
+                        splitLine: {
+                            show: false
+                        }
+                    }],
+                    yAxis: [{
+                        type: 'category',
+                        data: Object.keys(obj),
+                        axisLabel: {
+                            interval: 0,
+                            rotate: 30
+                        },
+                        splitLine: {
+                            show: false
+                        }
+                    }],
+                    series: [{
+                        type: 'bar',
+                        stack: 'chart',
+                        z: 3,
+                        label: {
+                            normal: {
+                                position: 'right',
+                                show: true
+                            }
+                        },
+                        data: Object.keys(obj).map(function (key) {
+                            return Math.floor(obj[key].probability * 100);
+                        })
+                    }, {
+                        type: 'pie',
+                        radius: [0, '30%'],
+                        center: ['75%', '35%'],
+                        data: Object.keys(obj).map(function (key) {
+                            return {
+                                name: key,
+                                value: Math.floor(obj[key].probability * 100)
+                            }
+                        })
+                    }]
+                },
+                media: [
+                    {
+                        option: {
+                            legend: {
+                                right: 'center',
+                                bottom: 0,
+                                orient: 'horizontal'
+                            },
+                            series: [
+                                {
+                                    radius: [20, '50%'],
+                                    center: ['25%', '50%']
+                                },
+                                {
+                                    radius: [30, '50%'],
+                                    center: ['75%', '50%']
+                                }
+                            ]
+                        }
+                    },
+                    {
+                        query: {
+                            minAspectRatio: 1
+                        },
+                        option: {
+                            legend: {
+                                right: 'center',
+                                bottom: 0,
+                                orient: 'horizontal'
+                            },
+                            series: [
+                                {
+                                    radius: [20, '50%'],
+                                    center: ['25%', '50%']
+                                },
+                                {
+                                    radius: [30, '50%'],
+                                    center: ['75%', '50%']
+                                }
+                            ]
+                        }
+                    },
+                    {
+                        query: {
+                            maxAspectRatio: 1
+                        },
+                        option: {
+                            legend: {
+                                right: 'center',
+                                bottom: 0,
+                                orient: 'horizontal'
+                            },
+                            series: [
+                                {
+                                    radius: [20, '50%'],
+                                    center: ['50%', '30%']
+                                },
+                                {
+                                    radius: [30, '50%'],
+                                    center: ['50%', '70%']
+                                }
+                            ]
+                        }
+                    },
+                    {
+                        query: {
+                            maxWidth: 500
+                        },
+                        option: {
+                            legend: {
+                                right: 10,
+                                top: '15%',
+                                orient: 'vertical'
+                            },
+                            series: [
+                                {
+                                    radius: [20, '50%'],
+                                    center: ['50%', '30%']
+                                },
+                                {
+                                    radius: [30, '50%'],
+                                    center: ['50%', '75%']
+                                }
+                            ]
+                        }
+                    }
+                ]
+            };
+            $.popup('.popup-result');
+            myChart.setOption(option);
+        })(resultObj) : zalert('请选择症状!');
+
+    };
+
+    $scope.closeExamine = function (){
+        $.closeModal('.popup-result');
+    };
+
+    zpost('getSymptom',{id:param}, function (data) {
+        $scope.symptom = data.data.symptom;
+        $scope.alldisease = data.data.disease;
+        $scope.alldisease.forEach(function (disease) {
+            disease.symptom = disease.symptom.split(',');
+        });
+        $scope.$apply();
+    });
+
+    $.init();
 });

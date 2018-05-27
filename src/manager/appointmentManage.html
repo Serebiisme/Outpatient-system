@@ -84,12 +84,87 @@ manager.html<div class="page" id="manager">
                 <div class="tabs">
                     <div class="tab active">
                         <div class="content-block">
-                            <div data-toggle='date' />
+                            <!-- 今日订单列表 -->
+                            <div class="content-block animated fadeIn">
+                                <div class="list-block tab-content">
+                                    <ul>
+                                        <li class="item-content">
+                                            <div class="item-inner">
+                                                <div class="item-title">订单编号</div>
+                                                <div class="item-title">医生姓名</div>
+                                                <div class="item-title">患者姓名</div>
+                                                <div class="item-title">预约时间</div>
+                                                <div class="item-title">预约地点</div>
+                                                <div class="item-title">预约状态</div>
+                                                <div class="item-title">订单操作</div>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                    <ul>
+                                        <li class="item-content" ng-repeat="appoint in appointmentList">
+                                            <div class="item-inner">
+                                                <div class="item-title">{{appoint.id}}</div>
+                                                <div class="item-title">{{appoint.docname}}</div>
+                                                <div class="item-title">{{appoint.patname}}</div>
+                                                <div class="item-title">{{appoint.time}}</div>
+                                                <div class="item-title">{{appoint.address}}</div>
+                                                <div class="item-title">{{appoint.status}}</div>
+                                                <div class="item-title">
+                                                    <span class="button button-green" ng-click="editAppointInfo()">编辑</span>
+                                                    <!--<span class="button button-red" ng-click="deleteDoctorInfo()">删除</span>-->
+                                                </div>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
                         </div>
                     </div>
                     <div class="tab">
                         <div class="content-block">
-                            <p>This is tab 2 content</p>
+                            <!-- 搜索栏 -->
+                            <div class="content-block">
+                                <div class="searchbar row">
+                                    <div class="search-input col-80">
+                                        <label class="icon icon-search" for="search"></label>
+                                        <input type="search" id='search' placeholder='输入医生姓名/患者姓名'/>
+                                    </div>
+                                    <a class="button button-fill button-primary col-20" ng-click="getSearchResult()">搜索</a>
+                                </div>
+                            </div>
+                            <!-- 搜索结果 -->
+                            <div class="content-block">
+                                <div class="list-block tab-content">
+                                    <ul ng-show="searchappoint.length > 0">
+                                        <li class="item-content">
+                                            <div class="item-inner">
+                                                <div class="item-title">订单编号</div>
+                                                <div class="item-title">医生姓名</div>
+                                                <div class="item-title">患者姓名</div>
+                                                <div class="item-title">预约时间</div>
+                                                <div class="item-title">预约地点</div>
+                                                <div class="item-title">预约状态</div>
+                                                <div class="item-title">订单操作</div>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                    <ul class="searchresult">
+                                        <li class="item-content animated fadeIn" ng-repeat="appoint in searchappoint">
+                                            <div class="item-inner">
+                                                <div class="item-title">{{appoint.id}}</div>
+                                                <div class="item-title">{{appoint.docname}}</div>
+                                                <div class="item-title">{{appoint.patname}}</div>
+                                                <div class="item-title">{{appoint.time}}</div>
+                                                <div class="item-title">{{appoint.address}}</div>
+                                                <div class="item-title">{{appoint.status}}</div>
+                                                <div class="item-title">
+                                                    <span class="button button-green" ng-click="editAppointInfo()">编辑</span>
+                                                    <!--<span class="button button-red" ng-click="deleteDoctorInfo()">删除</span>-->
+                                                </div>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
                         </div>
                     </div>
                     <div class="tab">
@@ -102,4 +177,84 @@ manager.html<div class="page" id="manager">
         </div>
     </div>
 </div>
+<script type="text/html" id="appointmentModel">
+    <div class="list-block">
+        <form id="u_appoint">
+            <ul>
+                <li>
+                    <div class="item-content">
+                        <div class="item-media"><i class="icon "></i></div>
+                        <div class="item-inner">
+                            <div class="item-title label">订单编号</div>
+                            <div class="item-input">
+                                <input type="text" name="a_id" placeholder="" disabled>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="item-content">
+                        <div class="item-media"><i class="icon "></i></div>
+                        <div class="item-inner">
+                            <div class="item-title label">医生姓名</div>
+                            <div class="item-input">
+                                <input type="text" name="a_docname" placeholder="" disabled>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="item-content">
+                        <div class="item-media"><i class="icon "></i></div>
+                        <div class="item-inner">
+                            <div class="item-title label">患者姓名</div>
+                            <div class="item-input">
+                                <input type="text" name="a_patname" placeholder="" disabled>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="item-content">
+                        <div class="item-media"><i class="icon "></i></div>
+                        <div class="item-inner">
+                            <div class="item-title label">预约时间</div>
+                            <div class="item-input">
+                                <input type="text" name="a_time" placeholder="" disabled>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="item-content">
+                        <div class="item-media"><i class="icon"></i></div>
+                        <div class="item-inner">
+                            <div class="item-title label">预约地点</div>
+                            <div class="item-input">
+                                <input type="text" name="a_address" placeholder="请输入预约地点">
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="item-content">
+                        <div class="item-media"><i class="icon"></i></div>
+                        <div class="item-inner">
+                            <div class="item-title label">预约状态</div>
+                            <div class="item-input">
+                                <select name="a_status">
+                                    <option value="未完成">未完成</option>
+                                    <option value="已预约">已预约</option>
+                                    <option value="已完成">已完成</option>
+                                    <option value="已取消">已取消</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+
+            </ul>
+        </form>
+    </div>
+</script>
 

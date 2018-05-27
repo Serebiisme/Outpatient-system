@@ -142,7 +142,8 @@ app.controller('settingController',function($scope,$location){
  */
 app.controller('addappointmentController',function($scope){
     console.log('addappointment');
-    var d = new Date(),dm = new Date();
+    var dd = new Date(),dm = new Date(),
+        d = new Date((dd/1000+86400*1)*1000);
         dm.setMonth(d.getMonth() + 1);
     $scope.minDate = d.format("yyyy-MM-dd");
     $scope.maxDate = dm.format("yyyy-MM-dd");
@@ -291,6 +292,7 @@ app.controller('doctorintroController', function ($scope) {
         '姓名':window.client.name,
         '性别':window.client.gender,
         '手机':window.client.telephone,
+        '职称':window.client.title,
         '科室':window.client.department,
         '医生编号':window.client.id
     };

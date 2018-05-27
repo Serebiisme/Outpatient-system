@@ -265,6 +265,15 @@ html, body {
     color: #bbb;
     font-size: 1rem; }
 
+#examine .content .partlist {
+  margin: 0; }
+  #examine .content .partlist .list-group-title {
+    color: #bbb; }
+
+#examineresult {
+  height: 31.125rem;
+  width: 18.75rem; }
+
 /* * * * * * * * * * * * * * * * * * * * * * *  医生端 * * * * * * * * * * * * * * * * * * * * * * * */
 .title_1 {
   background: #66cccc;
@@ -351,6 +360,15 @@ html, body {
 #concern .button-green:active, #manager .button-green:active, #mycase .button-green:active, #doctormanage .button-green:active, #officemanager .button-green:active, #patientmanager .button-green:active {
   border: 1px solid #66cccc;
   background: #66cccc;
+  color: #fff; }
+#concern .button-orange, #manager .button-orange, #mycase .button-orange, #doctormanage .button-orange, #officemanager .button-orange, #patientmanager .button-orange {
+  border: 1px solid #f60;
+  color: #f60;
+  padding: 0.25rem 1rem;
+  border-radius: .25rem; }
+#concern .button-orange:active, #manager .button-orange:active, #mycase .button-orange:active, #doctormanage .button-orange:active, #officemanager .button-orange:active, #patientmanager .button-orange:active {
+  border: 1px solid #f60;
+  background: #f60;
   color: #fff; }
 #concern .button-red, #manager .button-red, #mycase .button-red, #doctormanage .button-red, #officemanager .button-red, #patientmanager .button-red {
   border: 1px solid #e43e56;
@@ -457,10 +475,10 @@ html, body {
       #manager .content .m_content .tab-content ul.searchresult, #doctormanage .content .m_content .tab-content ul.searchresult, #officemanager .content .m_content .tab-content ul.searchresult, #patientmanager .content .m_content .tab-content ul.searchresult, #infomanage .content .m_content .tab-content ul.searchresult {
         max-height: 25rem; }
 
-  .editdoctor {
+  .editdoctor, .editappoint {
     width: 25rem;
     transform: translate(-15%, -5%) !important; }
-    .editdoctor .list-block {
+    .editdoctor .list-block, .editappoint .list-block {
       margin: 0; }
 
   #doctormanage #d_info {

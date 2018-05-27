@@ -145,7 +145,7 @@ app.controller('managerController', function ($scope) {
             }, {
                 type: 'pie',
                 radius: [0, '30%'],
-                center: ['75%', '25%'],
+                center: ['75%', '35%'],
                 data: Object.keys(obj).map(function (key) {
                     return {
                         name: key,
@@ -214,7 +214,7 @@ app.controller('managerController', function ($scope) {
             }, {
                 type: 'pie',
                 radius: [0, '30%'],
-                center: ['75%', '25%'],
+                center: ['75%', '35%'],
                 data: Object.keys(obj).map(function (key) {
                     return {
                         name: key,
@@ -379,7 +379,7 @@ app.controller('docmanagerController', function ($scope,$timeout) {
                                 $scope.alldoctor[this.$index].id = u_info.u_id;
                                 $scope.alldoctor[this.$index].name = u_info.u_name;
                                 $scope.alldoctor[this.$index].password = u_info.u_password;
-                                $scope.alldoctor[this.$index].gender = u_info.u_gender;
+                                $scope.alldoctor[this.$index].title = u_info.u_title;
                                 $scope.alldoctor[this.$index].telephone = u_info.u_telephone;
                                 $scope.alldoctor[this.$index].department = u_info.u_department;
                             }
@@ -400,7 +400,7 @@ app.controller('docmanagerController', function ($scope,$timeout) {
         $('[name=u_password]').val(this.doctor.password);
         $('[name=u_telephone]').val(this.doctor.telephone);
         $('[name=u_id]').val(this.doctor.id);
-        $('[name=u_gender]').find('[value=' + this.doctor.gender + ']').attr('selected','true');
+        $('[name=u_title]').find('[value=' + this.doctor.title + ']').attr('selected','true');
         $('[name=u_department]').find('[value=' + this.doctor.department + ']').attr('selected','true');
     };
 
@@ -603,6 +603,79 @@ app.controller('patmanagerController', function ($scope,$timeout) {
 
 app.controller('appointController', function ($scope) {
     console.log('appointment manage');
+
+    $scope.appointmentList = null;
+    $scope.searchappoint = null;
+
+
+    $scope.editAppointInfo = function () {
+        $.modal({
+            title:'编辑订单',
+            text:$('#appointmentModel').html(),
+            buttons:[
+                {
+                    text:'<span style="color: #e43e56">取消</span>',
+                    close:true
+                },
+                {
+                    text:'保存',
+                    bold:true,
+                    onClick: function () {
+                        var u_info = getFormToJson('#u_appoint');
+                        zpost('updateAppoint',{id:this.appoint.id,status:u_info.a_status,address:u_info.a_address}, function (data) {
+                            if (data.code == 500){
+                                zinfo(data.msg);
+                            } else {
+                                zinfo(data.msg);
+                                $scope.appointmentList[this.$index].status = u_info.a_status;
+                                $scope.appointmentList[this.$index].address = u_info.a_address;
+                                $scope.$apply();
+                            }
+                        }.bind(this))
+                    }.bind(this)
+                }
+            ],
+            extraClass:'editappoint'
+        });
+
+        $("[name=a_id]").val(this.appoint.id);
+        $("[name=a_docname]").val(this.appoint.docname);
+        $("[name=a_patname]").val(this.appoint.patname);
+        $("[name=a_time]").val(this.appoint.time);
+        $("[name=a_address]").val(this.appoint.address);
+        $("[name=a_status]").find('[value=' + this.appoint.status + ']').attr('selected','true');
+    };
+
+    //获取搜索结果
+    $scope.getSearchResult = function () {
+        var keyword = $('#search').val();
+        $scope.searchappoint = [];
+
+        if (keyword == ''){
+            return false
+        }
+
+        $scope.appointmentList.forEach(function (appoint) {
+            if (appoint.id == keyword) {
+                $scope.searchappoint.push(appoint);
+            } else if (appoint.docname.indexOf(keyword) != -1) {
+                $scope.searchappoint.push(appoint);
+            } else if (appoint.patname.indexOf(keyword) != -1) {
+                $scope.searchappoint.push(appoint);
+            }
+            console.log(appoint);
+        });
+
+        console.log($scope.searchappoint);
+
+        $('#search').val("");
+    };
+
+    zpost('getTodayAppointment',{}, function (data) {
+        $scope.appointmentList = data.data;
+        $scope.$apply();
+    });
+
 
     $.init();
 });

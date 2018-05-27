@@ -369,6 +369,21 @@ html,body{
   }
 }
 
+#examine{
+  .content{
+    .partlist{
+      margin: 0;
+      .list-group-title{
+        color:#bbb;
+      }
+    }
+  }
+}
+#examineresult{
+  height: 31.125rem;
+  width: 18.75rem;
+}
+
 /* * * * * * * * * * * * * * * * * * * * * * *  医生端 * * * * * * * * * * * * * * * * * * * * * * * */
 //#doctor,#manager,#setting,#addappointment,#calendar,#healtheducation,#help,#version {
 //  .title,
@@ -485,6 +500,17 @@ html,body{
   .button-green:active {
     border: 1px solid #66cccc;
     background:#66cccc ;
+    color: #fff;
+  }
+  .button-orange {
+    border: 1px solid #f60;
+    color: #f60;
+    padding: 0.25rem 1rem;
+    border-radius: .25rem;
+  }
+  .button-orange:active {
+    border: 1px solid #f60;
+    background:#f60 ;
     color: #fff;
   }
   .button-red {
@@ -642,7 +668,7 @@ html,body{
       }
     }
   }
-  .editdoctor{
+  .editdoctor,.editappoint{
     width: 25rem;
     transform: translate(-15%,-5%)!important;
     .list-block{

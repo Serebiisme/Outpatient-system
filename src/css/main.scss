@@ -490,7 +490,7 @@ html,body{
 .icon-only{
   visibility: hidden;
 }
-#concern,#manager,#mycase,#doctormanage,#officemanager,#patientmanager {
+#concern,#manager,#mycase,#doctormanage,#officemanager,#patientmanager,#bannermanage {
   .button-green {
     border: 1px solid #66cccc;
     color: #66cccc;
@@ -562,7 +562,7 @@ html,body{
     width: 30%;
     margin: 0 auto;
   }
-  #manager,#doctormanage,#officemanager,#patientmanager,#infomanage{
+  #manager,#doctormanage,#officemanager,#patientmanager,#infomanage,#bannermanage{
     .content{
       display:-webkit-box;
       display:-webkit-flex;
@@ -749,5 +749,73 @@ html,body{
       height: 31rem;
       width: 100%;
     }
+  }
+}
+#healtheducation{
+  .buttons-tab{
+    .button.active{
+      color: #66cccc;
+      border-color: #66cccc;
+    }
+  }
+}
+#bannermanage{
+  /*蓝色按钮,绝对定位*/
+  .blueButton,.submit_btn
+  {
+    position: absolute;
+    display: block;
+    width: 100px;
+    height: 40px;
+    background-color: $blue;
+    color: #fff;
+    text-decoration: none;
+    text-align: center;
+    font:normal normal normal 16px/40px 'Microsoft YaHei';
+    cursor: pointer;
+    border-radius: 4px;
+  }
+  .blueButton:hover
+  {
+    text-decoration: none;
+    cursor: pointer;
+  }
+  /*自定义上传,位置大小都和a完全一样,而且完全透明*/
+  .myFileUpload
+  {
+    position: absolute;
+    display: block;
+    width: 100px;
+    height: 40px;
+    opacity: 0;
+    cursor: pointer;
+  }
+  /*显示上传文件夹名的Div*/
+  .show
+  {
+    position: absolute;
+    top: 4rem;
+    left: 18rem;
+    height: 30px;
+    font:normal normal normal 14px/30px 'Microsoft YaHei';
+    display: inline;
+  }
+  .submit_btn{
+    left: 30rem;
+    background-color: $orange;
+    border: none;
+  }
+  .clear_btn{
+    left:35rem;
+    background: $red;
+  }
+  iframe{
+    display: block;
+    width: 40rem;
+    height: 27rem;
+    overflow: hidden;
+    border: none;
+    position: absolute;
+    top: 6rem;
   }
 }

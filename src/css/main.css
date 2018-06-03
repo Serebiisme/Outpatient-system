@@ -352,49 +352,49 @@ html, body {
 .icon-only {
   visibility: hidden; }
 
-#concern .button-green, #manager .button-green, #mycase .button-green, #doctormanage .button-green, #officemanager .button-green, #patientmanager .button-green {
+#concern .button-green, #manager .button-green, #mycase .button-green, #doctormanage .button-green, #officemanager .button-green, #patientmanager .button-green, #bannermanage .button-green {
   border: 1px solid #66cccc;
   color: #66cccc;
   padding: 0.25rem 1rem;
   border-radius: .25rem; }
-#concern .button-green:active, #manager .button-green:active, #mycase .button-green:active, #doctormanage .button-green:active, #officemanager .button-green:active, #patientmanager .button-green:active {
+#concern .button-green:active, #manager .button-green:active, #mycase .button-green:active, #doctormanage .button-green:active, #officemanager .button-green:active, #patientmanager .button-green:active, #bannermanage .button-green:active {
   border: 1px solid #66cccc;
   background: #66cccc;
   color: #fff; }
-#concern .button-orange, #manager .button-orange, #mycase .button-orange, #doctormanage .button-orange, #officemanager .button-orange, #patientmanager .button-orange {
+#concern .button-orange, #manager .button-orange, #mycase .button-orange, #doctormanage .button-orange, #officemanager .button-orange, #patientmanager .button-orange, #bannermanage .button-orange {
   border: 1px solid #f60;
   color: #f60;
   padding: 0.25rem 1rem;
   border-radius: .25rem; }
-#concern .button-orange:active, #manager .button-orange:active, #mycase .button-orange:active, #doctormanage .button-orange:active, #officemanager .button-orange:active, #patientmanager .button-orange:active {
+#concern .button-orange:active, #manager .button-orange:active, #mycase .button-orange:active, #doctormanage .button-orange:active, #officemanager .button-orange:active, #patientmanager .button-orange:active, #bannermanage .button-orange:active {
   border: 1px solid #f60;
   background: #f60;
   color: #fff; }
-#concern .button-red, #manager .button-red, #mycase .button-red, #doctormanage .button-red, #officemanager .button-red, #patientmanager .button-red {
+#concern .button-red, #manager .button-red, #mycase .button-red, #doctormanage .button-red, #officemanager .button-red, #patientmanager .button-red, #bannermanage .button-red {
   border: 1px solid #e43e56;
   color: #e43e56;
   padding: 0.25rem 1rem;
   border-radius: .25rem; }
-#concern .button-red:active, #manager .button-red:active, #mycase .button-red:active, #doctormanage .button-red:active, #officemanager .button-red:active, #patientmanager .button-red:active {
+#concern .button-red:active, #manager .button-red:active, #mycase .button-red:active, #doctormanage .button-red:active, #officemanager .button-red:active, #patientmanager .button-red:active, #bannermanage .button-red:active {
   border: 1px solid #e43e56;
   background: #e43e56;
   color: #fff; }
-#concern .button-grey, #manager .button-grey, #mycase .button-grey, #doctormanage .button-grey, #officemanager .button-grey, #patientmanager .button-grey {
+#concern .button-grey, #manager .button-grey, #mycase .button-grey, #doctormanage .button-grey, #officemanager .button-grey, #patientmanager .button-grey, #bannermanage .button-grey {
   border: 1px solid #bbb;
   color: #bbb; }
-#concern .button-grey:active, #manager .button-grey:active, #mycase .button-grey:active, #doctormanage .button-grey:active, #officemanager .button-grey:active, #patientmanager .button-grey:active {
+#concern .button-grey:active, #manager .button-grey:active, #mycase .button-grey:active, #doctormanage .button-grey:active, #officemanager .button-grey:active, #patientmanager .button-grey:active, #bannermanage .button-grey:active {
   background: #bbb;
   color: #fff; }
-#concern .layCenter, #manager .layCenter, #mycase .layCenter, #doctormanage .layCenter, #officemanager .layCenter, #patientmanager .layCenter {
+#concern .layCenter, #manager .layCenter, #mycase .layCenter, #doctormanage .layCenter, #officemanager .layCenter, #patientmanager .layCenter, #bannermanage .layCenter {
   text-align: center;
   position: relative;
   top: 30%; }
-  #concern .layCenter img, #manager .layCenter img, #mycase .layCenter img, #doctormanage .layCenter img, #officemanager .layCenter img, #patientmanager .layCenter img {
+  #concern .layCenter img, #manager .layCenter img, #mycase .layCenter img, #doctormanage .layCenter img, #officemanager .layCenter img, #patientmanager .layCenter img, #bannermanage .layCenter img {
     width: 5rem; }
-  #concern .layCenter h1, #manager .layCenter h1, #mycase .layCenter h1, #doctormanage .layCenter h1, #officemanager .layCenter h1, #patientmanager .layCenter h1 {
+  #concern .layCenter h1, #manager .layCenter h1, #mycase .layCenter h1, #doctormanage .layCenter h1, #officemanager .layCenter h1, #patientmanager .layCenter h1, #bannermanage .layCenter h1 {
     color: #bbb;
     font-size: 1rem; }
-#concern .caseresult, #manager .caseresult, #mycase .caseresult, #doctormanage .caseresult, #officemanager .caseresult, #patientmanager .caseresult {
+#concern .caseresult, #manager .caseresult, #mycase .caseresult, #doctormanage .caseresult, #officemanager .caseresult, #patientmanager .caseresult, #bannermanage .caseresult {
   padding: 0; }
 
 #editintro [name=editintro], #modifypsd [name=editintro] {
@@ -407,72 +407,72 @@ html, body {
     width: 30%;
     margin: 0 auto; }
 
-  #manager .content, #doctormanage .content, #officemanager .content, #patientmanager .content, #infomanage .content {
+  #manager .content, #doctormanage .content, #officemanager .content, #patientmanager .content, #infomanage .content, #bannermanage .content {
     display: -webkit-box;
     display: -webkit-flex;
     display: flex; }
-    #manager .content .panel, #doctormanage .content .panel, #officemanager .content .panel, #patientmanager .content .panel, #infomanage .content .panel {
+    #manager .content .panel, #doctormanage .content .panel, #officemanager .content .panel, #patientmanager .content .panel, #infomanage .content .panel, #bannermanage .content .panel {
       display: block;
       position: relative; }
-      #manager .content .panel .list-block .list-block ul li:hover, #doctormanage .content .panel .list-block .list-block ul li:hover, #officemanager .content .panel .list-block .list-block ul li:hover, #patientmanager .content .panel .list-block .list-block ul li:hover, #infomanage .content .panel .list-block .list-block ul li:hover {
+      #manager .content .panel .list-block .list-block ul li:hover, #doctormanage .content .panel .list-block .list-block ul li:hover, #officemanager .content .panel .list-block .list-block ul li:hover, #patientmanager .content .panel .list-block .list-block ul li:hover, #infomanage .content .panel .list-block .list-block ul li:hover, #bannermanage .content .panel .list-block .list-block ul li:hover {
         background: #efeff4; }
-        #manager .content .panel .list-block .list-block ul li:hover .item-title, #doctormanage .content .panel .list-block .list-block ul li:hover .item-title, #officemanager .content .panel .list-block .list-block ul li:hover .item-title, #patientmanager .content .panel .list-block .list-block ul li:hover .item-title, #infomanage .content .panel .list-block .list-block ul li:hover .item-title {
+        #manager .content .panel .list-block .list-block ul li:hover .item-title, #doctormanage .content .panel .list-block .list-block ul li:hover .item-title, #officemanager .content .panel .list-block .list-block ul li:hover .item-title, #patientmanager .content .panel .list-block .list-block ul li:hover .item-title, #infomanage .content .panel .list-block .list-block ul li:hover .item-title, #bannermanage .content .panel .list-block .list-block ul li:hover .item-title {
           color: #111; }
-      #manager .content .panel .list-block .list-block ul li.active, #doctormanage .content .panel .list-block .list-block ul li.active, #officemanager .content .panel .list-block .list-block ul li.active, #patientmanager .content .panel .list-block .list-block ul li.active, #infomanage .content .panel .list-block .list-block ul li.active {
+      #manager .content .panel .list-block .list-block ul li.active, #doctormanage .content .panel .list-block .list-block ul li.active, #officemanager .content .panel .list-block .list-block ul li.active, #patientmanager .content .panel .list-block .list-block ul li.active, #infomanage .content .panel .list-block .list-block ul li.active, #bannermanage .content .panel .list-block .list-block ul li.active {
         background: #efeff4; }
-        #manager .content .panel .list-block .list-block ul li.active .item-title, #doctormanage .content .panel .list-block .list-block ul li.active .item-title, #officemanager .content .panel .list-block .list-block ul li.active .item-title, #patientmanager .content .panel .list-block .list-block ul li.active .item-title, #infomanage .content .panel .list-block .list-block ul li.active .item-title {
+        #manager .content .panel .list-block .list-block ul li.active .item-title, #doctormanage .content .panel .list-block .list-block ul li.active .item-title, #officemanager .content .panel .list-block .list-block ul li.active .item-title, #patientmanager .content .panel .list-block .list-block ul li.active .item-title, #infomanage .content .panel .list-block .list-block ul li.active .item-title, #bannermanage .content .panel .list-block .list-block ul li.active .item-title {
           color: #111; }
-      #manager .content .panel .list-block .list-block ul li .item-inner::after, #doctormanage .content .panel .list-block .list-block ul li .item-inner::after, #officemanager .content .panel .list-block .list-block ul li .item-inner::after, #patientmanager .content .panel .list-block .list-block ul li .item-inner::after, #infomanage .content .panel .list-block .list-block ul li .item-inner::after {
+      #manager .content .panel .list-block .list-block ul li .item-inner::after, #doctormanage .content .panel .list-block .list-block ul li .item-inner::after, #officemanager .content .panel .list-block .list-block ul li .item-inner::after, #patientmanager .content .panel .list-block .list-block ul li .item-inner::after, #infomanage .content .panel .list-block .list-block ul li .item-inner::after, #bannermanage .content .panel .list-block .list-block ul li .item-inner::after {
         height: 0px; }
-      #manager .content .panel .list-block .list-block .exit, #doctormanage .content .panel .list-block .list-block .exit, #officemanager .content .panel .list-block .list-block .exit, #patientmanager .content .panel .list-block .list-block .exit, #infomanage .content .panel .list-block .list-block .exit {
+      #manager .content .panel .list-block .list-block .exit, #doctormanage .content .panel .list-block .list-block .exit, #officemanager .content .panel .list-block .list-block .exit, #patientmanager .content .panel .list-block .list-block .exit, #infomanage .content .panel .list-block .list-block .exit, #bannermanage .content .panel .list-block .list-block .exit {
         position: absolute;
         bottom: 1rem;
         width: 80%;
         margin: 1rem;
         color: #ccc; }
-      #manager .content .panel .list-block .list-block .exit:active, #manager .content .panel .list-block .list-block .exit:hover, #doctormanage .content .panel .list-block .list-block .exit:active, #doctormanage .content .panel .list-block .list-block .exit:hover, #officemanager .content .panel .list-block .list-block .exit:active, #officemanager .content .panel .list-block .list-block .exit:hover, #patientmanager .content .panel .list-block .list-block .exit:active, #patientmanager .content .panel .list-block .list-block .exit:hover, #infomanage .content .panel .list-block .list-block .exit:active, #infomanage .content .panel .list-block .list-block .exit:hover {
+      #manager .content .panel .list-block .list-block .exit:active, #manager .content .panel .list-block .list-block .exit:hover, #doctormanage .content .panel .list-block .list-block .exit:active, #doctormanage .content .panel .list-block .list-block .exit:hover, #officemanager .content .panel .list-block .list-block .exit:active, #officemanager .content .panel .list-block .list-block .exit:hover, #patientmanager .content .panel .list-block .list-block .exit:active, #patientmanager .content .panel .list-block .list-block .exit:hover, #infomanage .content .panel .list-block .list-block .exit:active, #infomanage .content .panel .list-block .list-block .exit:hover, #bannermanage .content .panel .list-block .list-block .exit:active, #bannermanage .content .panel .list-block .list-block .exit:hover {
         background: #efeff4;
         color: #5f646e;
         border: none; }
-    #manager .content .m_content, #doctormanage .content .m_content, #officemanager .content .m_content, #patientmanager .content .m_content, #infomanage .content .m_content {
+    #manager .content .m_content, #doctormanage .content .m_content, #officemanager .content .m_content, #patientmanager .content .m_content, #infomanage .content .m_content, #bannermanage .content .m_content {
       -webkit-box-flex: 1;
       -webkit-flex: 1;
       flex: 1; }
-      #manager .content .m_content .buttons-tab .button, #doctormanage .content .m_content .buttons-tab .button, #officemanager .content .m_content .buttons-tab .button, #patientmanager .content .m_content .buttons-tab .button, #infomanage .content .m_content .buttons-tab .button {
+      #manager .content .m_content .buttons-tab .button, #doctormanage .content .m_content .buttons-tab .button, #officemanager .content .m_content .buttons-tab .button, #patientmanager .content .m_content .buttons-tab .button, #infomanage .content .m_content .buttons-tab .button, #bannermanage .content .m_content .buttons-tab .button {
         width: 6rem;
         height: 3rem;
         line-height: 3rem;
         border: none; }
-      #manager .content .m_content .buttons-tab .button.active span, #doctormanage .content .m_content .buttons-tab .button.active span, #officemanager .content .m_content .buttons-tab .button.active span, #patientmanager .content .m_content .buttons-tab .button.active span, #infomanage .content .m_content .buttons-tab .button.active span {
+      #manager .content .m_content .buttons-tab .button.active span, #doctormanage .content .m_content .buttons-tab .button.active span, #officemanager .content .m_content .buttons-tab .button.active span, #patientmanager .content .m_content .buttons-tab .button.active span, #infomanage .content .m_content .buttons-tab .button.active span, #bannermanage .content .m_content .buttons-tab .button.active span {
         border-bottom: 2px solid #0894ec;
         line-height: inherit;
         height: inherit;
         display: inline-block; }
-      #manager .content .m_content .content-block, #doctormanage .content .m_content .content-block, #officemanager .content .m_content .content-block, #patientmanager .content .m_content .content-block, #infomanage .content .m_content .content-block {
+      #manager .content .m_content .content-block, #doctormanage .content .m_content .content-block, #officemanager .content .m_content .content-block, #patientmanager .content .m_content .content-block, #infomanage .content .m_content .content-block, #bannermanage .content .m_content .content-block {
         margin: 0.75rem 0; }
-      #manager .content .m_content .searchbar, #doctormanage .content .m_content .searchbar, #officemanager .content .m_content .searchbar, #patientmanager .content .m_content .searchbar, #infomanage .content .m_content .searchbar {
+      #manager .content .m_content .searchbar, #doctormanage .content .m_content .searchbar, #officemanager .content .m_content .searchbar, #patientmanager .content .m_content .searchbar, #infomanage .content .m_content .searchbar, #bannermanage .content .m_content .searchbar {
         width: 30rem;
         margin: 0 auto; }
-      #manager .content .m_content .list-block, #doctormanage .content .m_content .list-block, #officemanager .content .m_content .list-block, #patientmanager .content .m_content .list-block, #infomanage .content .m_content .list-block {
+      #manager .content .m_content .list-block, #doctormanage .content .m_content .list-block, #officemanager .content .m_content .list-block, #patientmanager .content .m_content .list-block, #infomanage .content .m_content .list-block, #bannermanage .content .m_content .list-block {
         margin: 0.75rem 0; }
-        #manager .content .m_content .list-block .item-title.label, #doctormanage .content .m_content .list-block .item-title.label, #officemanager .content .m_content .list-block .item-title.label, #patientmanager .content .m_content .list-block .item-title.label, #infomanage .content .m_content .list-block .item-title.label {
+        #manager .content .m_content .list-block .item-title.label, #doctormanage .content .m_content .list-block .item-title.label, #officemanager .content .m_content .list-block .item-title.label, #patientmanager .content .m_content .list-block .item-title.label, #infomanage .content .m_content .list-block .item-title.label, #bannermanage .content .m_content .list-block .item-title.label {
           width: 5rem; }
-        #manager .content .m_content .list-block textarea, #doctormanage .content .m_content .list-block textarea, #officemanager .content .m_content .list-block textarea, #patientmanager .content .m_content .list-block textarea, #infomanage .content .m_content .list-block textarea {
+        #manager .content .m_content .list-block textarea, #doctormanage .content .m_content .list-block textarea, #officemanager .content .m_content .list-block textarea, #patientmanager .content .m_content .list-block textarea, #infomanage .content .m_content .list-block textarea, #bannermanage .content .m_content .list-block textarea {
           padding-top: 0.6rem; }
-        #manager .content .m_content .list-block .item-title, #doctormanage .content .m_content .list-block .item-title, #officemanager .content .m_content .list-block .item-title, #patientmanager .content .m_content .list-block .item-title, #infomanage .content .m_content .list-block .item-title {
+        #manager .content .m_content .list-block .item-title, #doctormanage .content .m_content .list-block .item-title, #officemanager .content .m_content .list-block .item-title, #patientmanager .content .m_content .list-block .item-title, #infomanage .content .m_content .list-block .item-title, #bannermanage .content .m_content .list-block .item-title {
           width: 6rem;
           display: -webkit-box;
           display: -webkit-flex;
           display: flex; }
-          #manager .content .m_content .list-block .item-title .button-green, #manager .content .m_content .list-block .item-title .button-red, #manager .content .m_content .list-block .item-title .button-grey, #doctormanage .content .m_content .list-block .item-title .button-green, #doctormanage .content .m_content .list-block .item-title .button-red, #doctormanage .content .m_content .list-block .item-title .button-grey, #officemanager .content .m_content .list-block .item-title .button-green, #officemanager .content .m_content .list-block .item-title .button-red, #officemanager .content .m_content .list-block .item-title .button-grey, #patientmanager .content .m_content .list-block .item-title .button-green, #patientmanager .content .m_content .list-block .item-title .button-red, #patientmanager .content .m_content .list-block .item-title .button-grey, #infomanage .content .m_content .list-block .item-title .button-green, #infomanage .content .m_content .list-block .item-title .button-red, #infomanage .content .m_content .list-block .item-title .button-grey {
+          #manager .content .m_content .list-block .item-title .button-green, #manager .content .m_content .list-block .item-title .button-red, #manager .content .m_content .list-block .item-title .button-grey, #doctormanage .content .m_content .list-block .item-title .button-green, #doctormanage .content .m_content .list-block .item-title .button-red, #doctormanage .content .m_content .list-block .item-title .button-grey, #officemanager .content .m_content .list-block .item-title .button-green, #officemanager .content .m_content .list-block .item-title .button-red, #officemanager .content .m_content .list-block .item-title .button-grey, #patientmanager .content .m_content .list-block .item-title .button-green, #patientmanager .content .m_content .list-block .item-title .button-red, #patientmanager .content .m_content .list-block .item-title .button-grey, #infomanage .content .m_content .list-block .item-title .button-green, #infomanage .content .m_content .list-block .item-title .button-red, #infomanage .content .m_content .list-block .item-title .button-grey, #bannermanage .content .m_content .list-block .item-title .button-green, #bannermanage .content .m_content .list-block .item-title .button-red, #bannermanage .content .m_content .list-block .item-title .button-grey {
             padding: 0 .5rem;
             margin: 0 .2rem; }
-        #manager .content .m_content .list-block .item-inner, #doctormanage .content .m_content .list-block .item-inner, #officemanager .content .m_content .list-block .item-inner, #patientmanager .content .m_content .list-block .item-inner, #infomanage .content .m_content .list-block .item-inner {
+        #manager .content .m_content .list-block .item-inner, #doctormanage .content .m_content .list-block .item-inner, #officemanager .content .m_content .list-block .item-inner, #patientmanager .content .m_content .list-block .item-inner, #infomanage .content .m_content .list-block .item-inner, #bannermanage .content .m_content .list-block .item-inner {
           min-height: 2.5rem; }
-      #manager .content .m_content .tab-content ul, #doctormanage .content .m_content .tab-content ul, #officemanager .content .m_content .tab-content ul, #patientmanager .content .m_content .tab-content ul, #infomanage .content .m_content .tab-content ul {
+      #manager .content .m_content .tab-content ul, #doctormanage .content .m_content .tab-content ul, #officemanager .content .m_content .tab-content ul, #patientmanager .content .m_content .tab-content ul, #infomanage .content .m_content .tab-content ul, #bannermanage .content .m_content .tab-content ul {
         max-height: 27.5rem;
         overflow: auto; }
-      #manager .content .m_content .tab-content ul.searchresult, #doctormanage .content .m_content .tab-content ul.searchresult, #officemanager .content .m_content .tab-content ul.searchresult, #patientmanager .content .m_content .tab-content ul.searchresult, #infomanage .content .m_content .tab-content ul.searchresult {
+      #manager .content .m_content .tab-content ul.searchresult, #doctormanage .content .m_content .tab-content ul.searchresult, #officemanager .content .m_content .tab-content ul.searchresult, #patientmanager .content .m_content .tab-content ul.searchresult, #infomanage .content .m_content .tab-content ul.searchresult, #bannermanage .content .m_content .tab-content ul.searchresult {
         max-height: 25rem; }
 
   .editdoctor, .editappoint {
@@ -531,5 +531,57 @@ html, body {
   #manager #countDepart {
     height: 31rem;
     width: 100%; } }
+#healtheducation .buttons-tab .button.active {
+  color: #66cccc;
+  border-color: #66cccc; }
+
+#bannermanage {
+  /*蓝色按钮,绝对定位*/
+  /*自定义上传,位置大小都和a完全一样,而且完全透明*/
+  /*显示上传文件夹名的Div*/ }
+  #bannermanage .blueButton, #bannermanage .submit_btn {
+    position: absolute;
+    display: block;
+    width: 100px;
+    height: 40px;
+    background-color: #387ef5;
+    color: #fff;
+    text-decoration: none;
+    text-align: center;
+    font: normal normal normal 16px/40px 'Microsoft YaHei';
+    cursor: pointer;
+    border-radius: 4px; }
+  #bannermanage .blueButton:hover {
+    text-decoration: none;
+    cursor: pointer; }
+  #bannermanage .myFileUpload {
+    position: absolute;
+    display: block;
+    width: 100px;
+    height: 40px;
+    opacity: 0;
+    cursor: pointer; }
+  #bannermanage .show {
+    position: absolute;
+    top: 4rem;
+    left: 18rem;
+    height: 30px;
+    font: normal normal normal 14px/30px 'Microsoft YaHei';
+    display: inline; }
+  #bannermanage .submit_btn {
+    left: 30rem;
+    background-color: #ffc900;
+    border: none; }
+  #bannermanage .clear_btn {
+    left: 35rem;
+    background: #e43e56; }
+  #bannermanage iframe {
+    display: block;
+    width: 40rem;
+    height: 27rem;
+    overflow: hidden;
+    border: none;
+    position: absolute;
+    top: 6rem; }
 
 /*# sourceMappingURL=main.css.map */

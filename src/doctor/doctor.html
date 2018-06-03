@@ -9,9 +9,7 @@
         <!-- Slider -->
         <div class="swiper-container">
             <div class="swiper-wrapper">
-                <div class="swiper-slide"><img src="../img/banner_1.png"></div>
-                <div class="swiper-slide"><img src="../img/banner_2.png"></div>
-                <div class="swiper-slide"><img src="../img/banner_3.png"></div>
+                <div class="swiper-slide" ng-repeat="banner in bannerArr" ng-if="banner.docSet"><img src="../uploads/{{banner.name}}"></div>
             </div>
             <div class="swiper-pagination"></div>
         </div>
@@ -38,18 +36,16 @@
             <div class="content-block-title recommmendTitle">推荐资讯</div>
             <div class="list-block media-list recommendItem" ng-repeat="x in arr">
                 <ul>
-                    <li>
-                        <a href="#" class="item-link item-content">
-                            <div class="item-media"><img src="../img/doctor_default.png" style='width: 4rem;'></div>
+                    <li class="item-link" href="#/informationDetail?id={{x.id}}&type=1">
+                        <div class="item-content">
+                            <div class="item-media"><img src="{{x.thumb}}" style='width: 3.2rem;'></div>
                             <div class="item-inner">
                                 <div class="item-title-row">
-                                    <div class="item-title">医生姓名</div>
-                                    <div class="item-after">${{x}}</div>
+                                    <div class="item-title">{{x.title}}</div>
                                 </div>
-                                <div class="item-subtitle">医生职称</div>
-                                <div class="item-text">此处是医生简介...</div>
+                                <div class="item-subtitle">{{x.describe}}</div>
                             </div>
-                        </a>
+                        </div>
                     </li>
                 </ul>
             </div>

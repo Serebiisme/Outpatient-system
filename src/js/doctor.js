@@ -9,11 +9,35 @@
 app.controller('doctorController',function($scope){
     console.log('doctor');
 
+    $scope.arr = null;
+    $scope.bannerArr = null;
+
+    //初始化生活资讯
+    $.ajax({
+        type: 'POST',
+        url: $lifeArticleUrl + $scope.lifeStartNum,
+        dataType: 'jsonp',
+        timeout: 7500,
+        success: function(data){
+            $scope.arr = data.body.slice(0,3);
+            console.log($scope.arr);
+            $scope.$apply();
+        },
+        error: function(xhr, type){
+            zalert('加载失败,请重新加载...!');
+        }
+    });
+
     //初始化banner
-    $(".swiper-container").swiper({
-        autoplay : 3000,
-        pagination : '.swiper-pagination',
-        loop: true
+    zpost('getbanner',{}, function (data) {
+        $scope.bannerArr = data.data;
+        $scope.$apply();
+        //初始化banner
+        $(".swiper-container").swiper({
+            autoplay : 3000,
+            pagination : '.swiper-pagination',
+            loop: true
+        });
     });
 
     $.init();
@@ -278,10 +302,149 @@ app.controller('calendarController',function($scope){
 /**
  * 健康教育
  */
-app.controller('healtheducationController',function($scope){
+app.controller('healtheducationController',function($scope,$location){
     console.log('healtheducation');
 
-    $.init();
+    $scope.tabIndex = !!0;
+    $scope.lifeList = [];
+    $scope.busnessList = [];
+    $scope.ifload = 0;
+    $scope.lifeStartNum = 1;
+    $scope.busnessStartNum = 1;
+
+    //tab切换
+    $scope.switchTab = function(){
+        $scope.tabIndex = !$scope.tabIndex;
+        $.refreshScroller();
+    };
+
+    //跳转详情页
+    $scope.goToInformationDetail = function(){
+        var id = this.item.id,
+            path = '/informationDetail?id=' + id + "&type=1";
+        $location.url(path);
+    };
+
+    // 添加'refresh'监听器
+    $(document).off('refresh', '.pull-to-refresh-content');
+    $(document).on('refresh', '.pull-to-refresh-content',function(e) {
+        $scope.ifload = 0;
+        $scope.lifeStartNum = 0;
+        $scope.busnessStartNum = 0;
+
+        console.log('loadInformationList');
+
+        //初始化生活资讯
+        $.ajax({
+            type: 'POST',
+            url: $lifeArticleUrl + $scope.lifeStartNum,
+            dataType: 'jsonp',
+            timeout: 7500,
+            success: function(data){
+                $scope.lifeList = data.body;
+                $scope.ifload < 2 && $scope.ifload++;
+                console.log('A:' + $scope.ifload);
+                $scope.$apply();
+            },
+            error: function(xhr, type){
+                zalert('加载失败,请重新加载...!');
+                $.pullToRefreshDone('.pull-to-refresh-content');
+            }
+        });
+
+        //初始化行业资讯
+        $.ajax({
+            type: 'POST',
+            url: $busnessArticleUrl + $scope.busnessStartNum,
+            dataType: 'jsonp',
+            timeout: 7500,
+            success: function(data){
+                $scope.busnessList = data.body;
+                $scope.ifload < 2 && $scope.ifload++;
+                console.log('B:' + $scope.ifload);
+                $scope.$apply();
+            },
+            error: function(xhr, type){
+                zalert('加载失败,请重新加载...!');
+                $.pullToRefreshDone('.pull-to-refresh-content');
+            }
+        });
+
+    });
+
+    //无限滚动
+    var loading = false;
+    $(document).off('infinite', '.infinite-scroll-bottom');
+    $(document).on('infinite', '.infinite-scroll-bottom',function() {
+
+        // 如果正在加载，则退出
+        if (loading) return;
+
+        //tabindex - false : life , true : busnes
+        if ($scope.tabIndex){
+            console.log('load more busness article');
+            $scope.busnessStartNum++;
+            $.ajax({
+                type: 'POST',
+                url: $busnessArticleUrl + $scope.busnessStartNum,
+                dataType: 'jsonp',
+                timeout: 7500,
+                success: function(data){
+                    loading = !loading;
+
+                    data.body.length == 0 && $.detachInfiniteScroll('.infinite-scroll-bottom');
+
+                    $scope.busnessList = $scope.busnessList.concat(data.body);
+                    $scope.$apply();
+                    $.refreshScroller();
+                },
+                error: function(xhr, type){
+                    zalert('加载失败,请重新加载...!');
+                    $.refreshScroller();
+                }
+            });
+            loading = !loading;
+
+        } else {
+            console.log('load more life article');
+            $scope.lifeStartNum = $scope.lifeStartNum + 1;
+            console.log( $scope.lifeStartNum);
+            $.ajax({
+                type: 'POST',
+                url: $lifeArticleUrl + $scope.lifeStartNum,
+                dataType: 'jsonp',
+                timeout: 7500,
+                success: function(data){
+                    loading = !loading;
+
+                    data.body.length == 0 && $.detachInfiniteScroll('.infinite-scroll-bottom');
+
+                    $scope.lifeList = $scope.lifeList.concat(data.body);
+                    $scope.$apply();
+                    $.refreshScroller();
+                },
+                error: function(xhr, type){
+                    zalert('加载失败,请重新加载...!');
+
+                }
+            });
+            loading = !loading;
+        }
+
+        console.log('刷新');
+        $.refreshScroller();
+    });
+
+
+    $scope.$watch("ifload",function(newValue, oldValue) {
+        // 加载完毕需要重置
+        newValue == 2 && $.pullToRefreshDone('.pull-to-refresh-content');
+    });
+
+    $.init();//放最后
+
+    //初始化触发;
+    $('.pull-to-refresh-content').trigger('refresh');
 });
 /**
  * 医生个人信息

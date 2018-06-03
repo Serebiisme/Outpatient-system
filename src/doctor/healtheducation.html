@@ -7,9 +7,70 @@
         </a>
         <h1 class="title title_1">健康教育</h1>
     </header>
+    <!-- tab -->
+    <div class="buttons-tab buttons_tab_1">
+        <a class="tab-link button {{!tabIndex && 'active'}}" ng-click="switchTab()">生活</a>
+        <a class="tab-link button {{tabIndex && 'active'}}" ng-click="switchTab()">行业</a>
+    </div>
+
     <!-- 内容区 -->
-    <div class="content">
-        <span>健康教育页</span>
+    <div class="content  pull-to-refresh-content infinite-scroll infinite-scroll-bottom" data-ptr-distance="50">
+
+        <!-- 默认的下拉刷新层 -->
+        <div class="pull-to-refresh-layer pull-to-refresh-layer_1">
+            <div class="preloader"></div>
+            <div class="pull-to-refresh-arrow"></div>
+        </div>
+
+        <!-- content -->
+        <div class="content-block content-block_1 ">
+
+            <div class="tabs">
+                <!-- 生活 -->
+                <div id="list1" class="tab {{!tabIndex && 'active'}}" ng-show="!tabIndex">
+                    <div class="list-block list-block_1 media-list">
+                        <ul>
+                            <div class="item-content" ng-repeat="item in lifeList" ng-click="goToInformationDetail()">
+                                <div class="item-media item-media_1"><img src="{{item.thumb}}"></div>
+                                <div class="item-inner">
+                                    <div class="item-title-row">
+                                        <div class="item-title item-title_1">{{item.title}}</div>
+                                    </div>
+                                    <!--<div class="item-subtitle">{{item.describe}}</div>-->
+                                </div>
+                            </div>
+                        </ul>
+                        <!-- 加载提示符 -->
+                        <div class="infinite-scroll-preloader">
+                            <div class="preloader"></div>
+                        </div>
+                    </div>
+                </div>
+                <!-- 行业 -->
+                <div id="list2" class="tab {{tabIndex && 'active'}}" ng-show="tabIndex">
+                    <div class="list-block list-block_1 media-list">
+                        <ul>
+                            <div class="item-content" ng-repeat="item in busnessList" ng-click="goToInformationDetail()">
+                                <div class="item-media item-media_1"><img src="{{item.thumb}}"></div>
+                                <div class="item-inner">
+                                    <div class="item-title-row">
+                                        <div class="item-title item-title_1">{{item.title}}</div>
+                                    </div>
+                                    <!--<div class="item-subtitle">{{item.describe}}</div>-->
+                                </div>
+                            </div>
+                        </ul>
+                        <!-- 加载提示符 -->
+                        <div class="infinite-scroll-preloader">
+                            <div class="preloader"></div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
     </div>
 
 </div>

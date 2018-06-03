@@ -4,14 +4,7 @@
 app.controller('indexController', function($scope,$timeout,$compile) {
     console.log('index');
     $scope.arr = null;
-
-
-    //初始化banner
-    $(".swiper-container").swiper({
-        autoplay : 3000,
-        pagination : '.swiper-pagination',
-        loop: true
-    });
+    $scope.bannerArr = null;
 
     $.init();//放最后
 
@@ -26,6 +19,18 @@ app.controller('indexController', function($scope,$timeout,$compile) {
             $scope.arr = data.data;
             $scope.$apply();
         }
+    });
+
+    //初始化banner
+    zpost('getbanner',{}, function (data) {
+        $scope.bannerArr = data.data;
+        $scope.$apply();
+        //初始化banner
+        $(".swiper-container").swiper({
+            autoplay : 3000,
+            pagination : '.swiper-pagination',
+            loop: true
+        });
     });
 });
 /**
@@ -490,6 +495,7 @@ app.controller('informationDetailController',function($scope,$location){
 
     $scope.id = $location.search().id;
     $scope.article = {};
+    $scope.type = $location.search().type;
 
     //初始化资讯详情
     $.ajax({

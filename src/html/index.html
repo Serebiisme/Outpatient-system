@@ -12,9 +12,7 @@
         <!-- Slider -->
         <div class="swiper-container">
             <div class="swiper-wrapper">
-                <div class="swiper-slide"><img src="../img/banner_1.png"></div>
-                <div class="swiper-slide"><img src="../img/banner_2.png"></div>
-                <div class="swiper-slide"><img src="../img/banner_3.png"></div>
+                <div class="swiper-slide" ng-repeat="banner in bannerArr" ng-if="banner.patSet"><img src="../uploads/{{banner.name}}"></div>
             </div>
             <div class="swiper-pagination"></div>
         </div>

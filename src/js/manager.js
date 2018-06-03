@@ -23,7 +23,6 @@ app.controller('managerController', function ($scope) {
 
     $scope.initCountAppoint = function () {
         zpost('countAppointment',{}, function (data) {
-            console.log(data);
             var result = data.data;
             initAppointmentCount(result.todayAppoint.length,result.weekAppoint.length,result.monthAppoint.length);
             var monthCount = {};
@@ -814,6 +813,87 @@ app.controller('infoController', function ($scope) {
 
 app.controller('bannerController', function ($scope) {
     console.log('banner manage');
+
+    $scope.bannerArr = null;
+
+    $scope.togglePatShow = function () {
+        zpost('ifBannerShow',{ifshow:!this.banner.patSet,id:this.banner.id,type:'patSet'}, function (data) {
+            if (data.code == 500) {
+                zinfo(data.msg);
+            } else {
+                $scope.bannerArr[this.$index].patSet = !this.banner.patSet;
+                $scope.$apply();
+            }
+        }.bind(this));
+    };
+
+    $scope.toggleDocShow = function () {
+        zpost('ifBannerShow',{ifshow:!this.banner.docSet,id:this.banner.id,type:'docSet'}, function (data) {
+            if (data.code == 500) {
+                zinfo(data.msg);
+            } else {
+                $scope.bannerArr[this.$index].docSet = !this.banner.docSet;
+                $scope.$apply();
+            }
+        }.bind(this));
+    };
+
+    $scope.initBannerList = function () {
+        //初始化banner
+        zpost('getbanner',{}, function (data) {
+            $scope.bannerArr = data.data;
+            $scope.$apply();
+        });
+    };
+
+    $scope.initUpload = function () {
+        $('.clear_btn').trigger('click');
+    };
+
+    //初始化banner
+    zpost('getbanner',{}, function (data) {
+        $scope.bannerArr = data.data;
+        $scope.$apply();
+    });
+
+    //文件上传部分
+    $('#upJQuery').on('click', function() {
+        var fd = new FormData();
+        fd.append("upload", 1);
+        fd.append("upfile", $("#upfile").get(0).files[0]);
+        $.ajax({
+            url: "upload",
+            type: "POST",
+            processData: false,
+            contentType: false,
+            data: fd,
+            success: function(d) {
+                zinfo('上传成功!');
+            }
+        });
+    });
+
+    $(".myFileUpload").change(function() {
+        var arrs = $(this).val().split('\\');
+        var filename = arrs[arrs.length - 1];
+        $(".show").html(filename);
+    });
+
+    $('input.submit_btn').on('click', function (event) {
+        if ($('.myFileUpload').val() == ""){
+            event.stopPropagation();
+            event.preventDefault();
+            zalert('请选择文件再提交!');
+            return false;
+        }
+    });
+
+    $('.clear_btn').on('click', function () {
+        $('.myFileUpload').val("");
+        $(".show").html("暂无选择文件,请选择....");
+        $('iframe')[0].contentWindow.document.body.innerText = "";
+    });
+
 
     $.init();
 });

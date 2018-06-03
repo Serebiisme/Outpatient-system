@@ -1,4 +1,4 @@
-<div class="page" id="manager">
+<div class="page" id="bannermanage">
     <div class="content">
         <!--侧栏-->
         <div class="panel panel-left panel-reveal theme-dark">
@@ -73,13 +73,10 @@
 
         <div class="m_content">
             <div class="buttons-tab">
-                <a class="tab-link active button">
-                    <span>患者端</span>
+                <a class="tab-link active button" ng-click="initBannerList()">
+                    <span>客户端设置</span>
                 </a>
-                <a class="tab-link button">
-                    <span>医生端</span>
-                </a>
-                <a class="tab-link button">
+                <a class="tab-link button" ng-click="initUpload()">
                     <span>文件上传</span>
                 </a>
             </div>
@@ -87,17 +84,47 @@
                 <div class="tabs">
                     <div class="tab active">
                         <div class="content-block">
-                            <p>This is tab 1 content</p>
+                            <!-- 科室列表 -->
+                            <div class="content-block">
+                                <div class="list-block tab-content">
+                                    <ul>
+                                        <li class="item-content">
+                                            <div class="item-inner">
+                                                <div class="item-title">编号</div>
+                                                <div class="item-title" style="width: 20rem;">名称</div>
+                                                <div class="item-title">患者端</div>
+                                                <div class="item-title">医生端</div>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                    <ul>
+                                        <li class="item-content animated fadeIn" ng-repeat="banner in bannerArr">
+                                            <div class="item-inner">
+                                                <div class="item-title">{{$index}}</div>
+                                                <div class="item-title" style="width: 20rem;">{{banner.name}}</div>
+                                                <div class="item-title">
+                                                    <span class="button {{!!banner.patSet ? 'button-red' : 'button-grey'}}" ng-click="togglePatShow()">{{!!banner.patSet ? '隐藏' : '显示'}}</span>
+                                                </div>
+                                                <div class="item-title">
+                                                    <span class="button {{!!banner.docSet ? 'button-red' : 'button-grey'}}" ng-click="toggleDocShow()">{{!!banner.docSet ? '隐藏' : '显示'}}</span>
+                                                </div>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
                         </div>
                     </div>
                     <div class="tab">
                         <div class="content-block">
-                            <p>This is tab 2 content</p>
-                        </div>
-                    </div>
-                    <div class="tab">
-                        <div class="content-block">
-                            <p>This is tab 3 content</p>
+                            <form enctype="multipart/form-data" action="/upload" method="post" target="hidden-iframe">
+                                <a href='javascript:void(0);' class="blueButton">选择文件</a>
+                                <input type="file" class="myFileUpload"  accept="image/png,image/jpg,image/jpeg" name="myfile">
+                                <div class="show">暂无选择文件,请选择....</div>
+                                <input type="submit" class="submit_btn" value="提交">
+                            </form>
+                            <button class="submit_btn clear_btn">重置</button>
+                            <iframe name="hidden-iframe" ></iframe>
                         </div>
                     </div>
                 </div>

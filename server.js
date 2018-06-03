@@ -8,6 +8,8 @@ var mysql  = require('mysql');
 var superagent = require('superagent');
 //var path = require('path');
 //var fs = require('fs');
+var fs = require("fs");//操作文件
+var multer = require('multer');//接收图片
 
 var app = express();
 
@@ -31,6 +33,10 @@ app.use(express.static('src'));
 //    res.set('Content-Type', 'application/x-javascript');
 //    next();
 //});
+
+var upload = multer({
+    dest: './src/uploads'
+});//定义图片上传的临时目录
 
 //填写数据库连接信息，可查询数据库详情页
 var username = 'root';//用户AK
@@ -1014,6 +1020,90 @@ app.post('/getTodayAppointment', function (req,res) {
 app.post('/updateAppoint', function (req,res) {
     console.log(req.body);
     var DateSql = "update `appointment_list` al set al.`address` = '" + req.body.address + "' , al.`status` = '" + req.body.status + "' where al.`id` = " + req.body.id;
+    connection.query(DateSql, function (err, result) {
+        if (err) {
+            res.send({
+                code:500,
+                msg:'操作失败!'
+            });
+            return;
+        }
+        res.send({
+            code:200,
+            msg:'操作成功!'
+        });
+    });
+});
+
+//上传文件banner
+app.post('/upload',upload.single('myfile'),function(req,res,next){
+    var file = req.file;
+    console.log("名称：%s",file.originalname);
+    console.log("mime：%s",file.mimetype);
+    //以下代码得到文件后缀
+    var name = file.originalname;
+    var nameArray = name.split('');
+    var nameMime = [];
+    var l = nameArray.pop();
+    nameMime.unshift(l);
+    while(nameArray.length != 0 && l != '.' ){
+        l = nameArray.pop();
+        nameMime.unshift(l);
+    }
+    //Mime是文件的后缀
+    var Mime = nameMime.join('');
+    console.log(Mime);
+
+    //重命名文件 加上文件后缀
+    fs.rename('./src/uploads/' + file.filename , './src/uploads/' + file.filename + Mime , function (err) {
+        if (err) {
+            throw err;
+        }
+        console.log('上传成功');
+
+        var DateSql = "INSERT INTO banner ( name ) VALUES  ( '" + file.filename + Mime + "' );";
+
+        connection.query(DateSql, function (err, result) {
+            if (err) {
+                res.send({
+                    code:500,
+                    msg:'操作失败!'
+                });
+                return;
+            }
+            res.sendfile(__dirname + '/src/uploads/' + file.filename + Mime);
+        });
+
+        //res.sendfile(__dirname + '/uploads/' + file.filename + Mime);
+    });
+
+});
+
+//获取banner
+app.post('/getbanner', function (req,res) {
+    var DateSql = "select * from banner";
+    connection.query(DateSql, function (err, result) {
+        if (err) {
+            res.send({
+                code:500,
+                msg:'操作失败!'
+            });
+            return;
+        }
+        res.send({
+            code:200,
+            msg:'操作成功!',
+            data:result
+        });
+    });
+});
+
+//修改banner显示
+app.post('/ifBannerShow', function (req,res) {
+    console.log(req.body);
+    var DateSql = "UPDATE banner SET " + req.body.type + " = " + req.body.ifshow + " where id = " + req.body.id;
+    var a = "UPDATE banner SET patSet = false WHERE id = 6"
+    console.log(DateSql);
     connection.query(DateSql, function (err, result) {
         if (err) {
             res.send({

@@ -437,7 +437,8 @@ html, body {
     #manager .content .m_content, #doctormanage .content .m_content, #officemanager .content .m_content, #patientmanager .content .m_content, #infomanage .content .m_content, #bannermanage .content .m_content {
       -webkit-box-flex: 1;
       -webkit-flex: 1;
-      flex: 1; }
+      flex: 1;
+      overflow: hidden; }
       #manager .content .m_content .buttons-tab .button, #doctormanage .content .m_content .buttons-tab .button, #officemanager .content .m_content .buttons-tab .button, #patientmanager .content .m_content .buttons-tab .button, #infomanage .content .m_content .buttons-tab .button, #bannermanage .content .m_content .buttons-tab .button {
         width: 6rem;
         height: 3rem;

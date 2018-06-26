@@ -738,7 +738,7 @@ app.post('/getAllDoctor', function (req,res) {
 //更新医生
 app.post('/updateDoctor',function(req,res){
     console.log(req.body) ;
-    var DateSql = "update `doctor_login` set id = " + req.body.u_id + " ,name = '" + req.body.u_name + "',password = " + req.body.u_password + " , title = '" + req.body.u_title + "' , telephone = '" + req.body.u_telephone + "' ,department = '" + req.body.u_department + "' where id = " + req.body.u_id;
+    var DateSql = "update `doctor_login` set id = " + req.body.u_id + " ,name = '" + req.body.u_name + "',password = '" + req.body.u_password + "' , title = '" + req.body.u_title + "' , telephone = '" + req.body.u_telephone + "' ,department = '" + req.body.u_department + "' where id = " + req.body.u_id;
     console.log(DateSql);
     connection.query(DateSql, function (err, result) {
         if (err) {

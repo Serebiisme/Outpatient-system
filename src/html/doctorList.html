@@ -9,13 +9,14 @@
     </header>
     <!-- 内容区 -->
     <div class="content">
+        <!-- 日期选择 -->
         <div class="buttons-tab btn-group">
             <a class="tab-link button" ng-repeat="date in dateArr" ng-init="checkLast($last)" ng-click="selectDate()">
                 <div>{{date.day}}</div>
                 <div>{{date.date}}</div>
             </a>
         </div>
-
+        <!-- 医生列表 -->
         <div class="list-block media-list inset" id="listcontent">
             <ul ng-repeat="doctor in doctorlist" ng-click="showDoctorDetail()">
                 <li>
@@ -31,6 +32,5 @@
                 </li>
             </ul>
         </div>
-
     </div>
 </div>

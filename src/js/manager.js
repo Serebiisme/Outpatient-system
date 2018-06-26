@@ -8,8 +8,6 @@ app.controller('managerController', function ($scope) {
 
     $scope.initCountDepart = function () {
       zpost('countDepartment',{}, function (data) {
-          //$scope.departmentArr = data.data;
-          //$scope.$apply();
 
           var result = data.data,
               obj = {};
@@ -24,11 +22,12 @@ app.controller('managerController', function ($scope) {
     $scope.initCountAppoint = function () {
         zpost('countAppointment',{}, function (data) {
             var result = data.data;
-            initAppointmentCount(result.todayAppoint.length,result.weekAppoint.length,result.monthAppoint.length);
+
             var monthCount = {};
             result.monthCount.forEach(function (e) {
                monthCount[e.time] = e.num;
             });
+
             var todayCount = {};
             result.todayCount.forEach(function (e) {
                 todayCount[e.time] = e.num;
@@ -40,11 +39,9 @@ app.controller('managerController', function ($scope) {
                 monthCount[time] || (monthCount[time] =  0);
             });
 
-
+            initAppointmentCount(result.todayAppoint.length,result.weekAppoint.length,result.monthAppoint.length);            
             initMonthTimeCount(monthCount);
-
             initTodayTimeCount(todayCount);
-
         })
     };
 
@@ -369,10 +366,6 @@ app.controller('docmanagerController', function ($scope,$timeout) {
 
                         zpost('updateDoctor',u_info,function(data){
                             zinfo(data.msg);
-                            //data.code == '200' && zpost('getAllDoctor',{}, function (data) {
-                            //    $scope.alldoctor = data.result;
-                            //    $scope.$apply();
-                            //});
 
                             if (data.code == '200') {
                                 $scope.alldoctor[this.$index].id = u_info.u_id;
@@ -535,16 +528,6 @@ app.controller('patmanagerController', function ($scope,$timeout) {
 
                         zpost('updatePatient',p_info,function(data){
                             zinfo(data.msg);
-                            //data.code == '200' && $timeout(function(){
-                            //    $.closeModal();
-                            //    $scope.searchpatient = [];
-                            //},2100);
-                            //
-                            ////获取患者列表
-                            //zpost('getAllPatient',{}, function (data) {
-                            //    $scope.allpatient = data.result;
-                            //    $scope.$apply();
-                            //});
 
                             if (data.code == '200') {
                                 $scope.allpatient[this.$index].id = p_info.p_id;
@@ -605,7 +588,6 @@ app.controller('appointController', function ($scope) {
 
     $scope.appointmentList = null;
     $scope.searchappoint = null;
-
 
     $scope.editAppointInfo = function () {
         $.modal({

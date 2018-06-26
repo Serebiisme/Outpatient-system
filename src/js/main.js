@@ -1,6 +1,8 @@
 /**
  * Created by apple on 2018/4/2.
  */
+
+//接口请求函数
 function zpost(name,param,callback){
     $.ajax({
         type: 'POST',
@@ -16,31 +18,31 @@ function zpost(name,param,callback){
         }
     })
 }
-
+//加载动画函数
 function showloading(){
     $.showIndicator();
 }
-
+//隐藏加载动画函数
 function hideloading(){
     $.hideIndicator();
 }
-
+//页面加载动画哈数 title：提示文字
 function showLoading(title){
     $.showPreloader(title);
 }
-
+//隐藏页面加载动画函数
 function hideLoading(){
     $.hidePreloader();
 }
-
+//显示提示框函数 title：提示文字
 function zinfo(title){
     $.toast(title);
 }
-
+//显示警告框函数 text：提示内容 , title：警告框标题 , callback：回调函数
 function zalert(text,title,callback){
     $.alert(text, title, callback);
 }
-
+//显示确认框函数 text：提示内容 , title：确认框标题 , success：确认按钮回调函数 , cancel：取消按钮回调函数
 function zcomfirm(text,title,success,cancel){
     $.confirm(text, title,success,cancel);
 }
@@ -58,6 +60,7 @@ function zmodel(text,title,buttons){
     })
 }
 
+//获取链接所带参数函数 name：参数名
 function getParam(name){
     var reg = new RegExp("[^\?&]?" + encodeURI(name) + "=[^&]+");
     var arr = location.hash.substring(1).match(reg);

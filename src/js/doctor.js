@@ -72,16 +72,6 @@ app.controller('manageController',function($scope){
             return false;
         }
 
-        //zcomfirm('确实该患者已完成就诊?',"", function () {
-        //    zpost('complateAppointment',{id:this.x.id}, function (data) {
-        //        zinfo(data.msg);
-        //        if(data.code == 200 ){
-        //            $scope.appointmentList.splice(index,1);
-        //            $scope.$apply();
-        //        }
-        //    });
-        //
-        //}.bind(this));
         $.modal({
             title:'添加病历',
             text:'<textarea style="border: 1px solid #bbb;width: 90%;height: 6.5rem;border-radius: 5px;" autofocus></textarea>',

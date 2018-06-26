@@ -115,6 +115,7 @@ app.controller('appointmentController',function($scope,$location){
  */
 app.controller('doctorlistController', function ($scope,$location) {
     console.log('doctorlist');
+    //日期计算
     var dateArr = [];
     for (var i = 0 ; i < 7 ;  i++){
         (function(i){
@@ -229,8 +230,8 @@ app.controller('doctordetailController', function ($scope,$location) {
 app.controller('searchController',function($scope,$locals,$location){
     console.log('search');
 
+    //获取历史搜索医生列表
     $scope.historyArr = $locals.getObject('historySearch').history && $locals.getObject('historySearch').history.reverse().slice(0,5);
-    //console.log($scope.historyArr);
 
     //搜索医生
     $scope.foundDoctor = function () {
